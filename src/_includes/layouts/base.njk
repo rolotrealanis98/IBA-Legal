@@ -6,6 +6,8 @@
     <title>{{ title }} — IBA Music Legal</title>
     <meta name="description" content="{{ description or 'Legal documents for Island Breeze Affiliates Inc. (IBA Music).' }}">
     <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <link rel="privacy-policy" href="https://legal.ibamusic.com/privacy/">
+    <link rel="terms-of-service" href="https://legal.ibamusic.com/terms/">
     <link rel="stylesheet" href="/assets/style.css">
     <meta name="color-scheme" content="light">
     <meta name="robots" content="index, follow">
@@ -19,12 +21,21 @@
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
 
+    <aside class="legal-banner" aria-label="Legal documents">
+      <p>
+        <strong>Required legal documents for IBA Companion:</strong>
+        <a rel="privacy-policy" href="https://legal.ibamusic.com/privacy/">Privacy Policy (https://legal.ibamusic.com/privacy/)</a>
+        &middot;
+        <a rel="terms-of-service" href="https://legal.ibamusic.com/terms/">Terms of Service (https://legal.ibamusic.com/terms/)</a>
+      </p>
+    </aside>
+
     <header class="site-header">
       <nav aria-label="Primary">
         <a class="brand" href="/">IBA Companion — Legal</a>
         <ul class="nav-list">
-          <li><a href="/privacy/">Privacy Policy</a></li>
-          <li><a href="/terms/">Terms of Service</a></li>
+          <li><a rel="privacy-policy" href="/privacy/">Privacy Policy</a></li>
+          <li><a rel="terms-of-service" href="/terms/">Terms of Service</a></li>
           <li><a href="/cookies/">Cookies</a></li>
           <li><a href="/security/">Security</a></li>
           <li><a href="/contact/">Contact</a></li>
@@ -47,8 +58,8 @@
 
     <footer class="site-footer">
       <p>
-        <a href="/privacy/">Privacy Policy</a> ·
-        <a href="/terms/">Terms of Service</a> ·
+        <a rel="privacy-policy" href="/privacy/">Privacy Policy</a> ·
+        <a rel="terms-of-service" href="/terms/">Terms of Service</a> ·
         <a href="/cookies/">Cookie Policy</a> ·
         <a href="/subprocessors/">Sub-processors</a> ·
         <a href="/licenses/">Open Source Licenses</a> ·

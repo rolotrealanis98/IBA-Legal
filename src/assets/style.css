@@ -60,6 +60,37 @@ body {
   z-index: 100;
 }
 
+/* Prominent legal banner — ensures Privacy Policy + Terms links are
+   the first visible and crawler-discoverable content on every page */
+.legal-banner {
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 0.7rem 1rem;
+  line-height: 1.5;
+}
+
+.legal-banner p {
+  margin: 0;
+  max-width: 90ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.legal-banner a {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.legal-banner a:hover,
+.legal-banner a:focus {
+  text-decoration-thickness: 2px;
+}
+
 /* Header + navigation */
 .site-header {
   border-bottom: 1px solid var(--border);
