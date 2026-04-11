@@ -12,9 +12,9 @@ official home page and the directory for every legal document that
 covers the app.
 
 **Quick links to required policies:**
-[Privacy Policy](https://legal.ibamusic.com/privacy) ·
-[Terms of Service](https://legal.ibamusic.com/terms) ·
-[Contact](https://legal.ibamusic.com/contact)
+[Privacy Policy](https://legal.ibamusic.com/privacy/) ·
+[Terms of Service](https://legal.ibamusic.com/terms/) ·
+[Contact](https://legal.ibamusic.com/contact/)
 
 ## What IBA Companion is
 
@@ -89,7 +89,7 @@ advertising, or used to train generalized machine-learning models.
 The full disclosure of the Google Calendar integration — including
 what can be done with it, how to revoke it, and what happens to
 calendars after revocation — is in
-[Privacy Policy §5 — Google Calendar Integration](https://legal.ibamusic.com/privacy).
+[Privacy Policy §5 — Google Calendar Integration](https://legal.ibamusic.com/privacy/).
 
 ## Legal documents for IBA Companion
 
@@ -97,28 +97,28 @@ All legal documents that apply to IBA Companion, the IBA Music
 admin dashboard, and IBA Music's other web tools are published on
 this subdomain:
 
-- **[Privacy Policy](https://legal.ibamusic.com/privacy)** — What
+- **[Privacy Policy](https://legal.ibamusic.com/privacy/)** — What
   data IBA Companion collects, how we use it, how we share it,
   and how the Google Calendar scope (`calendar.app.created`) is
   used.
-- **[Terms of Service](https://legal.ibamusic.com/terms)** —
+- **[Terms of Service](https://legal.ibamusic.com/terms/)** —
   Rules for using IBA Companion and IBA Music web tools. Governed
   by Florida law. Includes a binding arbitration clause with a
   30-day opt-out for new users.
-- **[Cookie Policy](https://legal.ibamusic.com/cookies)** — How
+- **[Cookie Policy](https://legal.ibamusic.com/cookies/)** — How
   (and whether) cookies are used. This legal subdomain sets no
   cookies at all; the admin dashboard uses session cookies only.
-- **[Sub-processors](https://legal.ibamusic.com/subprocessors)** —
+- **[Sub-processors](https://legal.ibamusic.com/subprocessors/)** —
   The third-party providers (Apple, Google, Microsoft, Cloudflare)
   that process personal data on IBA Music's behalf.
-- **[Open Source Licenses](https://legal.ibamusic.com/licenses)** —
+- **[Open Source Licenses](https://legal.ibamusic.com/licenses/)** —
   Attribution for the open source software used by IBA Companion.
-- **[Security](https://legal.ibamusic.com/security)** — Security
+- **[Security](https://legal.ibamusic.com/security/)** — Security
   practices and the responsible-disclosure process. A
   machine-readable contact is also published at
   [/.well-known/security.txt](https://legal.ibamusic.com/.well-known/security.txt)
   per RFC 9116.
-- **[Contact](https://legal.ibamusic.com/contact)** — How to reach
+- **[Contact](https://legal.ibamusic.com/contact/)** — How to reach
   IBA Music for privacy, legal, or security matters.
 
 ## About IBA Music (the operator)
