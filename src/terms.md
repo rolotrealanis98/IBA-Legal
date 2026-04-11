@@ -164,29 +164,30 @@ You acknowledge that:
 
 ## 8. Account Deletion
 
-You may request deletion of your IBA Music account at any time.
+You can delete your IBA Music account at any time.
 
-**How to request deletion.** Email
+**In-app deletion (primary path).** Open IBA Companion and go to
+**Settings → Account → Delete Account**. The flow discloses what
+will be deleted and what will be retained, asks you to
+re-authenticate to prove you own the account, and permanently
+deletes your account once you confirm. You do not need to email
+us or leave the app. This satisfies Apple App Store Review
+Guideline 5.1.1(v).
+
+**Email deletion (fallback).** If you cannot reach the in-app
+control — for example, you no longer have the app installed or
+cannot sign in — email
 [privacy@ibamusic.com](mailto:privacy@ibamusic.com) from the email
-address on your account. We confirm your identity, delete your
-personal profile, stored credentials, device push tokens, and
-location check-in records (other than records we are legally
-required to retain under Florida tax and labor law — see
-[Privacy Policy §8](/privacy/)), and send you a confirmation.
-Deletions complete within 30 days of receipt.
+address on your account. We verify your identity and process the
+deletion on the same terms. Email deletions complete within 30
+days of receipt; in-app deletions are immediate.
 
-**In-app deletion.** A dedicated "Delete Account" action inside
-IBA Companion will initiate the same deletion flow without the
-need to contact us, in satisfaction of Apple App Store Review
-Guideline 5.1.1(v). This control is scheduled to ship in an
-upcoming release. Until it is live, the email path above is the
-supported deletion method.
-
-**What is deleted.** Your profile, your authentication credentials,
-your push-notification device tokens, your location records except
-those tied to performance attendance that tax and labor law require
-us to retain, and any other personal data we hold about you that is
-not retained under a lawful retention obligation.
+**What is deleted.** Your profile, your authentication credentials
+and sign-in provider identifiers, your push-notification device
+tokens, your location check-in records except those tied to
+performance attendance that tax and labor law require us to
+retain, and any other personal data we hold about you that is not
+retained under a lawful retention obligation.
 
 **What is retained, and why.** Records of performances you actually
 worked, the payroll artifacts tied to them, and the invoice receipts

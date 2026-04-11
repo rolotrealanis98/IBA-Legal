@@ -475,24 +475,37 @@ does **not** perform any of Apple's defined tracking activities.
 
 ### 6.5 Account deletion
 
-We treat your right to delete your account seriously and recognize
-that the Apple App Store Review Guidelines require apps that
-support account creation to also support account deletion.
+You can delete your IBA Music account at any time.
 
-**How to delete your account today:** email
+**In-app deletion (recommended).** Open IBA Companion, go to
+**Settings → Account → Delete Account**, and follow the prompts.
+The flow shows you what will be deleted and what will be retained,
+asks you to re-authenticate to prove you own the account, and then
+permanently deletes your account once you confirm. You do not need
+to email us or leave the app to complete deletion. This satisfies
+Apple App Store Review Guideline 5.1.1(v).
+
+**Email deletion.** If you cannot reach the in-app control for any
+reason — for example, you no longer have the app installed or
+cannot sign in — email
 [privacy@ibamusic.com](mailto:privacy@ibamusic.com) from the email
-address on your account and request deletion. We confirm the
-request, delete your personal profile, credentials, push tokens,
-location records (except where Florida tax and labor law requires
-retention — see section 8), and any other personal data not
-covered by those retention rules, and send you a confirmation.
-We complete deletions within 30 days.
+address on your account. We verify your identity and delete your
+account on the same terms.
 
-**In-app deletion:** a dedicated "Delete Account" action inside
-IBA Companion — tapping it initiates the same deletion flow without
-needing to email us — is scheduled to ship in an upcoming release.
-Until that release is live, the email path above is the supported
-deletion method.
+**What happens when you delete your account.** We permanently
+delete your personal profile, your stored authentication
+credentials and sign-in provider identifiers, your push-notification
+device tokens, and your location check-in records, except where
+Florida tax and labor law requires retention (see section 8). We
+send you a confirmation when deletion is complete. In-app
+deletions complete immediately; email deletions complete within
+30 days.
+
+**What happens to your calendars.** Deleting your IBA Music account
+does **not** automatically delete calendars IBA Companion previously
+created in your Google Calendar or Apple Calendar. Those calendars
+belong to you and remain in your account under your sole control.
+See sections 5.5 and 6.1 for how to remove them if you wish.
 
 ### 6.6 App Store privacy labels — data mapping
 
