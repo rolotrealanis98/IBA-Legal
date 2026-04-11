@@ -8,7 +8,7 @@
     "build": "eleventy",
     "dev": "eleventy --serve --port=8787",
     "clean": "rm -rf _site",
-    "deploy": "npm run clean && npm run build && wrangler pages deploy _site --project-name=iba-legal --branch=main"
+    "deploy": "npm run clean && npm run build && CLOUDFLARE_ACCOUNT_ID=4a06fd515aaed0451b97fcf2606264ab wrangler pages deploy _site --project-name=iba-legal --branch=main"
   },
   "repository": {
     "type": "git",

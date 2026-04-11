@@ -1,3 +1,8 @@
 name = "iba-legal"
 pages_build_output_dir = "_site"
 compatibility_date = "2026-04-11"
+
+# Pages projects do not support `account_id` here. The correct
+# Cloudflare account (Rolando@ibamusic.com — 4a06fd515aaed0451b97fcf2606264ab)
+# is selected via the CLOUDFLARE_ACCOUNT_ID environment variable set
+# inside the `deploy` script in package.json.
