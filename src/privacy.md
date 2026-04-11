@@ -510,37 +510,70 @@ does **not** perform any of Apple's defined tracking activities.
 
 ### 6.5 Account deletion
 
-You can delete your IBA Music account at any time.
+You can close your IBA Music account at any time.
 
-**In-app deletion (recommended).** Open IBA Companion, go to
+**In-app option (recommended).** Open IBA Companion, go to
 **Settings → Account → Delete Account**, and follow the prompts.
-The flow shows you what will be deleted and what will be retained,
-asks you to re-authenticate to prove you own the account, and then
-permanently deletes your account once you confirm. You do not need
-to email us or leave the app to complete deletion. This satisfies
-Apple App Store Review Guideline 5.1.1(v).
+The flow discloses what happens to your data, asks you to
+re-authenticate to prove you own the account, and closes your
+account once you confirm. You do not need to email us or leave the
+app to complete this. This satisfies Apple App Store Review
+Guideline 5.1.1(v).
 
-**Email deletion.** If you cannot reach the in-app control for any
+**Email option.** If you cannot reach the in-app control for any
 reason — for example, you no longer have the app installed or
 cannot sign in — email
 [privacy@ibamusic.com](mailto:privacy@ibamusic.com) from the email
-address on your account. We verify your identity and delete your
+address on your account. We verify your identity and close your
 account on the same terms.
 
-**What happens when you delete your account.** We permanently
-delete your personal profile, your stored authentication
-credentials and sign-in provider identifiers, your push-notification
-device tokens, and your location check-in records, except where
-Florida tax and labor law requires retention (see section 8). We
-send you a confirmation when deletion is complete. In-app
-deletions complete immediately; email deletions complete within
-30 days.
+**What happens when you close your account.** We immediately
+deactivate your IBA Music account so you can no longer sign in to
+IBA Companion on any device, on the web, or through any sign-in
+provider (Apple, Google, Microsoft, or email). You are signed out on
+every device you were using. Push notifications to those devices
+stop. In-app closures take effect immediately; email closures take
+effect within 30 days of receipt.
 
-**What happens to your calendars.** Deleting your IBA Music account
+**What we retain, and why.** Florida labor and tax recordkeeping
+law requires IBA Music to retain records of the performances you
+worked, the payroll artifacts tied to them, the invoice receipts
+you submitted, and the minimum personal identifiers — your name,
+contact information, instruments, and the performance history
+itself — needed to keep those records meaningful to a tax auditor
+or labor regulator. IBA Music retains this information for
+**seven (7) years** from the date of the underlying record.
+
+During the retention period IBA Music uses the retained information
+**only** for tax, labor, audit, and legal-process purposes, and only
+when specifically required by law or by a legitimate business
+continuity need. The retained information is **not** made available
+to any active feature of the Service — it is not used for scheduling,
+messaging, push notifications, marketing, automated processing,
+feature enrichment, model training, analytics, or any operational
+function of IBA Companion after your account is closed. You are not
+contacted about events, schedules, availability, or any other
+operational matter after closure.
+
+After the seven-year retention window elapses, IBA Music reviews the
+retained information and removes it from the live system unless a
+pending audit, legal hold, or ongoing dispute requires continued
+retention.
+
+**What happens to your calendars.** Closing your IBA Music account
 does **not** automatically delete calendars IBA Companion previously
 created in your Google Calendar or Apple Calendar. Those calendars
 belong to you and remain in your account under your sole control.
 See sections 5.5 and 6.1 for how to remove them if you wish.
+
+**Your state-law privacy rights are unchanged.** Nothing in this
+section limits any right you have under the California Consumer
+Privacy Act or any other applicable privacy law to request access,
+correction, deletion, or limitation of use with respect to specific
+categories of personal information. See section 11 for details and
+the contact path for exercising those rights. Requests are honored
+subject to the retention carve-outs described above, which reflect
+legal obligations IBA Music is required to meet.
 
 ### 6.6 App Store privacy labels — data mapping
 

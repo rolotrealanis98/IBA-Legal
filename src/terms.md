@@ -164,41 +164,45 @@ You acknowledge that:
 
 ## 8. Account Deletion
 
-You can delete your IBA Music account at any time.
+You can close your IBA Music account at any time.
 
-**In-app deletion (primary path).** Open IBA Companion and go to
+**In-app option (primary path).** Open IBA Companion and go to
 **Settings → Account → Delete Account**. The flow discloses what
-will be deleted and what will be retained, asks you to
-re-authenticate to prove you own the account, and permanently
-deletes your account once you confirm. You do not need to email
-us or leave the app. This satisfies Apple App Store Review
-Guideline 5.1.1(v).
+happens to your data, asks you to re-authenticate to prove you own
+the account, and closes your account once you confirm. You do not
+need to email us or leave the app. This satisfies Apple App Store
+Review Guideline 5.1.1(v).
 
-**Email deletion (fallback).** If you cannot reach the in-app
-control — for example, you no longer have the app installed or
-cannot sign in — email
+**Email option (fallback).** If you cannot reach the in-app control
+— for example, you no longer have the app installed or cannot sign
+in — email
 [privacy@ibamusic.com](mailto:privacy@ibamusic.com) from the email
 address on your account. We verify your identity and process the
-deletion on the same terms. Email deletions complete within 30
-days of receipt; in-app deletions are immediate.
+closure on the same terms. Email closures take effect within 30
+days of receipt; in-app closures are immediate.
 
-**What is deleted.** Your profile, your authentication credentials
-and sign-in provider identifiers, your push-notification device
-tokens, your location check-in records except those tied to
-performance attendance that tax and labor law require us to
-retain, and any other personal data we hold about you that is not
-retained under a lawful retention obligation.
+**What happens on closure.** Your IBA Music account is immediately
+deactivated so you can no longer sign in via any provider (Apple,
+Google, Microsoft, or email). You are signed out on every device.
+Push notifications to those devices stop. You cannot reactivate the
+account yourself — an IBA Music administrator is required to undo
+the closure on request.
 
 **What is retained, and why.** Records of performances you actually
-worked, the payroll artifacts tied to them, and the invoice receipts
-you submitted — along with the minimum personal identifiers needed
-to keep those records meaningful — are retained for the seven-year
-period required by Florida tax and labor recordkeeping. During this
-retention period your identifying information is used only for tax,
-labor, audit, or legal-process purposes and is not made available
-for any operational feature of the Service.
+worked, the payroll artifacts tied to them, the invoice receipts you
+submitted, and the minimum personal identifiers — including your
+name, contact information, and instruments — needed to keep those
+records meaningful to a tax auditor or labor regulator are retained
+for the seven-year period required by Florida tax and labor
+recordkeeping.
 
-**Effect on Google Calendar / Apple Calendar.** Deleting your
+During this retention period the retained information is used
+**only** for tax, labor, audit, and legal-process purposes and
+**not** for any operational feature of the Service. You will not
+receive scheduling, availability, invoice, event, marketing, or any
+other operational communication after closure.
+
+**Effect on Google Calendar / Apple Calendar.** Closing your
 IBA Music account does **not** automatically delete calendars
 IBA Companion previously created in your Google or Apple Calendar.
 Those calendars belong to you and remain in your account under
