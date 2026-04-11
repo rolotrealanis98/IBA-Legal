@@ -97,25 +97,114 @@ separate payroll and contractor-payment channels outside of the
 apps; the terms of those payments are governed by your engagement
 agreement with IBA Music, not by these Terms.
 
-## 6. Google Calendar Integration
+## 6. Calendar Integrations (Google and Apple)
 
-Syncing your IBA Music performance schedule to Google Calendar is
-**optional**. It requires your explicit consent via the Google OAuth
-2.0 authorization flow and the narrow
-`calendar.app.created` scope described in
-[Privacy Policy §5](/privacy/#5-google-calendar-integration).
+Syncing your IBA Music performance schedule to a calendar is
+**optional** on every platform. You can choose Google Calendar,
+Apple Calendar, both, or neither.
 
-IBA Music disclaims any liability for issues with Google Calendar
-itself, including service outages, event-delivery delays, data loss
-on Google's side, or changes in Google's API. Your use of Google
-Calendar is governed by Google's own terms of service, which you
-accept directly with Google.
-
-You may disconnect the Google Calendar integration at any time from
-inside IBA Companion or by revoking access in your Google account at
+**Google Calendar.** Integration uses the Google OAuth 2.0
+authorization flow and the narrow `calendar.app.created` scope
+described in [Privacy Policy §5](/privacy/). IBA Music disclaims
+any liability for issues with Google Calendar itself, including
+service outages, event-delivery delays, data loss on Google's side,
+or changes in Google's API. Your use of Google Calendar is governed
+by Google's own terms of service, which you accept directly with
+Google. You may disconnect the integration at any time from inside
+IBA Companion or by revoking access at
 [myaccount.google.com/permissions](https://myaccount.google.com/permissions).
 
-## 7. Intellectual Property
+**Apple Calendar.** On iOS, iPadOS, and watchOS, IBA Companion can
+also sync your schedule to your device's Apple Calendar using the
+Apple EventKit framework, as described in
+[Privacy Policy §6.1](/privacy/). This is an on-device, local
+integration — IBA Music's servers do not store a mirror of your
+Apple Calendar data. You can revoke Apple Calendar access at any
+time in **Settings → Privacy & Security → Calendars →
+IBA Companion**. Your use of Apple Calendar is governed by Apple's
+own terms.
+
+## 7. Apple App Store — Standard EULA
+
+When you install IBA Companion from the Apple App Store, the
+**Apple Media Services Terms and Conditions** and Apple's
+**Licensed Application End User License Agreement** (the
+"Apple Standard EULA") also apply to your use of the app, to the
+minimum extent required by Apple. Where these Terms and the Apple
+Standard EULA conflict, the terms of these Terms govern except to
+the extent prohibited by Apple's App Store rules, in which case the
+Apple Standard EULA controls only as to the specific conflicting
+point.
+
+You acknowledge that:
+
+- These Terms are between **you and IBA Music**, not between you
+  and Apple. IBA Music (not Apple) is solely responsible for
+  IBA Companion and its content.
+- **Apple has no obligation** to furnish any maintenance or
+  support services with respect to IBA Companion.
+- In the event of any failure of IBA Companion to conform to any
+  applicable warranty, you may notify Apple, and Apple will refund
+  the purchase price (if any) for IBA Companion. IBA Companion is
+  distributed free of charge, so the refund amount is zero. To
+  the maximum extent permitted by applicable law, Apple will have
+  no other warranty obligation whatsoever with respect to
+  IBA Companion.
+- IBA Music, not Apple, is responsible for addressing any of your
+  or any third party's claims relating to IBA Companion or your
+  possession and use of it, including (a) product-liability
+  claims, (b) any claim that IBA Companion fails to conform to
+  any applicable legal or regulatory requirement, and (c) claims
+  arising under consumer-protection, privacy, or similar
+  legislation.
+- **Apple and its subsidiaries are third-party beneficiaries** of
+  these Terms, and upon your acceptance of these Terms, Apple will
+  have the right (and will be deemed to have accepted the right)
+  to enforce these Terms against you as a third-party beneficiary.
+
+## 8. Account Deletion
+
+You may request deletion of your IBA Music account at any time.
+
+**How to request deletion.** Email
+[privacy@ibamusic.com](mailto:privacy@ibamusic.com) from the email
+address on your account. We confirm your identity, delete your
+personal profile, stored credentials, device push tokens, and
+location check-in records (other than records we are legally
+required to retain under Florida tax and labor law — see
+[Privacy Policy §8](/privacy/)), and send you a confirmation.
+Deletions complete within 30 days of receipt.
+
+**In-app deletion.** A dedicated "Delete Account" action inside
+IBA Companion will initiate the same deletion flow without the
+need to contact us, in satisfaction of Apple App Store Review
+Guideline 5.1.1(v). This control is scheduled to ship in an
+upcoming release. Until it is live, the email path above is the
+supported deletion method.
+
+**What is deleted.** Your profile, your authentication credentials,
+your push-notification device tokens, your location records except
+those tied to performance attendance that tax and labor law require
+us to retain, and any other personal data we hold about you that is
+not retained under a lawful retention obligation.
+
+**What is retained, and why.** Records of performances you actually
+worked, the payroll artifacts tied to them, and the invoice receipts
+you submitted — along with the minimum personal identifiers needed
+to keep those records meaningful — are retained for the seven-year
+period required by Florida tax and labor recordkeeping. During this
+retention period your identifying information is used only for tax,
+labor, audit, or legal-process purposes and is not made available
+for any operational feature of the Service.
+
+**Effect on Google Calendar / Apple Calendar.** Deleting your
+IBA Music account does **not** automatically delete calendars
+IBA Companion previously created in your Google or Apple Calendar.
+Those calendars belong to you and remain in your account under
+your sole control. See [Privacy Policy §5.5](/privacy/) and
+[§6.1](/privacy/) for how to remove them.
+
+## 9. Intellectual Property
 
 **Our rights.** IBA Music retains all rights, title, and interest in
 and to the Service, including all software, user interfaces, trade
@@ -138,7 +227,7 @@ reports, you agree that we may use them without obligation to you
 and without compensation. This does not give us any right to
 personal information beyond what this policy already permits.
 
-## 8. Termination
+## 10. Termination
 
 You may stop using the Service at any time. You may request account
 deletion by emailing
@@ -151,11 +240,11 @@ termination is necessary to protect IBA Music, our musicians, or
 third parties; or we decide to discontinue the product.
 
 Sections of these Terms that by their nature should survive
-termination will survive, including sections 7 (Intellectual
-Property), 9 (Disclaimer), 10 (Limitation of Liability), 11
-(Indemnification), and 12 (Governing Law and Venue).
+termination will survive, including sections 9 (Intellectual
+Property), 11 (Disclaimer), 12 (Limitation of Liability), 13
+(Indemnification), and 14 (Governing Law and Venue).
 
-## 9. Disclaimer of Warranties
+## 11. Disclaimer of Warranties
 
 The Service is provided **"AS IS" and "AS AVAILABLE"**, without
 warranty of any kind, whether express, implied, statutory, or
@@ -174,7 +263,7 @@ performance schedule through direct communication with IBA Music
 leadership before relying on it.** The app is a convenience, not a
 single source of truth for booking information.
 
-## 10. Limitation of Liability
+## 12. Limitation of Liability
 
 To the fullest extent permitted by applicable law, **in no event
 will IBA Music, its officers, directors, employees, or contractors
@@ -197,7 +286,7 @@ caused by negligence where limitation is prohibited. In such cases
 liability is limited to the minimum extent permitted by applicable
 law.
 
-## 11. Indemnification
+## 13. Indemnification
 
 You agree to defend, indemnify, and hold harmless IBA Music and its
 officers, directors, employees, and contractors from and against
@@ -209,7 +298,7 @@ violation of the rights of any third party. IBA Music will promptly
 notify you of any such claim and will reasonably cooperate with
 your defense.
 
-## 12. Governing Law and Venue
+## 14. Governing Law and Venue
 
 These Terms are governed by and construed in accordance with the
 **laws of the State of Florida, USA**, without regard to its
@@ -225,7 +314,7 @@ Nothing in this section prevents either party from seeking
 equitable relief (such as an injunction) in any court of competent
 jurisdiction.
 
-## 13. Changes to These Terms
+## 15. Changes to These Terms
 
 We may update these Terms from time to time. When we do, we will
 update the "Last updated" date at the top of the page. For material
@@ -235,7 +324,7 @@ practical. Your continued use of the Service after the effective
 date means you accept the updated Terms. If you do not accept the
 updated Terms, your remedy is to stop using the Service.
 
-## 14. Miscellaneous
+## 16. Miscellaneous
 
 - **Entire agreement.** These Terms, together with the
   [Privacy Policy](/privacy) and any separate engagement
@@ -254,7 +343,7 @@ updated Terms, your remedy is to stop using the Service.
   beyond whatever relationship exists under your engagement
   agreement.
 
-## 15. Contact
+## 17. Contact
 
 Questions about these Terms:
 **[privacy@ibamusic.com](mailto:privacy@ibamusic.com)**

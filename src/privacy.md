@@ -84,17 +84,79 @@ behalf. You can request corrections at any time.
 
 ### 3.3 Location (GPS)
 
-IBA Companion may request your device location **only when you are
-actively checking in to a performance** or when a geofence around a
-venue automatically triggers a check-in as you arrive. We use
-location to confirm that the check-in is consistent with the venue
-we booked — it is a fraud-prevention measure, not a movement tracker.
+IBA Companion uses your device's precise location for **one purpose
+only**: to verify that you are physically present at the venue where
+IBA Music booked you to perform, at the time of check-in. There are
+two ways a check-in can trigger:
 
-We do **not** track your location in the background, maintain a
-location history outside of check-in records, or share location with
-any third party except as noted in section 6. Disabling location
-permission in your device settings will prevent the check-in feature
-from working but will not affect the rest of the app.
+1. **Manual check-in** — you tap **Check In** on your upcoming
+   performance. IBA Companion requests your current location once
+   and compares it against the venue's coordinates.
+2. **Automatic geofence check-in** *(optional)* — you can enable
+   geofence auto-checkin, which asks iOS to notify IBA Companion
+   when you enter a small region centered on the venue for your
+   upcoming performance. When iOS fires that region-enter event,
+   IBA Companion records your arrival automatically so you don't
+   have to remember to tap Check In.
+
+#### iOS location permissions we request
+
+On iOS, iPadOS, and watchOS, IBA Companion asks you to grant one or
+both of the standard Core Location authorizations:
+
+| Permission | Key | Why we request it | Purpose string shown to you |
+|---|---|---|---|
+| When-In-Use | `NSLocationWhenInUseUsageDescription` | Manual check-in (tap Check In while the app is open) | *"IBA Companion needs your location to verify you've arrived at the venue for GPS check-in."* |
+| Always | `NSLocationAlwaysAndWhenInUseUsageDescription` | Geofence auto-checkin — required because iOS only delivers region-enter events to an authorized app when the app is in the background | *"IBA Companion uses your location to notify you when you arrive at a venue, so you can check in quickly."* |
+
+You can grant **When-In-Use only** (manual check-in works; auto
+check-in does not), grant **Always** (both work), or deny both
+(neither location feature works, but the rest of the app continues
+to function normally).
+
+On the IBA Companion **Apple Watch app**, IBA Companion requests
+When-In-Use only, to confirm your arrival from your watch without
+unlocking your phone. On **macOS**, IBA Companion does not use
+location services at all — the Mac app is read-only for schedule
+viewing.
+
+#### What we do with location data
+
+- We request **precise location**
+  (`kCLLocationAccuracyBest`) because venue-matching accuracy of
+  tens of meters is necessary — adjacent Disney-resort venues can
+  be within 100 meters of one another. We do not collect
+  reduced-accuracy location and do not currently expose a
+  reduced-accuracy toggle.
+- Location fixes are taken **only during a check-in transaction**
+  — IBA Companion does not log a continuous location history, does
+  not track your movement between venues, and does not retain
+  location points outside of check-in records.
+- Geofence regions are created for your upcoming performances only,
+  up to the iOS system limit of 20 simultaneously monitored
+  regions. They are removed as soon as the performance ends.
+- The `location` background mode is declared in IBA Companion's
+  `Info.plist` so iOS can deliver region-enter events while the app
+  is in the background. IBA Companion does **not** use that
+  background mode to poll your location, build a movement profile,
+  or share live location with anyone. It is used only to complete
+  check-in bookkeeping when iOS wakes the app on arrival.
+
+#### Sharing
+
+Location data associated with check-ins is stored in IBA Music's
+own database on Cloudflare D1 and is used only as described in
+section 4. We do **not** transfer location data to any advertising
+network, data broker, analytics provider, or third party other
+than the sub-processors listed in section 7. We do not sell it.
+
+#### How to turn it off
+
+Go to **Settings → Privacy & Security → Location Services → IBA
+Companion** on your iOS or iPadOS device to change or revoke
+permission at any time. Disabling location will prevent the
+check-in feature from working but will not affect schedule viewing,
+calendar sync, invoice submission, or any other part of the app.
 
 ### 3.4 Performance and schedule data
 
@@ -112,31 +174,79 @@ checked in to, and whether the check-in was on time. IBA Music uses
 these records for payroll reconciliation, attendance disputes, and
 operational reporting.
 
-### 3.6 Invoice receipts
+### 3.6 Invoice receipts (camera and photo library)
 
-If you submit an invoice receipt through IBA Companion or the
-invoice portal, we store the image you upload (using your device's
-standard photo picker — we do **not** scan your photo gallery), the
-performance date it relates to, and any metadata you enter (amount,
-category, notes). Receipts are retained for the period required by
-Florida tax and labor-records law, which is typically seven years.
+If you have an IBA Music role that submits expense receipts
+(typically administrators and band leaders), IBA Companion includes
+a receipt-capture flow. You can:
+
+- **Take a new photo** with the device camera — iOS shows the
+  standard camera permission prompt
+  (`NSCameraUsageDescription`: *"Camera required for Admins,
+  Receipt upload feature."*). The camera is invoked only when you
+  explicitly choose **Take photo**.
+- **Pick an existing photo** from your photo library using the
+  standard iOS photo picker (`PHPickerViewController` / SwiftUI
+  `PhotosPicker`). The photo picker is a system component that
+  runs outside IBA Companion's sandbox — IBA Companion receives
+  only the image you select and **never scans, lists, or sees the
+  rest of your photo library**. Because of this, IBA Companion
+  does **not** request `NSPhotoLibraryUsageDescription` and iOS
+  does not show a library-access prompt.
+
+We store the receipt image you provide, the expense line it is
+associated with, and any metadata you enter (amount, category,
+notes). Receipts are retained for the period required by Florida
+tax and labor-records law, which is typically seven years.
+
+Invoice receipts are **user-generated content** under IBA Music's
+[Terms of Service](/terms). They are visible only to you and to
+authorized IBA Music staff — they are never published, shared with
+other musicians, or used for any purpose other than expense
+reconciliation, payroll, and tax records.
 
 ### 3.7 Device and technical information
 
-- **Push notification tokens.** To send you push notifications about
-  schedule changes, check-in reminders, and payroll updates, we
-  store the Apple Push Notification service (APNs) device token or
-  Firebase Cloud Messaging (FCM) token your device reports.
-- **Crash and diagnostic logs.** If the app crashes we may receive a
-  minimal diagnostic report (OS version, app version, stack trace)
-  to help us fix bugs. We do not knowingly include personal data in
+- **Push notification tokens.** If you grant notification permission
+  (the standard iOS prompt) IBA Companion registers for remote
+  notifications with Apple and hands us the Apple Push Notification
+  service (APNs) device token your device reports. We store that
+  token so IBA Music's backend can deliver operational push
+  notifications — schedule changes, check-in reminders, payroll
+  updates. We do **not** send marketing or advertising push
+  notifications. On Android, the equivalent token is a Firebase
+  Cloud Messaging (FCM) token; the purpose and handling are
+  identical.
+- **Background delivery modes.** IBA Companion declares the
+  `remote-notification` background mode so push payloads can wake
+  the app to refresh your schedule silently. IBA Companion does
+  **not** declare `audio`, `voip`, `external-accessory`,
+  `bluetooth-central`, or any other background mode that would
+  allow long-running background execution beyond what is required
+  for push refresh and geofence arrival events (section 3.3).
+- **Crash and diagnostic logs.** IBA Companion does not integrate
+  Firebase Crashlytics, Sentry, Bugsnag, or any other third-party
+  crash-reporting SDK. Crash reports are the ones Apple and Google
+  collect on IBA Music's behalf when you opt in to sharing with
+  developers through your device settings (Apple's "Share With App
+  Developers" toggle, Google Play's "Usage & diagnostics"). Those
+  reports are delivered to IBA Music through Apple's App Store
+  Connect console and Google Play Console, and are used only to
+  find and fix bugs. We do not knowingly include personal data in
   these reports.
 
-### 3.8 Google Calendar integration data
+### 3.8 Calendar integration data
 
-See section 5 — **Google Calendar Integration** — for a detailed
-account of the Google OAuth scope we request, what we do with it,
-and what we never access.
+Calendar sync is **optional** on every platform. Your choices are:
+
+- **Google Calendar** — see section 5 for the exact OAuth scope,
+  calendar names created, and Google-specific Limited Use
+  commitments.
+- **Apple Calendar (EventKit)** — see section 6.1 for the EventKit
+  permission we request and how we handle on-device calendar data.
+
+You can use one, both, or neither. Choosing neither does not
+disable any other feature of IBA Companion.
 
 ## 4. How We Use Information
 
@@ -254,7 +364,174 @@ user data on our servers — your performance schedule is stored in
 our own database and is the source we push to Google Calendar, not
 the other way around.
 
-## 6. Information We Share
+## 6. Apple Platform Disclosures
+
+This section covers the additional disclosures that Apple App Store
+reviewers, App Tracking Transparency rules, and iOS platform
+conventions expect IBA Companion to make. It applies to the
+IBA Companion app on iPhone, iPad, Mac (Apple Silicon), and Apple
+Watch.
+
+### 6.1 Apple Calendar integration (EventKit)
+
+IBA Companion can also sync your performance schedule to your
+device's **Apple Calendar** using Apple's EventKit framework. This
+is an **on-device, local** integration — the calendar and its events
+live in your device's own calendar database (and in iCloud if you
+have Apple Calendar iCloud sync enabled through your Apple ID), not
+on IBA Music's servers.
+
+When you enable Apple Calendar sync, IBA Companion asks you for
+calendar permission. iOS shows the standard prompt with the string
+`NSCalendarsFullAccessUsageDescription` —
+*"IBA Companion adds your performance schedule directly to your
+device calendar so it stays up to date even when the app is
+closed."*
+
+We request **full calendar access** (rather than the more limited
+"write-only access" introduced in iOS 17) because IBA Companion
+needs to **read back** the events it previously wrote so it can
+update or delete them when your schedule changes without
+duplicating them. IBA Companion reads only the events it itself
+created for IBA Music — it identifies them by a stable IBA Music
+event identifier stored on each EventKit `EKEvent`. It does **not**
+read, modify, delete, or transmit events that belong to any
+other calendar source or that were created by any other app.
+
+You can revoke calendar access at any time in **Settings → Privacy
+& Security → Calendars → IBA Companion**. Revocation immediately
+stops IBA Companion from touching your Apple Calendar. The IBA
+Music calendar and any events IBA Companion previously wrote remain
+under your sole control — you can delete them from Apple Calendar
+whenever you like. IBA Music does not retain a mirror of your
+device calendar on our servers.
+
+The EventKit integration runs on iOS, iPadOS, and watchOS.
+On **macOS** (Mac Catalyst / Apple Silicon), IBA Companion does not
+currently enable the calendar sync feature.
+
+### 6.2 Sign in with Apple
+
+IBA Companion offers **Sign in with Apple** as a first-class
+authentication option alongside Google Sign-In, consistent with
+App Store Review Guideline 4.8. If you sign in with Apple:
+
+- You may choose to share your real Apple ID email or to use
+  **Private Relay** (Apple's email-masking service). Either way,
+  IBA Companion treats the address as your account email and sends
+  operational email to it.
+- If Apple provides a display name to us during the first-time
+  sign-in, we store it as your profile name. You can change this
+  at any time in the IBA Music admin dashboard or by emailing
+  [privacy@ibamusic.com](mailto:privacy@ibamusic.com).
+- Apple assigns IBA Music a stable "user identifier" that is
+  unique to your Apple ID and the IBA Companion app. IBA Music
+  stores this identifier to recognize your account on future
+  sign-ins. It cannot be used to look you up in any other Apple
+  service.
+
+### 6.3 Push notifications (APNs)
+
+Push notifications are **optional**. iOS asks you for permission
+the first time IBA Companion tries to register. If you grant it,
+IBA Companion registers for remote notifications and hands the
+APNs device token to IBA Music's backend so we can deliver
+operational notifications to you.
+
+IBA Music uses push notifications **only** for:
+
+- Schedule changes (a performance moved, added, or cancelled)
+- Check-in reminders before a performance
+- Payroll and invoice status updates
+- Critical service announcements from IBA Music operations
+
+We do **not** send advertising notifications, marketing offers,
+third-party promotions, or behavioral re-engagement nudges. You
+can disable notifications at any time in **Settings →
+Notifications → IBA Companion**.
+
+### 6.4 App Tracking Transparency (ATT) and the IDFA
+
+IBA Companion does **not** track you across apps and websites
+owned by other companies, and does **not** show the App Tracking
+Transparency prompt, because there is nothing to ask permission
+for:
+
+- IBA Companion does **not** read, request, or store the
+  Identifier for Advertisers (IDFA / `advertisingIdentifier`).
+- IBA Companion includes **no advertising SDKs** of any kind —
+  no Google Ads Mobile SDK, no Meta Audience Network SDK, no
+  AppLovin, no Unity Ads, no Chartboost, no IronSource, none.
+- IBA Companion includes **no analytics SDKs** — no Firebase
+  Analytics, no Amplitude, no Mixpanel, no Segment, no Hotjar, no
+  Sentry, no Crashlytics, none.
+- IBA Companion does **not** share any data with third parties
+  for cross-app or cross-site advertising. It does not share data
+  with data brokers.
+
+Consistent with this, IBA Companion declares in its App Store
+privacy report that it does **not** use data to track users and
+does **not** perform any of Apple's defined tracking activities.
+
+### 6.5 Account deletion
+
+We treat your right to delete your account seriously and recognize
+that the Apple App Store Review Guidelines require apps that
+support account creation to also support account deletion.
+
+**How to delete your account today:** email
+[privacy@ibamusic.com](mailto:privacy@ibamusic.com) from the email
+address on your account and request deletion. We confirm the
+request, delete your personal profile, credentials, push tokens,
+location records (except where Florida tax and labor law requires
+retention — see section 8), and any other personal data not
+covered by those retention rules, and send you a confirmation.
+We complete deletions within 30 days.
+
+**In-app deletion:** a dedicated "Delete Account" action inside
+IBA Companion — tapping it initiates the same deletion flow without
+needing to email us — is scheduled to ship in an upcoming release.
+Until that release is live, the email path above is the supported
+deletion method.
+
+### 6.6 App Store privacy labels — data mapping
+
+Below is how the data described elsewhere in this policy maps to
+Apple's App Store privacy-label categories. This exists so App
+Store reviewers can cross-check the policy against the privacy
+nutrition label displayed on IBA Companion's App Store page.
+
+| Apple category | Items collected | Linked to user? | Used to track? | Purpose |
+|---|---|---|---|---|
+| **Contact Info** — Name, Email, Phone | Section 3.1, 3.2 | Yes | No | App Functionality |
+| **Location** — Precise Location | Section 3.3 | Yes | No | App Functionality |
+| **User Content** — Photos (receipts) | Section 3.6 | Yes | No | App Functionality |
+| **Identifiers** — User ID (from sign-in provider) | Section 3.1 | Yes | No | App Functionality |
+| **Usage Data** | *Not collected* | — | — | — |
+| **Diagnostics** — Crash Data, Performance Data | Section 3.7 | No | No | App Functionality |
+| **Sensitive Info** | *Not collected* | — | — | — |
+| **Financial Info** | *Not collected* | — | — | — |
+| **Health & Fitness** | *Not collected* | — | — | — |
+| **Contacts** | *Not collected* | — | — | — |
+| **Browsing History** | *Not collected* | — | — | — |
+| **Search History** | *Not collected* | — | — | — |
+
+"Used to track?" is **No for every category** because IBA Companion
+does not perform any of Apple's defined tracking activities (see
+section 6.4).
+
+### 6.7 Supported operating systems and upgrade path
+
+IBA Companion supports current major versions of iOS, iPadOS,
+watchOS, and macOS, plus the immediately previous major version
+where practical. Security fixes target the current version first.
+If your device cannot run a supported version, some features —
+notably calendar sync, passkeys, and modern privacy prompts — may
+not be available. IBA Music does not intentionally limit
+functionality on older devices as long as they remain supported by
+Apple.
+
+## 7. Information We Share
 
 We share information only with the sub-processors we need in order
 to operate the service. We never sell personal information, share it
@@ -276,7 +553,7 @@ rights, property, or safety of IBA Music, our musicians, or the
 public. We will contest overbroad legal demands where we believe
 doing so is proper and practical.
 
-## 7. Data Retention
+## 8. Data Retention
 
 | Category | Retention |
 |---|---|
@@ -288,14 +565,14 @@ doing so is proper and practical.
 | Crash and diagnostic logs | Up to 90 days. |
 | Google Calendar data | Not stored on IBA Music servers. Events live in your Google account; we write to them but do not keep a mirror. |
 
-## 8. Your Rights
+## 9. Your Rights
 
 Regardless of where you live, you may request:
 
 - **Access** — a copy of the personal information we hold about you.
 - **Correction** — a fix for inaccurate or incomplete information.
 - **Deletion** — removal of your information, subject to our
-  retention obligations under section 7.
+  retention obligations under section 8.
 - **Portability** — a machine-readable export.
 - **Objection and withdrawal of consent** — an end to processing
   based on your consent, where consent is the lawful basis.
@@ -306,7 +583,7 @@ email address on file with your account, or use another method
 reasonable to verify your identity. We respond within the time
 frames required by applicable law.
 
-## 9. European Economic Area, United Kingdom, and Switzerland (GDPR)
+## 10. European Economic Area, United Kingdom, and Switzerland (GDPR)
 
 If you are located in the European Economic Area, the United Kingdom,
 or Switzerland, the following additional information applies.
@@ -338,7 +615,7 @@ operations are focused on Florida, USA. We will appoint one if our
 processing reaches the thresholds that require it under Article 27
 GDPR.
 
-## 10. California (CCPA / CPRA)
+## 11. California (CCPA / CPRA)
 
 If you are a California resident, the following additional
 information applies.
@@ -355,7 +632,7 @@ information applies.
   advertising.
 - **Sources:** you, IBA Music staff acting on your behalf, and the
   devices you use to interact with the service.
-- **Retention:** see section 7.
+- **Retention:** see section 8.
 - **Your rights:** you may request to know, delete, correct, and
   limit use of sensitive personal information (which, for our
   purposes, means your precise geolocation at check-in). Contact
@@ -363,7 +640,7 @@ information applies.
   exercise any right. We do not discriminate against users who
   exercise rights under the CCPA.
 
-## 11. Children's Privacy
+## 12. Children's Privacy
 
 IBA Music's apps and services are **not directed to children under
 13 years of age**, and we do not knowingly collect personal
@@ -375,7 +652,7 @@ us, please contact
 [privacy@ibamusic.com](mailto:privacy@ibamusic.com) and we will
 delete the information promptly.
 
-## 12. Security
+## 13. Security
 
 We take reasonable measures to protect information against
 unauthorized access, use, disclosure, alteration, and destruction:
@@ -400,7 +677,7 @@ vulnerability in our services, please email
 [privacy@ibamusic.com](mailto:privacy@ibamusic.com) — see the
 [Security](/security) page for our responsible disclosure policy.
 
-## 13. Changes to This Policy
+## 14. Changes to This Policy
 
 We may update this Privacy Policy from time to time. When we do, we
 will update the "Last updated" date at the top of the page. For
@@ -411,7 +688,7 @@ we will notify registered users by email or in-app notice at least
 continued use of the service after the effective date means you
 accept the updated policy.
 
-## 14. Contact
+## 15. Contact
 
 For any question about this Privacy Policy or to exercise any right
 described here, contact:
