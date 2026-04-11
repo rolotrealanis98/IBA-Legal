@@ -248,6 +248,41 @@ Calendar sync is **optional** on every platform. Your choices are:
 You can use one, both, or neither. Choosing neither does not
 disable any other feature of IBA Companion.
 
+### 3.9 Biometric identifiers (NOT collected)
+
+IBA Music does **not** collect, store, transmit, or process
+biometric identifiers of any kind. Specifically, IBA Music does
+not receive, record, or retain:
+
+- Face geometry, facial scans, or FaceID template data
+- Fingerprint templates, TouchID data, or any other friction-ridge
+  data
+- Voiceprints or voice characteristics
+- Retina or iris scans
+- Hand or palm geometry
+- Gait or behavioral-biometric signatures
+
+When you sign in to IBA Companion using Face ID, Touch ID, a
+passkey, or the equivalent on Android, the biometric check happens
+**entirely on your device**, inside Apple's Secure Enclave or the
+equivalent hardware-backed keystore on Android. The biometric data
+never leaves your device and is never visible to IBA Music or our
+servers. We receive only the OAuth assertion or passkey signature
+that the device produces after it has locally verified your
+biometric — an opaque cryptographic token that contains no
+biometric information.
+
+This policy addresses the Illinois Biometric Information Privacy
+Act (BIPA), Texas Capture or Use of Biometric Identifier Act
+(CUBI), and similar biometric-specific statutes: because IBA Music
+does not collect biometric identifiers, the notice, consent,
+retention, and destruction requirements of those statutes do not
+apply to us. If that ever changes — for example, if a future
+feature required biometric processing on our servers — we would
+update this policy, obtain express written consent before
+collecting any biometric data, and comply with all applicable
+biometric-privacy laws.
+
 ## 4. How We Use Information
 
 We use the information described in section 3 to:
@@ -549,7 +584,10 @@ Apple.
 We share information only with the sub-processors we need in order
 to operate the service. We never sell personal information, share it
 for cross-context behavioral advertising, or permit any third party
-to use your information for its own marketing purposes.
+to use your information for its own marketing purposes. A
+stand-alone, always-current list of sub-processors is published at
+[legal.ibamusic.com/subprocessors](/subprocessors/) — the table
+below is a summary.
 
 | Sub-processor | Purpose |
 |---|---|
@@ -689,6 +727,19 @@ believe your account has been compromised or you have identified a
 vulnerability in our services, please email
 [privacy@ibamusic.com](mailto:privacy@ibamusic.com) — see the
 [Security](/security) page for our responsible disclosure policy.
+
+**Breach notification.** If we determine that a security incident
+has resulted in unauthorized access to your personal data, we will
+notify you **without undue delay** and, where required by law,
+within the timeframes set by applicable breach-notification
+statutes — including 72 hours of becoming aware of a personal data
+breach for notifications to supervisory authorities under Article
+33 of the EU GDPR and the equivalent UK GDPR provision, and the
+timeframes required by Florida Statute §501.171 (Florida
+Information Protection Act of 2014) for affected Florida residents.
+Our notice will describe the nature of the breach, the categories
+of data affected, the steps we are taking in response, and the
+steps you can take to protect yourself.
 
 ## 14. Changes to This Policy
 

@@ -8,6 +8,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/_headers": "_headers" });
   eleventyConfig.addPassthroughCopy({ "src/robots.txt": "robots.txt" });
+  // RFC 9116 security.txt lives under the well-known URI prefix so
+  // security researchers and automated scanners can discover it.
+  eleventyConfig.addPassthroughCopy({ "src/.well-known": ".well-known" });
 
   // Filter: `{{ page.inputPath | gitCommitIso }}` → ISO-8601 string for
   // the `<time datetime="...">` attribute. Reads the git log of the

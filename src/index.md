@@ -15,11 +15,19 @@ live-music performance company.
   we handle information from the Google Calendar API
   (`calendar.app.created` scope).
 - **[Terms of Service](/terms)** — Rules for using IBA Music apps and
-  web tools, governed by Florida law.
+  web tools, governed by Florida law. Includes a binding arbitration
+  clause with a 30-day opt-out.
 - **[Cookie Policy](/cookies)** — How our products use cookies
   (briefly: sparingly, and never for tracking).
+- **[Sub-processors](/subprocessors)** — The third-party service
+  providers that process personal data on IBA Music's behalf, and
+  the purposes we use each one for.
+- **[Open Source Licenses](/licenses)** — Attribution for the open
+  source software used by IBA Music apps and this legal subdomain.
 - **[Security](/security)** — Our security practices and how to report a
-  vulnerability responsibly.
+  vulnerability responsibly. A machine-readable security contact is
+  also available at
+  [/.well-known/security.txt](/.well-known/security.txt) per RFC 9116.
 - **[Contact](/contact)** — How to reach us with privacy, legal, or
   security questions.
 

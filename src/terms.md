@@ -315,7 +315,141 @@ Nothing in this section prevents either party from seeking
 equitable relief (such as an injunction) in any court of competent
 jurisdiction.
 
-## 15. Changes to These Terms
+## 15. Binding Arbitration and Class-Action Waiver
+
+> **Please read this section carefully.** It requires you and
+> IBA Music to resolve disputes through binding, individual
+> arbitration rather than in court, and it waives your right to
+> participate in a class action. It does not apply to small-claims
+> court matters or to requests for injunctive relief.
+
+### 15.1 Agreement to arbitrate
+
+You and **Island Breeze Affiliates Inc.** d/b/a IBA Music ("we")
+agree that any dispute, claim, or controversy arising out of or
+relating to these Terms, the [Privacy Policy](/privacy), the
+Service, or your relationship with IBA Music — whether based in
+contract, tort, statute, fraud, misrepresentation, or any other
+legal theory, and whether arising before, during, or after the
+termination of these Terms — will be resolved by **final, binding,
+individual arbitration** administered by the **American Arbitration
+Association (AAA)** under its **Consumer Arbitration Rules** (the
+"AAA Rules") in effect at the time the arbitration is commenced.
+
+The **Federal Arbitration Act, 9 U.S.C. §§ 1–16**, governs the
+interpretation and enforcement of this section. The substantive
+law governing the underlying claim is Florida law, consistent with
+[section 14](#14-governing-law-and-venue).
+
+### 15.2 Exceptions to arbitration
+
+Nothing in this section requires arbitration of the following:
+
+- **Small-claims court.** Either party may bring an individual
+  claim in a small-claims court of competent jurisdiction, so long
+  as the claim remains in that court and is not removed or
+  appealed to a court of general jurisdiction.
+- **Injunctive and equitable relief.** Either party may seek
+  injunctive, declaratory, or other equitable relief from a court
+  of competent jurisdiction to protect that party's intellectual
+  property rights, confidential information, or to prevent an
+  unauthorized use or disclosure of the Service.
+- **Intellectual property claims.** Claims of infringement,
+  misappropriation, or dilution of intellectual property rights
+  (including trademarks, copyrights, patents, and trade secrets)
+  may be brought in court.
+
+### 15.3 Class-action and representative-action waiver
+
+**You and IBA Music agree that each may bring claims against the
+other only in your or its individual capacity, and not as a
+plaintiff or class member in any purported class, collective,
+consolidated, mass, or representative action or proceeding.**
+Unless both you and IBA Music agree otherwise in writing, neither
+you nor IBA Music may:
+
+- Join or consolidate claims brought by or against other
+  individuals.
+- Arbitrate or litigate any claim as a class, collective, or
+  representative action.
+- Pursue any claim on behalf of the general public in a
+  representative capacity.
+
+If a court or arbitrator decides that any part of this
+class-action waiver is invalid or unenforceable as to a particular
+claim for relief, that claim must be brought in a court of
+competent jurisdiction, but the remainder of this section 15 will
+otherwise remain in full force and effect.
+
+### 15.4 Informal dispute resolution (required first step)
+
+Before initiating arbitration or litigation, the party intending
+to bring a claim must send the other party a **written notice of
+dispute** describing the claim, the facts on which it is based,
+and the relief sought. Notices to IBA Music must be sent to
+**[privacy@ibamusic.com](mailto:privacy@ibamusic.com)** with the
+subject line "Notice of Dispute". You and IBA Music agree to make
+a good-faith attempt to resolve the dispute informally for **30
+days** after the notice is received. If the dispute is not
+resolved within that period, either party may then commence
+arbitration (or file a permitted claim under section 15.2).
+
+### 15.5 How arbitration works
+
+- **Commencement.** The party initiating arbitration must follow
+  AAA's rules for commencing a consumer arbitration, including
+  filing a demand with AAA and delivering a copy to the other
+  party. AAA's Consumer Arbitration Rules and demand forms are
+  available at [adr.org](https://www.adr.org).
+- **Location.** Arbitration hearings, if any, will take place in
+  the county in which you live, or by telephone or video
+  conference if you prefer and AAA agrees. Unless all parties and
+  the arbitrator agree otherwise, hearings will not be held in
+  Florida if that would impose a hardship on you.
+- **Fees.** IBA Music will pay all AAA filing, administrative, and
+  arbitrator fees for any arbitration you commence in accordance
+  with the AAA Consumer Arbitration Rules, unless the arbitrator
+  finds your claim to be frivolous under the standard set forth in
+  Rule 11 of the Federal Rules of Civil Procedure, in which case
+  the allocation of fees will be governed by the AAA Rules.
+- **Arbitrator.** A single neutral arbitrator, selected by you and
+  IBA Music from AAA's roster of consumer arbitrators, will hear
+  the dispute.
+- **Authority.** The arbitrator has the exclusive authority to
+  resolve any dispute relating to the interpretation,
+  applicability, enforceability, or formation of this arbitration
+  agreement, **except** that a court has exclusive authority to
+  decide whether the class-action waiver in section 15.3 is
+  enforceable.
+- **Award.** The arbitrator may award any relief that a court
+  could award, limited to the individual claim before them. The
+  arbitrator's decision is **final and binding**, and judgment on
+  the award may be entered in any court having jurisdiction.
+
+### 15.6 Opt-out right (30 days)
+
+You may opt out of this arbitration agreement by sending a
+written opt-out notice to
+**[privacy@ibamusic.com](mailto:privacy@ibamusic.com)** within
+**30 days** of the date you first accepted these Terms (or, if
+you are an existing user, within 30 days of the effective date
+on which this arbitration section was first published). Your
+opt-out notice must include your full name, the email address
+on your IBA Music account, and the statement "I opt out of the
+arbitration agreement in the IBA Music Terms of Service."
+
+If you validly opt out, sections 15.1–15.5 and 15.7 will not
+apply to you, but the [Governing Law and Venue](#14-governing-law-and-venue)
+section will continue to apply, and disputes will be resolved in
+the Florida courts identified there.
+
+### 15.7 Survival
+
+This section 15 survives termination of your relationship with
+IBA Music and applies to any claim that arose before, during, or
+after the termination of these Terms or your use of the Service.
+
+## 16. Changes to These Terms
 
 We may update these Terms from time to time. When we do, we will
 update the "Last updated" date at the top of the page. For material
@@ -325,7 +459,7 @@ practical. Your continued use of the Service after the effective
 date means you accept the updated Terms. If you do not accept the
 updated Terms, your remedy is to stop using the Service.
 
-## 16. Miscellaneous
+## 17. Miscellaneous
 
 - **Entire agreement.** These Terms, together with the
   [Privacy Policy](/privacy) and any separate engagement
@@ -344,7 +478,7 @@ updated Terms, your remedy is to stop using the Service.
   beyond whatever relationship exists under your engagement
   agreement.
 
-## 17. Contact
+## 18. Contact
 
 Questions about these Terms:
 **[privacy@ibamusic.com](mailto:privacy@ibamusic.com)**

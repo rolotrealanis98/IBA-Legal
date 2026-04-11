@@ -1,0 +1,11 @@
+# IBA Music security contact — RFC 9116 (https://www.rfc-editor.org/rfc/rfc9116)
+# If you believe you have found a vulnerability in any IBA Music
+# product, please email us before public disclosure. See our full
+# responsible-disclosure policy at https://legal.ibamusic.com/security
+
+Contact: mailto:privacy@ibamusic.com
+Contact: https://legal.ibamusic.com/security
+Expires: 2027-04-11T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://legal.ibamusic.com/.well-known/security.txt
+Policy: https://legal.ibamusic.com/security
