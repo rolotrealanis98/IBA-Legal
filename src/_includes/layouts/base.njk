@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }} — IBA Music Legal</title>
+    <meta name="description" content="{{ description or 'Legal documents for Island Breeze Affiliates Inc. (IBA Music).' }}">
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <link rel="stylesheet" href="/assets/style.css">
+    <meta name="color-scheme" content="light">
+    <meta name="robots" content="index, follow">
+    <meta property="og:site_name" content="IBA Music Legal">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{{ description or 'Legal documents for Island Breeze Affiliates Inc. (IBA Music).' }}">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_US">
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <header class="site-header">
+      <nav aria-label="Primary">
+        <a class="brand" href="/">IBA Music Legal</a>
+        <ul class="nav-list">
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+          <li><a href="/cookies">Cookies</a></li>
+          <li><a href="/security">Security</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="content">
+      <article>
+        <header class="doc-header">
+          <h1>{{ title }}</h1>
+          <p class="doc-meta">
+            <time datetime="{{ page.inputPath | gitCommitIso }}">Last updated: {{ page.inputPath | gitCommitHuman }}</time>
+          </p>
+        </header>
+
+        {{ content | safe }}
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; {{ site.currentYear }} {{ site.entity.fullName }}. All rights reserved.</p>
+      <p>
+        Questions about privacy, legal, or security?
+        <a href="mailto:{{ site.contact.privacyEmail }}">{{ site.contact.privacyEmail }}</a>
+      </p>
+    </footer>
+  </body>
+</html>

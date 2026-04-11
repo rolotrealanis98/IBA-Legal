@@ -1,0 +1,10 @@
+node_modules/
+_site/
+.DS_Store
+.wrangler/
+.env
+.env.*
+!.env.example
+npm-debug.log*
+.vscode/
+.idea/

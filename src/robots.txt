@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://legal.ibamusic.com/sitemap.xml

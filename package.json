@@ -1,0 +1,27 @@
+{
+  "name": "iba-legal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Legal documents for Island Breeze Affiliates Inc. (dba IBA Music) — Privacy Policy, Terms of Service, Google OAuth verification materials. Served at legal.ibamusic.com.",
+  "type": "module",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve --port=8787",
+    "clean": "rm -rf _site",
+    "deploy": "npm run clean && npm run build && wrangler pages deploy _site --project-name=iba-legal --branch=main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rolotrealanis98/IBA-Legal.git"
+  },
+  "author": "Island Breeze Affiliates Inc. (IBA Music)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/rolotrealanis98/IBA-Legal/issues"
+  },
+  "homepage": "https://legal.ibamusic.com",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.5",
+    "wrangler": "^4.81.1"
+  }
+}
