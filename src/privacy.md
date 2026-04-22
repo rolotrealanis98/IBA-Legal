@@ -35,9 +35,10 @@ This policy applies to:
 
 - **IBA Companion** — our mobile app for iOS, iPadOS, macOS,
   watchOS, and Android. Musicians use it to view their performance
-  schedule, check in at venues, submit invoice receipts, and
-  optionally sync their schedule to Apple Calendar (via EventKit) or
-  Google Calendar (via the scope described in section 5).
+  schedule, check in at venues, rehearse setlists with multitrack
+  stems (Practice), and optionally sync their schedule to Apple
+  Calendar (via EventKit) or Google Calendar (via the scope
+  described in section 5).
 - **IBA Music Admin Dashboard** at admin.ibamusic.com — the internal
   operations tool used by IBA Music staff to manage performances,
   venues, and musician assignments.
@@ -175,38 +176,7 @@ checked in to, and whether the check-in was on time. IBA Music uses
 these records for payroll reconciliation, attendance disputes, and
 operational reporting.
 
-### 3.6 Invoice receipts (camera and photo library)
-
-If you have an IBA Music role that submits expense receipts
-(typically administrators and band leaders), IBA Companion includes
-a receipt-capture flow. You can:
-
-- **Take a new photo** with the device camera — iOS shows the
-  standard camera permission prompt
-  (`NSCameraUsageDescription`: *"Camera required for Admins,
-  Receipt upload feature."*). The camera is invoked only when you
-  explicitly choose **Take photo**.
-- **Pick an existing photo** from your photo library using the
-  standard iOS photo picker (`PHPickerViewController` / SwiftUI
-  `PhotosPicker`). The photo picker is a system component that
-  runs outside IBA Companion's sandbox — IBA Companion receives
-  only the image you select and **never scans, lists, or sees the
-  rest of your photo library**. Because of this, IBA Companion
-  does **not** request `NSPhotoLibraryUsageDescription` and iOS
-  does not show a library-access prompt.
-
-We store the receipt image you provide, the expense line it is
-associated with, and any metadata you enter (amount, category,
-notes). Receipts are retained for the period required by Florida
-tax and labor-records law, which is typically seven years.
-
-Invoice receipts are **user-generated content** under IBA Music's
-[Terms of Service](/terms). They are visible only to you and to
-authorized IBA Music staff — they are never published, shared with
-other musicians, or used for any purpose other than expense
-reconciliation, payroll, and tax records.
-
-### 3.7 Device and technical information
+### 3.6 Device and technical information
 
 - **Push notification tokens.** If you grant notification permission
   (the standard iOS prompt) IBA Companion registers for remote
@@ -229,7 +199,7 @@ reconciliation, payroll, and tax records.
     | `remote-notification` | Push notifications (§6.3) | Silent push payloads wake the app to refresh your schedule in the background. |
     | `location` | Geofence auto check-in (§3.3) | iOS delivers region-enter events so check-in can be recorded when you arrive at a booked venue. |
     | `fetch` | Calendar sync v2 | Periodic `BGAppRefreshTask` with identifier `com.rolotrealanis.IBA-Companion.calendarsync.refresh` reconciles your opted-in calendar with your performance schedule while the app is in the background. |
-    | `audio` | Practice (multitrack rehearsal, §3.10) | Allows Practice audio you started to continue playing when the screen is locked or the app is backgrounded — identical behavior to any music or podcast app. |
+    | `audio` | Practice (multitrack rehearsal, §3.9) | Allows Practice audio you started to continue playing when the screen is locked or the app is backgrounded — identical behavior to any music or podcast app. |
 
     IBA Companion does **not** use the `audio` background mode to
     record audio, capture microphone input, run speech recognition,
@@ -249,7 +219,7 @@ reconciliation, payroll, and tax records.
   find and fix bugs. We do not knowingly include personal data in
   these reports.
 
-### 3.8 Calendar integration data
+### 3.7 Calendar integration data
 
 Calendar sync is **optional** on every platform. Your choices are:
 
@@ -262,7 +232,7 @@ Calendar sync is **optional** on every platform. Your choices are:
 You can use one, both, or neither. Choosing neither does not
 disable any other feature of IBA Companion.
 
-### 3.9 Biometric identifiers (NOT collected)
+### 3.8 Biometric identifiers (NOT collected)
 
 IBA Music does **not** collect, store, transmit, or process
 biometric identifiers of any kind. Specifically, IBA Music does
@@ -297,7 +267,7 @@ update this policy, obtain express written consent before
 collecting any biometric data, and comply with all applicable
 biometric-privacy laws.
 
-### 3.10 Practice (multitrack rehearsal)
+### 3.9 Practice (multitrack rehearsal)
 
 IBA Companion includes a **Practice** tab that lets you rehearse
 the songs on your IBA Music setlist with separated instrument
@@ -377,6 +347,16 @@ macOS Practice playback therefore behaves like any foreground
 macOS media app and does not rely on an iOS-style background
 audio entitlement. No location, no microphone, and no camera are
 used by Practice on any platform.
+
+### 3.10 Photos and camera (not collected)
+
+IBA Companion does **not** declare `NSCameraUsageDescription` or
+`NSPhotoLibraryUsageDescription`. It does not access the device
+camera or photo library. If you are a reviewer who remembers a
+previous version of this policy describing a receipt-capture flow
+for expenses, that flow has been moved to the IBA Music admin
+webapp (admin.ibamusic.com), which is not part of the iOS App
+Store submission reviewed alongside this policy.
 
 ## 4. How We Use Information
 
@@ -720,11 +700,10 @@ nutrition label displayed on IBA Companion's App Store page.
 |---|---|---|---|---|
 | **Contact Info** — Name, Email, Phone | Section 3.1, 3.2 | Yes | No | App Functionality |
 | **Location** — Precise Location | Section 3.3 | Yes | No | App Functionality |
-| **User Content** — Photos (receipts) | Section 3.6 | Yes | No | App Functionality |
-| **User Content** — Audio (Practice stems) | Section 3.10 — cached on-device only, not uploaded | No | No | App Functionality |
 | **Identifiers** — User ID (from sign-in provider) | Section 3.1 | Yes | No | App Functionality |
 | **Usage Data** | *Not collected* | — | — | — |
-| **Diagnostics** — Crash Data, Performance Data | Section 3.7 | No | No | App Functionality |
+| **Diagnostics** — Crash Data, Performance Data | Section 3.6 | No | No | App Functionality |
+| **User Content** | *Not collected* — see §3.9 (Practice audio is delivered to device, not collected) and §3.10 (camera / photos not used) | — | — | — |
 | **Sensitive Info** | *Not collected* | — | — | — |
 | **Financial Info** | *Not collected* | — | — | — |
 | **Health & Fitness** | *Not collected* | — | — | — |
@@ -736,11 +715,13 @@ nutrition label displayed on IBA Companion's App Store page.
 does not perform any of Apple's defined tracking activities (see
 section 6.5).
 
-Practice stem audio (§3.10) is delivered **to** your device from
+Practice stem audio (§3.9) is delivered **to** your device from
 IBA Music's own servers — it is not user-provided content and is
-not "collected" in the App Store privacy-label sense. It appears
-in the table above only to make explicit that Practice does not
-upload audio and does not link that audio to your user identity.
+not "collected" in the App Store privacy-label sense. The
+User Content row above is "Not collected" for exactly this
+reason: Practice does not upload audio and does not link that
+audio to your user identity, and the camera / photo library are
+never accessed (§3.10).
 
 ### 6.8 Supported operating systems and upgrade path
 
@@ -768,7 +749,7 @@ below is a summary.
 | **Apple Inc.** | Apple Push Notification service (APNs), Apple Sign-In, EventKit for optional Apple Calendar sync on iOS/iPadOS/macOS/watchOS, ActivityKit for the Set Tracker Live Activity (§6.4), and Apple WeatherKit for the optional venue precipitation forecast shown inside the Live Activity (queries use venue coordinates, not your device location). |
 | **Google LLC** | Google Calendar API via the `calendar.app.created` scope (opt-in calendar sync), Google Sign-In for authentication, Firebase Cloud Messaging (FCM) for Android push. |
 | **Microsoft Corporation** | Microsoft Sign-In (Azure Active Directory) and Microsoft Graph — used on the IBA Music admin side to sync performance bookings with Microsoft 365 calendars belonging to IBA Music staff. Not used for musician-facing features. |
-| **Cloudflare, Inc.** | Edge hosting for admin.ibamusic.com and related tools, database storage (Cloudflare D1 — performance schedule, check-ins, invoices, song metadata), object storage (Cloudflare R2 — receipt images and IBA Music's multitrack audio stems used by the Practice feature, §3.10), and Cloudflare Pages hosting for this legal subdomain itself. Cloudflare processes data on IBA Music's behalf; its own use of the data is governed by its contractual role as a processor. |
+| **Cloudflare, Inc.** | Edge hosting for admin.ibamusic.com and related tools, database storage (Cloudflare D1 — performance schedule, check-ins, song metadata), object storage (Cloudflare R2 — IBA Music's multitrack audio stems used by the Practice feature, §3.9; receipt images for the admin webapp, which is out of scope for the IBA Companion iOS App Store submission), and Cloudflare Pages hosting for this legal subdomain itself. Cloudflare processes data on IBA Music's behalf; its own use of the data is governed by its contractual role as a processor. |
 
 We also disclose information when we reasonably believe disclosure
 is necessary to comply with a lawful subpoena, court order, or

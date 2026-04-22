@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 title: IBA Companion — by Island Breeze Affiliates Inc. (IBA Music)
-description: IBA Companion is the private companion app for musicians contracted to IBA Music. Musicians use it to view their performance schedule, check in at venues, submit invoice receipts, and optionally sync their schedule to Google Calendar or Apple Calendar. This page is the app home page and legal document directory.
+description: IBA Companion is the private companion app for musicians contracted to IBA Music. Musicians use it to view their performance schedule, check in at venues, rehearse setlists with multitrack audio stems, and optionally sync their schedule to Google Calendar or Apple Calendar. This page is the app home page and legal document directory.
 permalink: /
 ---
 
@@ -39,10 +39,6 @@ IBA Companion lets an IBA Music musician:
   **Check In** button or by opting in to a geofence that records
   their arrival automatically. Check-ins are used for attendance
   verification and payroll reconciliation, not for tracking.
-- **Submit invoice receipts** (admin and band-leader roles only)
-  by taking a photo with the device camera or picking an image
-  from the device's photo library. Receipts are attached to
-  expense lines for payroll processing.
 - **Receive operational push notifications** — schedule changes,
   check-in reminders, and payroll updates. Push is optional and
   can be disabled in device settings. IBA Music does not send

@@ -32,12 +32,14 @@ Access is limited to musicians contracted to IBA Music, IBA Music
 staff, band leaders, and other authorized contractors.
 
 Features include viewing your performance schedule, checking in at
-venues, submitting invoice receipts, receiving push notifications
-about schedule changes (including on-stage Stage Alerts during a
-performance), rehearsing setlists with multitrack audio stems in
-the Practice tab, displaying a Set Tracker Live Activity during
-performances, and — if you opt in — syncing your schedule to Apple
-Calendar or Google Calendar.
+venues, receiving push notifications about schedule changes
+(including on-stage Stage Alerts during a performance), rehearsing
+setlists with multitrack audio stems in the Practice tab,
+displaying a Set Tracker Live Activity during performances, and —
+if you opt in — syncing your schedule to Apple Calendar or Google
+Calendar. Invoice submission is handled via IBA Music's web
+invoice portal (invoice.ibamusic.com), which is a separate
+property governed by the same Terms and Privacy Policy.
 
 ## 3. Account Requirements
 
@@ -69,9 +71,10 @@ When using the Service you agree **not** to:
   payroll and attendance records, and falsification is grounds for
   immediate termination of both your account and your engagement
   with IBA Music.
-- **Submit fraudulent invoice receipts.** Do not upload receipts
-  for performances you did not complete, receipts belonging to
-  someone else, or altered or fabricated receipts.
+- **Submit fraudulent invoice data.** Via any IBA Music property
+  that accepts invoices (web invoice portal, admin webapp), do
+  not claim performances you did not complete, impersonate other
+  musicians, or submit altered or fabricated supporting records.
 - **Share your account** with anyone else, including other
   IBA Music musicians or staff.
 - **Access data that does not belong to you.** Do not attempt to
@@ -106,7 +109,7 @@ licensors**. Your license to access and cache them on-device is:
 You agree **not** to extract, re-upload, redistribute, publicly
 perform, synchronize to video, remix, sample, or otherwise exploit
 the stems outside the Practice feature. The on-device TTL
-auto-delete described in [Privacy Policy §3.10](/privacy/#310-practice-multitrack-rehearsal)
+auto-delete described in [Privacy Policy §3.9](/privacy/#39-practice-multitrack-rehearsal)
 is a best-effort storage-hygiene mechanism, not a DRM system —
 your license obligations apply regardless of whether a cached
 file still exists on your device.
