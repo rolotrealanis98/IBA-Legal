@@ -26,10 +26,10 @@ easy to consume on its own.
 
 | Provider | Purpose | Data location | Legal link |
 |---|---|---|---|
-| **Apple Inc.** | Apple Push Notification service (APNs); Sign in with Apple; EventKit framework for on-device Apple Calendar sync | USA, global edge | [apple.com/legal/privacy](https://www.apple.com/legal/privacy/en-ww/) |
+| **Apple Inc.** | Apple Push Notification service (APNs); Sign in with Apple; EventKit framework for on-device Apple Calendar sync; ActivityKit for the Set Tracker Live Activity; Apple WeatherKit for the optional venue precipitation forecast shown inside the Live Activity (queries use venue coordinates, not device location) | USA, global edge | [apple.com/legal/privacy](https://www.apple.com/legal/privacy/en-ww/) |
 | **Google LLC** | Google Calendar API (opt-in, `calendar.app.created` scope only); Google Sign-In; Firebase Cloud Messaging for Android push | USA, global edge | [policies.google.com/privacy](https://policies.google.com/privacy) |
 | **Microsoft Corporation** | Microsoft Azure Active Directory and Microsoft Graph — used on the IBA Music admin side to sync performance bookings with IBA Music staff Outlook calendars. Not used in the IBA Companion musician-facing app. | USA, global edge | [privacy.microsoft.com](https://privacy.microsoft.com/en-us/privacystatement) |
-| **Cloudflare, Inc.** | Edge hosting for admin.ibamusic.com and related tools; Cloudflare D1 database storage; Cloudflare R2 object storage for receipt images; Cloudflare Pages hosting for this legal subdomain | USA, global edge | [cloudflare.com/privacypolicy](https://www.cloudflare.com/privacypolicy/) |
+| **Cloudflare, Inc.** | Edge hosting for admin.ibamusic.com and related tools; Cloudflare D1 database storage (performance schedule, check-ins, invoices, song metadata); Cloudflare R2 object storage (receipt images and IBA Music's multitrack audio stems used by the Practice feature); Cloudflare Pages hosting for this legal subdomain | USA, global edge | [cloudflare.com/privacypolicy](https://www.cloudflare.com/privacypolicy/) |
 
 All listed providers process personal data only as needed to
 provide the services described above. None of them are authorized

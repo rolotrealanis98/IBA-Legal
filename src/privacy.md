@@ -117,8 +117,9 @@ to function normally).
 On the IBA Companion **Apple Watch app**, IBA Companion requests
 When-In-Use only, to confirm your arrival from your watch without
 unlocking your phone. On **macOS**, IBA Companion does not use
-location services at all — the Mac app is read-only for schedule
-viewing.
+location services at all. The Mac app is used primarily for schedule
+viewing and Practice (multitrack rehearsal) — features that do not
+require location.
 
 #### What we do with location data
 
@@ -217,13 +218,26 @@ reconciliation, payroll, and tax records.
   notifications. On Android, the equivalent token is a Firebase
   Cloud Messaging (FCM) token; the purpose and handling are
   identical.
-- **Background delivery modes.** IBA Companion declares the
-  `remote-notification` background mode so push payloads can wake
-  the app to refresh your schedule silently. IBA Companion does
-  **not** declare `audio`, `voip`, `external-accessory`,
-  `bluetooth-central`, or any other background mode that would
-  allow long-running background execution beyond what is required
-  for push refresh and geofence arrival events (section 3.3).
+- **Background delivery modes.** IBA Companion declares the iOS
+  background modes listed below, each tied to a specific,
+  user-visible feature. It does **not** declare `voip`,
+  `external-accessory`, `bluetooth-central`, or any other background
+  mode beyond those listed here.
+
+    | Background mode | Feature | Purpose |
+    |---|---|---|
+    | `remote-notification` | Push notifications (§6.3) | Silent push payloads wake the app to refresh your schedule in the background. |
+    | `location` | Geofence auto check-in (§3.3) | iOS delivers region-enter events so check-in can be recorded when you arrive at a booked venue. |
+    | `fetch` | Calendar sync v2 | Periodic `BGAppRefreshTask` with identifier `com.rolotrealanis.IBA-Companion.calendarsync.refresh` reconciles your opted-in calendar with your performance schedule while the app is in the background. |
+    | `audio` | Practice (multitrack rehearsal, §3.10) | Allows Practice audio you started to continue playing when the screen is locked or the app is backgrounded — identical behavior to any music or podcast app. |
+
+    IBA Companion does **not** use the `audio` background mode to
+    record audio, capture microphone input, run speech recognition,
+    or do anything other than continue user-initiated rehearsal
+    playback. The microphone is never accessed —
+    `NSMicrophoneUsageDescription` is not declared and
+    `AVAudioSession` is configured for `.playback` (output only),
+    never `.record` or `.playAndRecord`.
 - **Crash and diagnostic logs.** IBA Companion does not integrate
   Firebase Crashlytics, Sentry, Bugsnag, or any other third-party
   crash-reporting SDK. Crash reports are the ones Apple and Google
@@ -282,6 +296,87 @@ feature required biometric processing on our servers — we would
 update this policy, obtain express written consent before
 collecting any biometric data, and comply with all applicable
 biometric-privacy laws.
+
+### 3.10 Practice (multitrack rehearsal)
+
+IBA Companion includes a **Practice** tab that lets you rehearse
+the songs on your IBA Music setlist with separated instrument
+stems (vocals, drums, bass, keys, guitar, etc.). All practice data
+belongs either to IBA Music's backend or to your device — it is
+not shared with any third party outside the sub-processors listed
+in section 7.
+
+#### What we collect for Practice
+
+- **Song catalog metadata** — title, artist, key, tempo, section
+  markers, cover art. This metadata is stored in IBA Music's own
+  database on Cloudflare D1 and is delivered to your device via
+  our Companion API when you open the Practice tab.
+- **Audio stems** — individual instrument recordings that belong
+  to IBA Music's internal multitrack library, stored in IBA
+  Music's own Cloudflare R2 bucket. When you choose to practice a
+  song, IBA Companion downloads those stems to your device for
+  offline playback using a standard iOS background `URLSession`.
+- **On-device usage signals** — your per-song mixer preset (mute,
+  solo, volume per stem), the last position you played to, and a
+  "recently practiced" list. These are stored on your device only
+  and are not transmitted to IBA Music unless you are signed in
+  and IBA Companion synchronizes preferences across your own
+  devices in a future release.
+
+#### On-device storage, limits, and deletion
+
+- Downloaded stems are cached in IBA Companion's sandboxed
+  Documents directory (`Documents/Songs/{songId}/`). They are
+  **not** indexed by iOS Spotlight, **not** shared to the Files
+  app unless you explicitly export, and **not** visible to other
+  apps.
+- IBA Companion enforces a **storage cap** (10 downloaded songs
+  by default, configurable between 5 and 20) and a **time-to-live
+  (TTL) auto-delete** (7 days by default, configurable between 3
+  and 30). Stems you have not practiced in a while are
+  automatically removed to keep device storage in check. You can
+  review usage and delete downloads manually from
+  **Settings → Practice → Storage**.
+- Uninstalling IBA Companion removes every stem file.
+
+#### Lock screen, CarPlay, and Bluetooth transport controls
+
+When you are practicing, IBA Companion publishes **Now Playing**
+metadata (song title, artist, cover art, playback position) via
+`MPNowPlayingInfoCenter` so iOS can display it on your lock
+screen and in Control Center. It also registers for the standard
+**remote command center** (play, pause, next, previous, and
+scrub) so the transport buttons on Bluetooth headphones, CarPlay,
+and your lock screen control the Practice player. This is
+identical to how any music or podcast app integrates with iOS.
+
+IBA Companion does **not**:
+
+- Access Apple Music, the Music app's library, or any audio file
+  outside its own downloaded stems.
+- Record audio or use the microphone —
+  `NSMicrophoneUsageDescription` is not declared and
+  `AVAudioSession` is configured for `.playback` (output only).
+- Share what you are practicing with other musicians, bandleaders,
+  or IBA Music staff. Practice playback happens locally and is
+  not reported back to our servers.
+- Apply any copy protection or DRM beyond the standard iOS
+  sandbox — the stems are IBA Music's intellectual property (see
+  [Terms of Service](/terms) §4.5) and your right to use them
+  ends when your engagement with IBA Music ends, at which point
+  your access to the Companion API is revoked and any local
+  downloads become orphaned and age out via TTL.
+
+#### macOS
+
+On macOS (Apple Silicon Mac Catalyst), the Practice view is
+available but the `audio` background mode is **iOS-only** —
+audio session handling is compiled out of the macOS target.
+macOS Practice playback therefore behaves like any foreground
+macOS media app and does not rely on an iOS-style background
+audio entitlement. No location, no microphone, and no camera are
+used by Practice on any platform.
 
 ## 4. How We Use Information
 
@@ -478,6 +573,12 @@ IBA Music uses push notifications **only** for:
 - Schedule changes (a performance moved, added, or cancelled)
 - Check-in reminders before a performance
 - Payroll and invoice status updates
+- **Stage Alerts** — time-sensitive on-stage messages sent by IBA
+  Music staff during a performance. You can acknowledge or reply
+  from the notification by choosing one of four predefined
+  responses (OK, On my way, Need 5 min, Can't right now). Replies
+  are posted only to IBA Music's Companion API — no free-text
+  input is accepted and no third party sees them.
 - Critical service announcements from IBA Music operations
 
 We do **not** send advertising notifications, marketing offers,
@@ -485,7 +586,40 @@ third-party promotions, or behavioral re-engagement nudges. You
 can disable notifications at any time in **Settings →
 Notifications → IBA Companion**.
 
-### 6.4 App Tracking Transparency (ATT) and the IDFA
+### 6.4 Live Activities (Set Tracker) and WeatherKit
+
+IBA Companion declares `NSSupportsLiveActivities` so that during a
+live performance it can optionally display a **Set Tracker** Live
+Activity on your lock screen and in the Dynamic Island. The Live
+Activity shows set-by-set timing — current set, remaining time,
+countdown to the next break — drawn entirely from the performance
+schedule IBA Music already holds on its servers. No new categories
+of personal data are collected by the Live Activity: it is a
+presentation-layer feature over schedule data already described
+elsewhere in this policy.
+
+The Live Activity may also show an optional **hourly
+precipitation timeline** for the venue using **Apple WeatherKit**.
+When the Live Activity has venue coordinates from the performance
+schedule, IBA Companion asks WeatherKit for a short-range forecast
+at those coordinates. WeatherKit is an Apple service: the forecast
+query uses the venue's coordinates (not your device's location)
+and is subject to Apple's own WeatherKit privacy terms. IBA Music
+does not receive any additional personal data back from Apple in
+this flow — only a forecast — and the forecast is rendered
+locally on your device. IBA Companion does not query WeatherKit
+for your current location and does not log or transmit the
+forecast data elsewhere.
+
+Live Activities are managed by iOS and follow Apple's timing
+rules: they appear while the performance is active, update via
+ActivityKit, and are dismissed automatically (or on your manual
+swipe) when the performance ends. You can disable Live Activities
+for IBA Companion at any time in **Settings → IBA Companion →
+Live Activities** (or globally via **Settings → Face ID &
+Passcode → Allow Access When Locked → Live Activities**).
+
+### 6.5 App Tracking Transparency (ATT) and the IDFA
 
 IBA Companion does **not** track you across apps and websites
 owned by other companies, and does **not** show the App Tracking
@@ -508,7 +642,7 @@ Consistent with this, IBA Companion declares in its App Store
 privacy report that it does **not** use data to track users and
 does **not** perform any of Apple's defined tracking activities.
 
-### 6.5 Account deletion
+### 6.6 Account deletion
 
 You can close your IBA Music account at any time.
 
@@ -575,7 +709,7 @@ the contact path for exercising those rights. Requests are honored
 subject to the retention carve-outs described above, which reflect
 legal obligations IBA Music is required to meet.
 
-### 6.6 App Store privacy labels — data mapping
+### 6.7 App Store privacy labels — data mapping
 
 Below is how the data described elsewhere in this policy maps to
 Apple's App Store privacy-label categories. This exists so App
@@ -587,6 +721,7 @@ nutrition label displayed on IBA Companion's App Store page.
 | **Contact Info** — Name, Email, Phone | Section 3.1, 3.2 | Yes | No | App Functionality |
 | **Location** — Precise Location | Section 3.3 | Yes | No | App Functionality |
 | **User Content** — Photos (receipts) | Section 3.6 | Yes | No | App Functionality |
+| **User Content** — Audio (Practice stems) | Section 3.10 — cached on-device only, not uploaded | No | No | App Functionality |
 | **Identifiers** — User ID (from sign-in provider) | Section 3.1 | Yes | No | App Functionality |
 | **Usage Data** | *Not collected* | — | — | — |
 | **Diagnostics** — Crash Data, Performance Data | Section 3.7 | No | No | App Functionality |
@@ -599,9 +734,15 @@ nutrition label displayed on IBA Companion's App Store page.
 
 "Used to track?" is **No for every category** because IBA Companion
 does not perform any of Apple's defined tracking activities (see
-section 6.4).
+section 6.5).
 
-### 6.7 Supported operating systems and upgrade path
+Practice stem audio (§3.10) is delivered **to** your device from
+IBA Music's own servers — it is not user-provided content and is
+not "collected" in the App Store privacy-label sense. It appears
+in the table above only to make explicit that Practice does not
+upload audio and does not link that audio to your user identity.
+
+### 6.8 Supported operating systems and upgrade path
 
 IBA Companion supports current major versions of iOS, iPadOS,
 watchOS, and macOS, plus the immediately previous major version
@@ -624,10 +765,10 @@ below is a summary.
 
 | Sub-processor | Purpose |
 |---|---|
-| **Apple Inc.** | Apple Push Notification service (APNs), Apple Sign-In, and EventKit for optional Apple Calendar sync on iOS/iPadOS/macOS/watchOS. |
+| **Apple Inc.** | Apple Push Notification service (APNs), Apple Sign-In, EventKit for optional Apple Calendar sync on iOS/iPadOS/macOS/watchOS, ActivityKit for the Set Tracker Live Activity (§6.4), and Apple WeatherKit for the optional venue precipitation forecast shown inside the Live Activity (queries use venue coordinates, not your device location). |
 | **Google LLC** | Google Calendar API via the `calendar.app.created` scope (opt-in calendar sync), Google Sign-In for authentication, Firebase Cloud Messaging (FCM) for Android push. |
 | **Microsoft Corporation** | Microsoft Sign-In (Azure Active Directory) and Microsoft Graph — used on the IBA Music admin side to sync performance bookings with Microsoft 365 calendars belonging to IBA Music staff. Not used for musician-facing features. |
-| **Cloudflare, Inc.** | Edge hosting for admin.ibamusic.com and related tools, database storage (Cloudflare D1), object storage for receipt images (Cloudflare R2), and hosting for this legal subdomain itself. Cloudflare processes data on IBA Music's behalf; its own use of the data is governed by its contractual role as a processor. |
+| **Cloudflare, Inc.** | Edge hosting for admin.ibamusic.com and related tools, database storage (Cloudflare D1 — performance schedule, check-ins, invoices, song metadata), object storage (Cloudflare R2 — receipt images and IBA Music's multitrack audio stems used by the Practice feature, §3.10), and Cloudflare Pages hosting for this legal subdomain itself. Cloudflare processes data on IBA Music's behalf; its own use of the data is governed by its contractual role as a processor. |
 
 We also disclose information when we reasonably believe disclosure
 is necessary to comply with a lawful subpoena, court order, or

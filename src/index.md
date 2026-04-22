@@ -51,6 +51,12 @@ IBA Companion lets an IBA Music musician:
   device's native **Apple Calendar** through Apple's EventKit
   framework, or to **Google Calendar** through a narrowly-scoped
   Google OAuth integration described in the next section.
+- **Rehearse setlists in the Practice tab** with separated
+  multitrack audio stems provided by IBA Music. Downloads are
+  cached on-device only, auto-delete on a TTL, and are never
+  uploaded anywhere by the musician.
+- **See a Set Tracker Live Activity during a performance** with
+  set-by-set timing on the lock screen and in the Dynamic Island.
 
 ## How IBA Companion uses Google API data
 

@@ -33,8 +33,11 @@ staff, band leaders, and other authorized contractors.
 
 Features include viewing your performance schedule, checking in at
 venues, submitting invoice receipts, receiving push notifications
-about schedule changes, and — if you opt in — syncing your schedule
-to Apple Calendar or Google Calendar.
+about schedule changes (including on-stage Stage Alerts during a
+performance), rehearsing setlists with multitrack audio stems in
+the Practice tab, displaying a Set Tracker Live Activity during
+performances, and — if you opt in — syncing your schedule to Apple
+Calendar or Google Calendar.
 
 ## 3. Account Requirements
 
@@ -84,6 +87,29 @@ When using the Service you agree **not** to:
 
 Good-faith security research is welcomed and is governed by the
 responsible-disclosure policy on the [Security](/security) page.
+
+### 4.5 Practice audio stems
+
+The Practice feature in IBA Companion delivers multitrack audio
+stems (individual instrument recordings for rehearsal). Those
+stems are the **intellectual property of IBA Music or its
+licensors**. Your license to access and cache them on-device is:
+
+- Limited to **personal rehearsal** in your capacity as an IBA
+  Music contractor;
+- **Non-transferable** — you may not let anyone else use the
+  stems or the device copy of them;
+- Automatically **terminated** when your engagement with IBA
+  Music ends, at which point your access to the Companion API
+  is revoked and any local copies become orphaned.
+
+You agree **not** to extract, re-upload, redistribute, publicly
+perform, synchronize to video, remix, sample, or otherwise exploit
+the stems outside the Practice feature. The on-device TTL
+auto-delete described in [Privacy Policy §3.10](/privacy/#310-practice-multitrack-rehearsal)
+is a best-effort storage-hygiene mechanism, not a DRM system —
+your license obligations apply regardless of whether a cached
+file still exists on your device.
 
 ## 5. Fees and Payments
 

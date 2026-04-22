@@ -32,8 +32,10 @@ convenience mirror.
 
 All other app code is proprietary to IBA Music. The app relies on
 first-party Apple frameworks (SwiftUI, EventKit, Core Location,
-User Notifications, ASAuthorization, PhotoKit) which are licensed
-by Apple under the Apple Developer Program License Agreement.
+User Notifications, ASAuthorization, PhotoKit, AVFoundation,
+MediaPlayer, ActivityKit, WidgetKit, WeatherKit, WatchConnectivity)
+which are licensed by Apple under the Apple Developer Program
+License Agreement.
 
 ## IBA Companion (Android)
 

@@ -37,8 +37,9 @@ hosts.
 
 - Primary relational data is stored in **Cloudflare D1** and is
   encrypted at rest by Cloudflare.
-- File uploads (invoice receipts, profile photos) are stored in
-  **Cloudflare R2** and are encrypted at rest by Cloudflare.
+- File uploads (invoice receipts, profile photos) and IBA Music's
+  multitrack audio stems used by the Practice feature are stored
+  in **Cloudflare R2** and are encrypted at rest by Cloudflare.
 - OAuth refresh tokens and other secrets on mobile devices are
   stored in the **iOS Keychain** or **Android Keystore** with
   hardware-backed protection where the device supports it.
