@@ -26,14 +26,19 @@ convenience mirror.
 | Project | License | Upstream |
 |---|---|---|
 | **GoogleSignIn-iOS** | Apache License 2.0 | [github.com/google/GoogleSignIn-iOS](https://github.com/google/GoogleSignIn-iOS) |
+| **Firebase App Check** | Apache License 2.0 | [github.com/google/app-check](https://github.com/google/app-check) |
 | **AppAuth-iOS** *(transitive via GoogleSignIn)* | Apache License 2.0 | [github.com/openid/AppAuth-iOS](https://github.com/openid/AppAuth-iOS) |
 | **GTMAppAuth** *(transitive via GoogleSignIn)* | Apache License 2.0 | [github.com/google/GTMAppAuth](https://github.com/google/GTMAppAuth) |
 | **GTMSessionFetcher** *(transitive via GoogleSignIn)* | Apache License 2.0 | [github.com/google/gtm-session-fetcher](https://github.com/google/gtm-session-fetcher) |
+| **GoogleUtilities** *(transitive via GoogleSignIn / App Check)* | Apache License 2.0 | [github.com/google/GoogleUtilities](https://github.com/google/GoogleUtilities) |
+| **Google Promises** *(transitive)* | Apache License 2.0 | [github.com/google/promises](https://github.com/google/promises) |
 
 All other app code is proprietary to IBA Music. The app relies on
 first-party Apple frameworks (SwiftUI, EventKit, Core Location,
 User Notifications, ASAuthorization, PhotoKit, AVFoundation,
-MediaPlayer, ActivityKit, WidgetKit, WeatherKit, WatchConnectivity)
+MediaPlayer, ActivityKit, WidgetKit, WeatherKit, WatchConnectivity,
+**MetricKit** — used for opt-in diagnostic crash and performance
+telemetry per [Privacy Policy §3.11](/privacy/#diagnostics))
 which are licensed by Apple under the Apple Developer Program
 License Agreement.
 

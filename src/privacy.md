@@ -210,14 +210,17 @@ operational reporting.
     never `.record` or `.playAndRecord`.
 - **Crash and diagnostic logs.** IBA Companion does not integrate
   Firebase Crashlytics, Sentry, Bugsnag, or any other third-party
-  crash-reporting SDK. Crash reports are the ones Apple and Google
-  collect on IBA Music's behalf when you opt in to sharing with
-  developers through your device settings (Apple's "Share With App
-  Developers" toggle, Google Play's "Usage & diagnostics"). Those
-  reports are delivered to IBA Music through Apple's App Store
-  Connect console and Google Play Console, and are used only to
-  find and fix bugs. We do not knowingly include personal data in
-  these reports.
+  crash-reporting SDK. Platform-level crash reports are collected
+  by Apple and Google on IBA Music's behalf when you opt in to
+  sharing with developers through your device settings (Apple's
+  "Share With App Developers" toggle, Google Play's "Usage &
+  diagnostics"). Those reports are delivered through Apple's App
+  Store Connect console and Google Play Console, and are used only
+  to find and fix bugs. We do not knowingly include personal data
+  in these reports. IBA Companion also includes a separate,
+  **opt-in** self-hosted diagnostic telemetry system — see
+  §3.11 for the full disclosure of what it collects, how long data
+  is kept, and how to control it.
 
 ### 3.7 Calendar integration data
 
@@ -348,6 +351,65 @@ macOS media app and does not rely on an iOS-style background
 audio entitlement. No location, no microphone, and no camera are
 used by Practice on any platform.
 
+<a name="diagnostics"></a>
+
+### 3.11 Diagnostic &amp; Usage Data (Opt-In)
+
+IBA Companion includes an **opt-in diagnostic telemetry system** that uses
+Apple MetricKit and custom anonymous event counters to help us find and fix
+crashes before they affect more users. This feature is **off by default** and
+is only activated if you explicitly choose to allow it.
+
+#### What we collect (opt-in only)
+
+The consent prompt you see at first launch and the **Settings → Diagnostics &
+Analytics** toggle disclose exactly what is collected. In full:
+
+- **Crash reports** — what went wrong, not who you are. Delivered via Apple
+  MetricKit (a first-party Apple framework) and sent to IBA Music's own backend
+  (`companion.ibamusic.com`). They do not include your name, account,
+  location, or any personal identifier.
+- **Which screens you use and how often** — anonymized counters for which
+  features are opened and how frequently (for example, Practice sessions
+  started, Set Tracker activations). No content — we count navigation events,
+  not what you viewed or typed.
+- **App launch time, battery usage from iOS** — performance metrics provided
+  directly by MetricKit, covering hang rate, launch time, and on-screen
+  render time.
+
+#### What we do not collect
+
+- Your location, messages, or audio
+- Your contacts, calendar events, or invoice data
+- Anything that identifies you personally — telemetry rows store a **hashed
+  device identifier only**, never your `user.id`, name, email, or account
+  number. The hash cannot be reversed to your identity.
+
+#### Consent model
+
+Opt-in consent is presented **once**, after your first successful login
+following the update that introduces this feature. You may allow or decline.
+If you decline or skip, diagnostics remain off and no telemetry is sent.
+You can change your choice at any time in **Settings → Diagnostics &
+Analytics**. Turning diagnostics off immediately stops all future event
+transmission. You may also delete previously submitted telemetry from your
+device by tapping **Delete my telemetry data** in that same Settings screen.
+
+#### Retention
+
+- **Event counters** (screen usage, feature adoption) — 90 days, then
+  permanently deleted.
+- **Crash payloads** (MetricKit diagnostic reports) — 180 days, to allow
+  investigation of intermittent issues, then permanently deleted.
+
+#### Data storage and sharing
+
+Telemetry data is stored exclusively on **Cloudflare D1** — IBA Music's own
+database, already disclosed in §7 and used for the rest of the app's data.
+No new sub-processor is introduced. Telemetry data is **not** shared with any
+third party, not sold, and not used for advertising or machine-learning model
+training.
+
 ### 3.10 Photos and camera (not collected)
 
 IBA Companion does **not** declare `NSCameraUsageDescription` or
@@ -357,6 +419,64 @@ previous version of this policy describing a receipt-capture flow
 for expenses, that flow has been moved to the IBA Music admin
 webapp (admin.ibamusic.com), which is not part of the iOS App
 Store submission reviewed alongside this policy.
+
+### 3.12 Firebase App Check (anti-abuse, not analytics)
+
+IBA Companion includes the **Firebase App Check** SDK from Google
+solely as an **anti-abuse signal** for IBA Music's own backend
+(`companion.ibamusic.com`). App Check does **not** perform analytics,
+advertising, or behavioral tracking. It is bundled because it is
+the practical way to confirm that a request reaching IBA Music's
+backend originates from a genuine, unmodified copy of IBA Companion
+running on a real Apple device — preventing scripted scraping of
+musician schedules and forged check-ins.
+
+#### What App Check sends
+
+When IBA Companion makes a request to IBA Music's backend, App
+Check asks Apple for a **DeviceCheck** or **App Attest** assertion
+and forwards an **opaque attestation token** to Firebase. Firebase
+verifies the token with Apple and returns a short-lived App Check
+token, which IBA Companion attaches to backend requests so the
+backend can reject traffic that did not originate from a real
+device. The attestation token is generated and signed by Apple's
+Secure Enclave; it does **not** contain your name, email, account
+identifier, IDFA, IDFV, location, or any other personal information,
+and it cannot be reversed to your identity.
+
+#### What App Check does *not* do
+
+- It does **not** read any data from the app, including your
+  schedule, location, calendar, or Practice usage.
+- It does **not** send analytics events to Firebase. We do not
+  use Firebase Analytics, Crashlytics, Performance, or Remote
+  Config — only App Check.
+- It does **not** track you across apps or websites.
+- The App Check token is **not** linked to your IBA Music user
+  account at the Firebase layer. Firebase sees only "this device
+  is authentic"; it does not see who you are.
+
+#### Sub-processor
+
+Firebase App Check is operated by Google LLC and is included in
+the Google sub-processor entry in §7 and on the
+[Sub-processors](/subprocessors/) page. App Check itself does not
+introduce a new third party beyond what is already disclosed for
+Google Sign-In and Google Calendar.
+
+### 3.13 Maps and external apps (canOpenURL only)
+
+IBA Companion declares `comgooglemaps` in `LSApplicationQueriesSchemes`
+so that, when you tap a venue address, it can detect whether
+**Google Maps** is installed on your device and offer it as an
+alternative to Apple Maps for routing. This is an
+**on-device-only** existence check using Apple's `canOpenURL` API —
+no information about your installed apps, your device, your
+location, or your account is transmitted to IBA Music or Google.
+IBA Companion does not enumerate any other app schemes and does
+not use this query for analytics, fingerprinting, or any purpose
+other than rendering the "Open in Google Maps" option in the venue
+sheet.
 
 ## 4. How We Use Information
 
@@ -560,6 +680,8 @@ IBA Music uses push notifications **only** for:
   are posted only to IBA Music's Companion API — no free-text
   input is accepted and no third party sees them.
 - Critical service announcements from IBA Music operations
+- **Diagnostics** — crash/hang/usage counters to improve app
+  stability (opt-in only; see §3.11 for full disclosure)
 
 We do **not** send advertising notifications, marketing offers,
 third-party promotions, or behavioral re-engagement nudges. You
@@ -702,7 +824,7 @@ nutrition label displayed on IBA Companion's App Store page.
 | **Location** — Precise Location | Section 3.3 | Yes | No | App Functionality |
 | **Identifiers** — User ID (from sign-in provider) | Section 3.1 | Yes | No | App Functionality |
 | **Usage Data** | *Not collected* | — | — | — |
-| **Diagnostics** — Crash Data, Performance Data | Section 3.6 | No | No | App Functionality |
+| **Diagnostics** — Crash Data, Performance Data, Other Diagnostic Data | Sections 3.6, 3.11 (opt-in) | No (hashed device identifier only, not linked to user identity) | No | App Functionality, Product Personalization (diagnostic context only) |
 | **User Content** | *Not collected* — see §3.9 (Practice audio is delivered to device, not collected) and §3.10 (camera / photos not used) | — | — | — |
 | **Sensitive Info** | *Not collected* | — | — | — |
 | **Financial Info** | *Not collected* | — | — | — |
@@ -714,6 +836,17 @@ nutrition label displayed on IBA Companion's App Store page.
 "Used to track?" is **No for every category** because IBA Companion
 does not perform any of Apple's defined tracking activities (see
 section 6.5).
+
+The **Firebase App Check** attestation flow (§3.12) is not listed in
+the table above because the App Attest assertion App Check forwards
+to Google is not a category of "data collected from this app" under
+Apple's privacy-label definitions: it is a per-request, per-app
+cryptographic attestation produced by Apple's Secure Enclave, it
+contains no personal information, and it is not stored or linked to
+your IBA Music user identity. Apple's own developer documentation
+treats App Attest assertions as anti-abuse infrastructure rather
+than user data. We disclose App Check anyway in §3.12 for full
+transparency.
 
 Practice stem audio (§3.9) is delivered **to** your device from
 IBA Music's own servers — it is not user-provided content and is
@@ -747,7 +880,7 @@ below is a summary.
 | Sub-processor | Purpose |
 |---|---|
 | **Apple Inc.** | Apple Push Notification service (APNs), Apple Sign-In, EventKit for optional Apple Calendar sync on iOS/iPadOS/macOS/watchOS, ActivityKit for the Set Tracker Live Activity (§6.4), and Apple WeatherKit for the optional venue precipitation forecast shown inside the Live Activity (queries use venue coordinates, not your device location). |
-| **Google LLC** | Google Calendar API via the `calendar.app.created` scope (opt-in calendar sync), Google Sign-In for authentication, Firebase Cloud Messaging (FCM) for Android push. |
+| **Google LLC** | Google Calendar API via the `calendar.app.created` scope (opt-in calendar sync), Google Sign-In for authentication, Firebase Cloud Messaging (FCM) for Android push, and **Firebase App Check** (anti-abuse attestation, §3.12 — receives only Apple-signed App Attest tokens; no personal data, no analytics, no advertising). |
 | **Microsoft Corporation** | Microsoft Sign-In (Azure Active Directory) and Microsoft Graph — used on the IBA Music admin side to sync performance bookings with Microsoft 365 calendars belonging to IBA Music staff. Not used for musician-facing features. |
 | **Cloudflare, Inc.** | Edge hosting for admin.ibamusic.com and related tools, database storage (Cloudflare D1 — performance schedule, check-ins, song metadata), object storage (Cloudflare R2 — IBA Music's multitrack audio stems used by the Practice feature, §3.9; receipt images for the admin webapp, which is out of scope for the IBA Companion iOS App Store submission), and Cloudflare Pages hosting for this legal subdomain itself. Cloudflare processes data on IBA Music's behalf; its own use of the data is governed by its contractual role as a processor. |
 
@@ -768,7 +901,9 @@ doing so is proper and practical.
 | Invoice receipts | Seven (7) years. |
 | Location records (check-ins) | Seven (7) years alongside the associated attendance record. We do not maintain location history outside of check-in transactions. |
 | Push notification tokens | Until the token is invalidated by your device or you sign out. |
-| Crash and diagnostic logs | Up to 90 days. |
+| Crash and diagnostic logs (platform-level, via Apple/Google) | Up to 90 days. |
+| Telemetry event counters (opt-in, §3.11) | 90 days. |
+| Telemetry crash payloads (opt-in, §3.11) | 180 days. |
 | Google Calendar data | Not stored on IBA Music servers. Events live in your Google account; we write to them but do not keep a mirror. |
 
 ## 9. Your Rights
