@@ -91,6 +91,14 @@ When using the Service you agree **not** to:
 Good-faith security research is welcomed and is governed by the
 responsible-disclosure policy on the [Security](/security) page.
 
+### 4.4 Diagnostic data
+
+Diagnostic data collection is opt-in and does not affect service
+availability. If you choose not to allow diagnostics — or turn them off
+later in **Settings → Diagnostics & Analytics** — every feature of
+IBA Companion continues to work identically. See
+[Privacy Policy §3.11](/privacy/#diagnostics) for full disclosure.
+
 ### 4.5 Practice audio stems
 
 The Practice feature in IBA Companion delivers multitrack audio

@@ -53,6 +53,10 @@ IBA Companion lets an IBA Music musician:
   uploaded anywhere by the musician.
 - **See a Set Tracker Live Activity during a performance** with
   set-by-set timing on the lock screen and in the Dynamic Island.
+- **Diagnostics (Opt-In)** — with explicit consent, share anonymous
+  crash reports and feature usage counters to help improve the app.
+  No personal information is collected; data is stored on IBA Music's
+  own servers only. See [Privacy Policy §3.11](/privacy/#diagnostics).
 
 ## How IBA Companion uses Google API data
 
