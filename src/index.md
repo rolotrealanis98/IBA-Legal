@@ -24,9 +24,9 @@ not distributed to the public at large — it is only used by people
 who already have an active performance, staff, or contractor
 relationship with IBA Music.
 
-The app is published for **iPhone, iPad, Mac (Apple Silicon),
-Apple Watch, and Android**. Across all of those platforms it
-provides the same core feature set.
+The app is published for **iPhone**. The current submission to the
+App Store covers iPhone only; iPad, Mac, Apple Watch, and Android
+versions are not part of this release.
 
 ## What IBA Companion does
 

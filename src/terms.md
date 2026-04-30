@@ -20,10 +20,10 @@ products.
 
 "Service" means, collectively:
 
-- **IBA Companion** for iOS, iPadOS, macOS, watchOS, and Android;
+- **IBA Companion** for iOS (iPhone);
 - the **IBA Music Admin Dashboard** at admin.ibamusic.com; and
-- IBA Music's internal web tools for musician availability,
-  invoice submission, and band leader scheduling.
+- IBA Music's internal web tools for musician availability and
+  band leader scheduling.
 
 The Service is an **internal operations tool for IBA Music and the
 people who work with us**. It is not a general-purpose consumer
@@ -37,9 +37,7 @@ venues, receiving push notifications about schedule changes
 setlists with multitrack audio stems in the Practice tab,
 displaying a Set Tracker Live Activity during performances, and —
 if you opt in — syncing your schedule to Apple Calendar or Google
-Calendar. Invoice submission is handled via IBA Music's web
-invoice portal (invoice.ibamusic.com), which is a separate
-property governed by the same Terms and Privacy Policy.
+Calendar.
 
 ## 3. Account Requirements
 
@@ -71,10 +69,6 @@ When using the Service you agree **not** to:
   payroll and attendance records, and falsification is grounds for
   immediate termination of both your account and your engagement
   with IBA Music.
-- **Submit fraudulent invoice data.** Via any IBA Music property
-  that accepts invoices (web invoice portal, admin webapp), do
-  not claim performances you did not complete, impersonate other
-  musicians, or submit altered or fabricated supporting records.
 - **Share your account** with anyone else, including other
   IBA Music musicians or staff.
 - **Access data that does not belong to you.** Do not attempt to
@@ -128,17 +122,16 @@ The Service is **free to use** for authorized IBA Music musicians,
 staff, and contractors. IBA Music does not charge you to install or
 use any of the apps or web tools covered by these Terms.
 
-The Service does **not process payments**. Invoice submission is a
-record-keeping and workflow feature. IBA Music pays musicians through
-separate payroll and contractor-payment channels outside of the
-apps; the terms of those payments are governed by your engagement
-agreement with IBA Music, not by these Terms.
+The Service does **not process payments**. IBA Music pays musicians
+through separate payroll and contractor-payment channels outside of
+the apps; the terms of those payments are governed by your
+engagement agreement with IBA Music, not by these Terms.
 
 ## 6. Calendar Integrations (Google and Apple)
 
 Syncing your IBA Music performance schedule to a calendar is
-**optional** on every platform. You can choose Google Calendar,
-Apple Calendar, both, or neither.
+**optional**. You can choose Google Calendar, Apple Calendar, both,
+or neither.
 
 **Google Calendar.** Integration uses the Google OAuth 2.0
 authorization flow and the narrow `calendar.app.created` scope
@@ -151,9 +144,9 @@ Google. You may disconnect the integration at any time from inside
 IBA Companion or by revoking access at
 [myaccount.google.com/permissions](https://myaccount.google.com/permissions).
 
-**Apple Calendar.** On iOS, iPadOS, and watchOS, IBA Companion can
-also sync your schedule to your device's Apple Calendar using the
-Apple EventKit framework, as described in
+**Apple Calendar.** IBA Companion can also sync your schedule to
+your iPhone's Apple Calendar using the Apple EventKit framework, as
+described in
 [Privacy Policy §6.1](/privacy/). This is an on-device, local
 integration — IBA Music's servers do not store a mirror of your
 Apple Calendar data. You can revoke Apple Calendar access at any
@@ -226,18 +219,17 @@ account yourself — an IBA Music administrator is required to undo
 the closure on request.
 
 **What is retained, and why.** Records of performances you actually
-worked, the payroll artifacts tied to them, the invoice receipts you
-submitted, and the minimum personal identifiers — including your
-name, contact information, and instruments — needed to keep those
-records meaningful to a tax auditor or labor regulator are retained
-for the seven-year period required by Florida tax and labor
-recordkeeping.
+worked, the payroll artifacts tied to them, and the minimum personal
+identifiers — including your name, contact information, and
+instruments — needed to keep those records meaningful to a tax
+auditor or labor regulator are retained for the seven-year period
+required by Florida tax and labor recordkeeping.
 
 During this retention period the retained information is used
 **only** for tax, labor, audit, and legal-process purposes and
 **not** for any operational feature of the Service. You will not
-receive scheduling, availability, invoice, event, marketing, or any
-other operational communication after closure.
+receive scheduling, availability, event, marketing, or any other
+operational communication after closure.
 
 **Effect on Google Calendar / Apple Calendar.** Closing your
 IBA Music account does **not** automatically delete calendars
@@ -257,12 +249,11 @@ Service for its intended internal purpose. Nothing in these Terms
 grants you any ownership right in IBA Music's intellectual
 property.
 
-**Your content.** You retain ownership of invoice receipts and any
-other content you upload. By uploading content you grant IBA Music a
-worldwide, royalty-free license to store, display, and use that
-content for the purpose of operating the Service and performing
-IBA Music's own business (payroll reconciliation, attendance
-records, tax filings).
+**Your content.** You retain ownership of any content you upload to
+the Service. By uploading content you grant IBA Music a worldwide,
+royalty-free license to store, display, and use that content for the
+purpose of operating the Service and performing IBA Music's own
+business (payroll reconciliation, attendance records, tax filings).
 
 **Feedback.** If you send us feedback, feature requests, or bug
 reports, you agree that we may use them without obligation to you

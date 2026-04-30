@@ -17,13 +17,13 @@ The legal subdomain exists to publish transparency documents. It
 would be inconsistent with that purpose to track the people reading
 them.
 
-## IBA Music mobile apps
+## IBA Music mobile app
 
-**IBA Companion** for iOS, iPadOS, macOS, watchOS, and Android does
-not use HTTP cookies. Mobile apps authenticate via OAuth 2.0 tokens
-or passkey assertions stored in the device keychain (iOS) or
-keystore (Android) and sent with API requests as HTTP authorization
-headers. No cookie is set or read by any IBA Music mobile app.
+**IBA Companion** for iOS (iPhone) does not use HTTP cookies. The
+app authenticates via OAuth 2.0 tokens or an IBA Music-issued
+session token stored in the iOS Keychain and sent with API requests
+as HTTP authorization headers. No cookie is set or read by the
+IBA Companion iOS app.
 
 ## IBA Music Admin Dashboard (admin.ibamusic.com)
 
@@ -44,10 +44,9 @@ or any other IBA Music web property.
 
 ## IBA Music satellite web tools
 
-The availability forms at forms.ibamusic.com, the invoice portal at
-invoice.ibamusic.com, and the band leader tools at
-lead.ibamusic.com follow the same rule: functional session cookies
-only for the sign-in that gates each tool, no tracking, no
+The availability forms at forms.ibamusic.com and the band leader
+tools at lead.ibamusic.com follow the same rule: functional session
+cookies only for the sign-in that gates each tool, no tracking, no
 advertising, no third-party analytics.
 
 ## Your choices

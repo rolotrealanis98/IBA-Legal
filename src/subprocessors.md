@@ -27,9 +27,9 @@ easy to consume on its own.
 | Provider | Purpose | Data location | Legal link |
 |---|---|---|---|
 | **Apple Inc.** | Apple Push Notification service (APNs); Sign in with Apple; EventKit framework for on-device Apple Calendar sync; ActivityKit for the Set Tracker Live Activity; Apple WeatherKit for the optional venue precipitation forecast shown inside the Live Activity (queries use venue coordinates, not device location) | USA, global edge | [apple.com/legal/privacy](https://www.apple.com/legal/privacy/en-ww/) |
-| **Google LLC** | Google Calendar API (opt-in, `calendar.app.created` scope only); Google Sign-In; Firebase Cloud Messaging for Android push; **Firebase App Check** for anti-abuse attestation (verifies that requests reaching IBA Music's backend originate from a genuine, unmodified copy of IBA Companion — receives only Apple-signed App Attest tokens, no personal data, no analytics) | USA, global edge | [policies.google.com/privacy](https://policies.google.com/privacy) |
-| **Microsoft Corporation** | Microsoft Azure Active Directory and Microsoft Graph — used on the IBA Music admin side to sync performance bookings with IBA Music staff Outlook calendars. Not used in the IBA Companion musician-facing app. | USA, global edge | [privacy.microsoft.com](https://privacy.microsoft.com/en-us/privacystatement) |
-| **Cloudflare, Inc.** | Edge hosting for admin.ibamusic.com and related tools; Cloudflare D1 database storage (performance schedule, check-ins, song metadata, and opt-in diagnostic telemetry data per Privacy Policy §3.11); Cloudflare R2 object storage (IBA Music's multitrack audio stems used by the Practice feature; receipt images for the admin webapp, which is out of scope for the IBA Companion iOS App Store submission); Cloudflare Pages hosting for this legal subdomain | USA, global edge | [cloudflare.com/privacypolicy](https://www.cloudflare.com/privacypolicy/) |
+| **Google LLC** | Google Calendar API (opt-in, `calendar.app.created` scope only) and Google Sign-In for authentication. | USA, global edge | [policies.google.com/privacy](https://policies.google.com/privacy) |
+| **Microsoft Corporation** | Microsoft Azure Active Directory — IBA Companion offers Microsoft 365 sign-in to musicians whose IBA Music account is linked to a Microsoft identity. Microsoft Graph is also used on the IBA Music admin side to sync performance bookings with IBA Music staff Outlook calendars; that admin use is not part of the IBA Companion app. | USA, global edge | [privacy.microsoft.com](https://privacy.microsoft.com/en-us/privacystatement) |
+| **Cloudflare, Inc.** | Edge hosting for admin.ibamusic.com and related tools; Cloudflare D1 database storage (performance schedule, check-ins, song metadata, and opt-in diagnostic telemetry data per Privacy Policy §3.11); Cloudflare R2 object storage (IBA Music's multitrack audio stems used by the Practice feature); Cloudflare Pages hosting for this legal subdomain | USA, global edge | [cloudflare.com/privacypolicy](https://www.cloudflare.com/privacypolicy/) |
 
 All listed providers process personal data only as needed to
 provide the services described above. None of them are authorized
@@ -48,9 +48,9 @@ IBA Music does **not** use:
 - Any third-party crash-reporting SDK (Sentry, Crashlytics, Bugsnag, etc.) —
   IBA Companion's opt-in diagnostics use Apple MetricKit and IBA Music's
   own backend (no new sub-processor)
-- Firebase Analytics, Firebase Crashlytics, Firebase Performance, or
-  Firebase Remote Config — the **only** Firebase product in IBA Companion
-  is Firebase App Check (anti-abuse attestation, see Privacy Policy §3.12)
+- Any Firebase product. IBA Companion does not include Firebase
+  Analytics, Crashlytics, Performance, Remote Config, Cloud
+  Messaging, or App Check.
 - Any data broker or CRM enrichment provider
 - Any generative-AI provider in a user-facing decision path
 

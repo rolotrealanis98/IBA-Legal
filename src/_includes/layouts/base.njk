@@ -48,6 +48,10 @@
         <header class="doc-header">
           <h1>{{ title }}</h1>
           <p class="doc-meta">
+            <time datetime="{{ site.effectiveDate }}">Effective: {{ site.effectiveDate }}</time>
+            &middot;
+            <span>Applies to IBA Companion v{{ site.appVersion }} (iOS)</span>
+            &middot;
             <time datetime="{{ page.inputPath | gitCommitIso }}">Last updated: {{ page.inputPath | gitCommitHuman }}</time>
           </p>
         </header>

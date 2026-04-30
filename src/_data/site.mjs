@@ -33,14 +33,19 @@ export default {
 
   // Products covered by these legal documents
   productsCovered: [
-    "IBA Companion (iOS, iPadOS, macOS, watchOS)",
-    "IBA Companion for Android",
+    "IBA Companion for iOS (iPhone)",
     "IBA Music Admin Dashboard (admin.ibamusic.com)",
-    "IBA Music web tools (availability, invoice portal, band leader)",
+    "IBA Music web tools (availability, band leader)",
   ],
 
   // Google OAuth scope disclosed on the Privacy Policy
   googleScope: "https://www.googleapis.com/auth/calendar.app.created",
+
+  // Effective date for the current published version of these
+  // documents. Bump when material changes are made. App version is
+  // the IBA Companion iOS build these documents apply to.
+  effectiveDate: "2026-04-30",
+  appVersion: "1.2",
 
   // Copyright year — computed once per build
   currentYear: new Date().getFullYear(),

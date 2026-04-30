@@ -25,9 +25,11 @@ hosts.
   passwords for any account.
 - **OAuth 2.0.** Users sign in via Apple Sign-In, Google Sign-In, or
   Microsoft Sign-In (Azure Active Directory).
-- **Passkeys (WebAuthn).** Where supported, we prefer passkey
-  authentication backed by the device's secure enclave or hardware
-  security module.
+- **Passkeys (WebAuthn).** The IBA Music admin dashboard supports
+  passkey authentication for staff sign-in, backed by the device's
+  secure enclave or hardware security module. The IBA Companion iOS
+  app uses OAuth 2.0 (Apple, Google, Microsoft) and email-and-password
+  sign-in only.
 - **Session tokens** expire on a rolling basis and are bound to the
   device that requested them where possible.
 - **Rate limiting** is applied to authentication endpoints to slow
@@ -37,12 +39,12 @@ hosts.
 
 - Primary relational data is stored in **Cloudflare D1** and is
   encrypted at rest by Cloudflare.
-- File uploads (invoice receipts, profile photos) and IBA Music's
-  multitrack audio stems used by the Practice feature are stored
-  in **Cloudflare R2** and are encrypted at rest by Cloudflare.
-- OAuth refresh tokens and other secrets on mobile devices are
-  stored in the **iOS Keychain** or **Android Keystore** with
-  hardware-backed protection where the device supports it.
+- IBA Music's multitrack audio stems used by the Practice feature
+  are stored in **Cloudflare R2** and are encrypted at rest by
+  Cloudflare.
+- OAuth refresh tokens and other secrets on the device are stored
+  in the **iOS Keychain** with hardware-backed protection where the
+  device supports it.
 
 ### Infrastructure
 
@@ -103,8 +105,7 @@ In scope for responsible disclosure:
 
 - admin.ibamusic.com and other IBA Music-owned production web
   tools.
-- IBA Companion mobile apps (iOS / iPadOS / macOS / watchOS /
-  Android) — as published on the App Store and Google Play.
+- IBA Companion iOS app — as published on the App Store.
 - API endpoints owned by IBA Music at companion.ibamusic.com and
   related subdomains.
 - This legal subdomain (legal.ibamusic.com).

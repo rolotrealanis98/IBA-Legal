@@ -16,7 +16,7 @@ Service](/terms) and the [Privacy Policy](/privacy). The open
 source licenses below govern only the relationship between IBA
 Music and the respective upstream project maintainers.
 
-## IBA Companion (iOS / iPadOS / macOS / watchOS)
+## IBA Companion (iOS)
 
 The authoritative, up-to-date acknowledgements list for the
 IBA Companion iOS app is visible inside the app itself, under
@@ -26,33 +26,24 @@ convenience mirror.
 | Project | License | Upstream |
 |---|---|---|
 | **GoogleSignIn-iOS** | Apache License 2.0 | [github.com/google/GoogleSignIn-iOS](https://github.com/google/GoogleSignIn-iOS) |
-| **Firebase App Check** | Apache License 2.0 | [github.com/google/app-check](https://github.com/google/app-check) |
 | **AppAuth-iOS** *(transitive via GoogleSignIn)* | Apache License 2.0 | [github.com/openid/AppAuth-iOS](https://github.com/openid/AppAuth-iOS) |
 | **GTMAppAuth** *(transitive via GoogleSignIn)* | Apache License 2.0 | [github.com/google/GTMAppAuth](https://github.com/google/GTMAppAuth) |
 | **GTMSessionFetcher** *(transitive via GoogleSignIn)* | Apache License 2.0 | [github.com/google/gtm-session-fetcher](https://github.com/google/gtm-session-fetcher) |
-| **GoogleUtilities** *(transitive via GoogleSignIn / App Check)* | Apache License 2.0 | [github.com/google/GoogleUtilities](https://github.com/google/GoogleUtilities) |
+| **GoogleUtilities** *(transitive via GoogleSignIn)* | Apache License 2.0 | [github.com/google/GoogleUtilities](https://github.com/google/GoogleUtilities) |
 | **Google Promises** *(transitive)* | Apache License 2.0 | [github.com/google/promises](https://github.com/google/promises) |
 
 All other app code is proprietary to IBA Music. The app relies on
 first-party Apple frameworks (SwiftUI, EventKit, Core Location,
-User Notifications, ASAuthorization, PhotoKit, AVFoundation,
-MediaPlayer, ActivityKit, WidgetKit, WeatherKit, WatchConnectivity,
-**MetricKit** — used for opt-in diagnostic crash and performance
-telemetry per [Privacy Policy §3.11](/privacy/#diagnostics))
-which are licensed by Apple under the Apple Developer Program
-License Agreement.
-
-## IBA Companion (Android)
-
-The in-app acknowledgements screen is the authoritative list. If
-you need a written list for compliance purposes, email
-[privacy@ibamusic.com](mailto:privacy@ibamusic.com) and we will
-send the current manifest.
+User Notifications, AuthenticationServices, AVFoundation,
+MediaPlayer, ActivityKit, WidgetKit, WeatherKit, **MetricKit** —
+used for opt-in diagnostic crash and performance telemetry per
+[Privacy Policy §3.11](/privacy/#diagnostics)) which are licensed
+by Apple under the Apple Developer Program License Agreement.
 
 ## IBA Music admin dashboard and satellite web tools
 
 The IBA Music admin dashboard and its satellite web tools
-(availability forms, invoice portal, band leader tools) are built
+(availability forms, band leader tools) are built
 on a hand-rolled stack that includes some open source components.
 Notable dependencies include:
 

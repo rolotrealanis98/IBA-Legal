@@ -33,17 +33,16 @@ IBA Companion's use of the Google Calendar API.
 
 This policy applies to:
 
-- **IBA Companion** — our mobile app for iOS, iPadOS, macOS,
-  watchOS, and Android. Musicians use it to view their performance
-  schedule, check in at venues, rehearse setlists with multitrack
-  stems (Practice), and optionally sync their schedule to Apple
-  Calendar (via EventKit) or Google Calendar (via the scope
-  described in section 5).
+- **IBA Companion** — our iOS app for iPhone. Musicians use it to
+  view their performance schedule, check in at venues, rehearse
+  setlists with multitrack stems (Practice), and optionally sync
+  their schedule to Apple Calendar (via EventKit) or Google Calendar
+  (via the scope described in section 5).
 - **IBA Music Admin Dashboard** at admin.ibamusic.com — the internal
   operations tool used by IBA Music staff to manage performances,
   venues, and musician assignments.
-- **IBA Music web tools** — availability forms, the invoice portal,
-  and band leader schedule tools used by band leaders and musicians.
+- **IBA Music web tools** — availability forms and band leader
+  schedule tools used by band leaders and musicians.
 
 If IBA Music launches a new product or service in the future, we will
 either update this policy to cover it or publish a separate policy
@@ -55,8 +54,8 @@ and link to it from the [Legal Center](/).
 > We do not use analytics or advertising trackers. We do not read
 > your Google calendar — the scope we request only lets IBA Companion
 > manage calendars it creates itself. We collect the information we
-> need to run live-music performances (schedule, check-ins, invoices)
-> and nothing more.
+> need to run live-music performances (schedule, check-ins) and
+> nothing more.
 
 The rest of this policy explains each item in detail.
 
@@ -68,7 +67,7 @@ When you sign in to IBA Companion or any IBA Music web tool, we
 receive your name, email address, and (for some providers) a unique
 identifier from the sign-in provider you choose: **Apple Sign-In**,
 **Google Sign-In**, **Microsoft Sign-In**, or an IBA Music-hosted
-email and passkey sign-in.
+email and password sign-in.
 
 We use this information to create and maintain your account and to
 link you to the musician, staff, or contractor record IBA Music
@@ -102,25 +101,19 @@ two ways a check-in can trigger:
 
 #### iOS location permissions we request
 
-On iOS, iPadOS, and watchOS, IBA Companion asks you to grant one or
-both of the standard Core Location authorizations:
+IBA Companion declares one Core Location authorization on iOS:
 
-| Permission | Key | Why we request it | Purpose string shown to you |
-|---|---|---|---|
-| When-In-Use | `NSLocationWhenInUseUsageDescription` | Manual check-in (tap Check In while the app is open) | *"IBA Companion needs your location to verify you've arrived at the venue for GPS check-in."* |
-| Always | `NSLocationAlwaysAndWhenInUseUsageDescription` | Geofence auto-checkin — required because iOS only delivers region-enter events to an authorized app when the app is in the background | *"IBA Companion uses your location to notify you when you arrive at a venue, so you can check in quickly."* |
+| Permission | Key | Purpose string shown to you |
+|---|---|---|
+| Always | `NSLocationAlwaysAndWhenInUseUsageDescription` | *"IBA Companion uses your location to notify you when you arrive at a venue, so you can check in quickly."* |
 
-You can grant **When-In-Use only** (manual check-in works; auto
-check-in does not), grant **Always** (both work), or deny both
-(neither location feature works, but the rest of the app continues
-to function normally).
-
-On the IBA Companion **Apple Watch app**, IBA Companion requests
-When-In-Use only, to confirm your arrival from your watch without
-unlocking your phone. On **macOS**, IBA Companion does not use
-location services at all. The Mac app is used primarily for schedule
-viewing and Practice (multitrack rehearsal) — features that do not
-require location.
+iOS lets you respond to that prompt with **While Using the App**,
+**Always**, or **Don't Allow**. Manual check-in works with either
+"While Using" or "Always". Geofence auto check-in additionally
+requires "Always", because iOS only delivers region-enter events to
+an authorized app while it is in the background. If you deny both,
+the location features are unavailable but the rest of the app
+continues to function normally.
 
 #### What we do with location data
 
@@ -155,10 +148,10 @@ than the sub-processors listed in section 7. We do not sell it.
 #### How to turn it off
 
 Go to **Settings → Privacy & Security → Location Services → IBA
-Companion** on your iOS or iPadOS device to change or revoke
-permission at any time. Disabling location will prevent the
-check-in feature from working but will not affect schedule viewing,
-calendar sync, invoice submission, or any other part of the app.
+Companion** on your iPhone to change or revoke permission at any
+time. Disabling location will prevent the check-in feature from
+working but will not affect schedule viewing, calendar sync, or
+any other part of the app.
 
 ### 3.4 Performance and schedule data
 
@@ -185,9 +178,7 @@ operational reporting.
   token so IBA Music's backend can deliver operational push
   notifications — schedule changes, check-in reminders, payroll
   updates. We do **not** send marketing or advertising push
-  notifications. On Android, the equivalent token is a Firebase
-  Cloud Messaging (FCM) token; the purpose and handling are
-  identical.
+  notifications.
 - **Background delivery modes.** IBA Companion declares the iOS
   background modes listed below, each tied to a specific,
   user-visible feature. It does **not** declare `voip`,
@@ -211,20 +202,19 @@ operational reporting.
 - **Crash and diagnostic logs.** IBA Companion does not integrate
   Firebase Crashlytics, Sentry, Bugsnag, or any other third-party
   crash-reporting SDK. Platform-level crash reports are collected
-  by Apple and Google on IBA Music's behalf when you opt in to
-  sharing with developers through your device settings (Apple's
-  "Share With App Developers" toggle, Google Play's "Usage &
-  diagnostics"). Those reports are delivered through Apple's App
-  Store Connect console and Google Play Console, and are used only
-  to find and fix bugs. We do not knowingly include personal data
-  in these reports. IBA Companion also includes a separate,
-  **opt-in** self-hosted diagnostic telemetry system — see
-  §3.11 for the full disclosure of what it collects, how long data
-  is kept, and how to control it.
+  by Apple on IBA Music's behalf only when you opt in to sharing
+  with developers through your device settings (Apple's "Share With
+  App Developers" toggle). Those reports are delivered through
+  Apple's App Store Connect console and are used only to find and
+  fix bugs. We do not knowingly include personal data in these
+  reports. IBA Companion also includes a separate, **opt-in**
+  self-hosted diagnostic telemetry system — see §3.11 for the full
+  disclosure of what it collects, how long data is kept, and how to
+  control it.
 
 ### 3.7 Calendar integration data
 
-Calendar sync is **optional** on every platform. Your choices are:
+Calendar sync is **optional**. Your choices are:
 
 - **Google Calendar** — see section 5 for the exact OAuth scope,
   calendar names created, and Google-specific Limited Use
@@ -249,14 +239,13 @@ not receive, record, or retain:
 - Hand or palm geometry
 - Gait or behavioral-biometric signatures
 
-When you sign in to IBA Companion using Face ID, Touch ID, a
-passkey, or the equivalent on Android, the biometric check happens
-**entirely on your device**, inside Apple's Secure Enclave or the
-equivalent hardware-backed keystore on Android. The biometric data
-never leaves your device and is never visible to IBA Music or our
-servers. We receive only the OAuth assertion or passkey signature
-that the device produces after it has locally verified your
-biometric — an opaque cryptographic token that contains no
+When you sign in to IBA Companion using Face ID or Touch ID via
+your device's standard auto-fill or sign-in provider flow, the
+biometric check happens **entirely on your device**, inside Apple's
+Secure Enclave. The biometric data never leaves your device and is
+never visible to IBA Music or our servers. We receive only the
+OAuth assertion the device produces after it has locally verified
+your biometric — an opaque cryptographic token that contains no
 biometric information.
 
 This policy addresses the Illinois Biometric Information Privacy
@@ -341,16 +330,6 @@ IBA Companion does **not**:
   your access to the Companion API is revoked and any local
   downloads become orphaned and age out via TTL.
 
-#### macOS
-
-On macOS (Apple Silicon Mac Catalyst), the Practice view is
-available but the `audio` background mode is **iOS-only** —
-audio session handling is compiled out of the macOS target.
-macOS Practice playback therefore behaves like any foreground
-macOS media app and does not rely on an iOS-style background
-audio entitlement. No location, no microphone, and no camera are
-used by Practice on any platform.
-
 <a name="diagnostics"></a>
 
 ### 3.11 Diagnostic &amp; Usage Data (Opt-In)
@@ -380,7 +359,7 @@ Analytics** toggle disclose exactly what is collected. In full:
 #### What we do not collect
 
 - Your location, messages, or audio
-- Your contacts, calendar events, or invoice data
+- Your contacts or calendar events
 - Anything that identifies you personally — telemetry rows store a **hashed
   device identifier only**, never your `user.id`, name, email, or account
   number. The hash cannot be reversed to your identity.
@@ -414,57 +393,9 @@ training.
 
 IBA Companion does **not** declare `NSCameraUsageDescription` or
 `NSPhotoLibraryUsageDescription`. It does not access the device
-camera or photo library. If you are a reviewer who remembers a
-previous version of this policy describing a receipt-capture flow
-for expenses, that flow has been moved to the IBA Music admin
-webapp (admin.ibamusic.com), which is not part of the iOS App
-Store submission reviewed alongside this policy.
+camera or photo library.
 
-### 3.12 Firebase App Check (anti-abuse, not analytics)
-
-IBA Companion includes the **Firebase App Check** SDK from Google
-solely as an **anti-abuse signal** for IBA Music's own backend
-(`companion.ibamusic.com`). App Check does **not** perform analytics,
-advertising, or behavioral tracking. It is bundled because it is
-the practical way to confirm that a request reaching IBA Music's
-backend originates from a genuine, unmodified copy of IBA Companion
-running on a real Apple device — preventing scripted scraping of
-musician schedules and forged check-ins.
-
-#### What App Check sends
-
-When IBA Companion makes a request to IBA Music's backend, App
-Check asks Apple for a **DeviceCheck** or **App Attest** assertion
-and forwards an **opaque attestation token** to Firebase. Firebase
-verifies the token with Apple and returns a short-lived App Check
-token, which IBA Companion attaches to backend requests so the
-backend can reject traffic that did not originate from a real
-device. The attestation token is generated and signed by Apple's
-Secure Enclave; it does **not** contain your name, email, account
-identifier, IDFA, IDFV, location, or any other personal information,
-and it cannot be reversed to your identity.
-
-#### What App Check does *not* do
-
-- It does **not** read any data from the app, including your
-  schedule, location, calendar, or Practice usage.
-- It does **not** send analytics events to Firebase. We do not
-  use Firebase Analytics, Crashlytics, Performance, or Remote
-  Config — only App Check.
-- It does **not** track you across apps or websites.
-- The App Check token is **not** linked to your IBA Music user
-  account at the Firebase layer. Firebase sees only "this device
-  is authentic"; it does not see who you are.
-
-#### Sub-processor
-
-Firebase App Check is operated by Google LLC and is included in
-the Google sub-processor entry in §7 and on the
-[Sub-processors](/subprocessors/) page. App Check itself does not
-introduce a new third party beyond what is already disclosed for
-Google Sign-In and Google Calendar.
-
-### 3.13 Maps and external apps (canOpenURL only)
+### 3.12 Maps and external apps (canOpenURL only)
 
 IBA Companion declares `comgooglemaps` in `LSApplicationQueriesSchemes`
 so that, when you tap a venue address, it can detect whether
@@ -483,8 +414,8 @@ sheet.
 We use the information described in section 3 to:
 
 - **Provide the service** — show you your performance schedule,
-  route push notifications, accept check-ins, process invoice
-  uploads, and (if you opt in) keep your calendar in sync.
+  route push notifications, accept check-ins, and (if you opt in)
+  keep your calendar in sync.
 - **Run internal operations** — payroll, attendance reconciliation,
   performance reporting, customer-service responses to musicians
   who write to us with questions about their schedule.
@@ -599,8 +530,7 @@ the other way around.
 This section covers the additional disclosures that Apple App Store
 reviewers, App Tracking Transparency rules, and iOS platform
 conventions expect IBA Companion to make. It applies to the
-IBA Companion app on iPhone, iPad, Mac (Apple Silicon), and Apple
-Watch.
+IBA Companion app on iPhone.
 
 ### 6.1 Apple Calendar integration (EventKit)
 
@@ -636,10 +566,6 @@ under your sole control — you can delete them from Apple Calendar
 whenever you like. IBA Music does not retain a mirror of your
 device calendar on our servers.
 
-The EventKit integration runs on iOS, iPadOS, and watchOS.
-On **macOS** (Mac Catalyst / Apple Silicon), IBA Companion does not
-currently enable the calendar sync feature.
-
 ### 6.2 Sign in with Apple
 
 IBA Companion offers **Sign in with Apple** as a first-class
@@ -672,7 +598,7 @@ IBA Music uses push notifications **only** for:
 
 - Schedule changes (a performance moved, added, or cancelled)
 - Check-in reminders before a performance
-- Payroll and invoice status updates
+- Payroll status updates
 - **Stage Alerts** — time-sensitive on-stage messages sent by IBA
   Music staff during a performance. You can acknowledge or reply
   from the notification by choosing one of four predefined
@@ -765,20 +691,20 @@ account on the same terms.
 
 **What happens when you close your account.** We immediately
 deactivate your IBA Music account so you can no longer sign in to
-IBA Companion on any device, on the web, or through any sign-in
-provider (Apple, Google, Microsoft, or email). You are signed out on
-every device you were using. Push notifications to those devices
-stop. In-app closures take effect immediately; email closures take
-effect within 30 days of receipt.
+IBA Companion or to the web tools through any sign-in provider
+(Apple, Google, Microsoft, or email). You are signed out on every
+device you were using. Push notifications to those devices stop.
+In-app closures take effect immediately; email closures take effect
+within 30 days of receipt.
 
 **What we retain, and why.** Florida labor and tax recordkeeping
 law requires IBA Music to retain records of the performances you
-worked, the payroll artifacts tied to them, the invoice receipts
-you submitted, and the minimum personal identifiers — your name,
-contact information, instruments, and the performance history
-itself — needed to keep those records meaningful to a tax auditor
-or labor regulator. IBA Music retains this information for
-**seven (7) years** from the date of the underlying record.
+worked, the payroll artifacts tied to them, and the minimum
+personal identifiers — your name, contact information, instruments,
+and the performance history itself — needed to keep those records
+meaningful to a tax auditor or labor regulator. IBA Music retains
+this information for **seven (7) years** from the date of the
+underlying record.
 
 During the retention period IBA Music uses the retained information
 **only** for tax, labor, audit, and legal-process purposes, and only
@@ -837,17 +763,6 @@ nutrition label displayed on IBA Companion's App Store page.
 does not perform any of Apple's defined tracking activities (see
 section 6.5).
 
-The **Firebase App Check** attestation flow (§3.12) is not listed in
-the table above because the App Attest assertion App Check forwards
-to Google is not a category of "data collected from this app" under
-Apple's privacy-label definitions: it is a per-request, per-app
-cryptographic attestation produced by Apple's Secure Enclave, it
-contains no personal information, and it is not stored or linked to
-your IBA Music user identity. Apple's own developer documentation
-treats App Attest assertions as anti-abuse infrastructure rather
-than user data. We disclose App Check anyway in §3.12 for full
-transparency.
-
 Practice stem audio (§3.9) is delivered **to** your device from
 IBA Music's own servers — it is not user-provided content and is
 not "collected" in the App Store privacy-label sense. The
@@ -858,14 +773,13 @@ never accessed (§3.10).
 
 ### 6.8 Supported operating systems and upgrade path
 
-IBA Companion supports current major versions of iOS, iPadOS,
-watchOS, and macOS, plus the immediately previous major version
-where practical. Security fixes target the current version first.
-If your device cannot run a supported version, some features —
-notably calendar sync, passkeys, and modern privacy prompts — may
-not be available. IBA Music does not intentionally limit
-functionality on older devices as long as they remain supported by
-Apple.
+IBA Companion supports the current major version of iOS plus the
+immediately previous major version where practical. Security fixes
+target the current version first. If your iPhone cannot run a
+supported version, some features — notably calendar sync and
+modern privacy prompts — may not be available. IBA Music does not
+intentionally limit functionality on older devices as long as they
+remain supported by Apple.
 
 ## 7. Information We Share
 
@@ -879,10 +793,10 @@ below is a summary.
 
 | Sub-processor | Purpose |
 |---|---|
-| **Apple Inc.** | Apple Push Notification service (APNs), Apple Sign-In, EventKit for optional Apple Calendar sync on iOS/iPadOS/macOS/watchOS, ActivityKit for the Set Tracker Live Activity (§6.4), and Apple WeatherKit for the optional venue precipitation forecast shown inside the Live Activity (queries use venue coordinates, not your device location). |
-| **Google LLC** | Google Calendar API via the `calendar.app.created` scope (opt-in calendar sync), Google Sign-In for authentication, Firebase Cloud Messaging (FCM) for Android push, and **Firebase App Check** (anti-abuse attestation, §3.12 — receives only Apple-signed App Attest tokens; no personal data, no analytics, no advertising). |
-| **Microsoft Corporation** | Microsoft Sign-In (Azure Active Directory) and Microsoft Graph — used on the IBA Music admin side to sync performance bookings with Microsoft 365 calendars belonging to IBA Music staff. Not used for musician-facing features. |
-| **Cloudflare, Inc.** | Edge hosting for admin.ibamusic.com and related tools, database storage (Cloudflare D1 — performance schedule, check-ins, song metadata), object storage (Cloudflare R2 — IBA Music's multitrack audio stems used by the Practice feature, §3.9; receipt images for the admin webapp, which is out of scope for the IBA Companion iOS App Store submission), and Cloudflare Pages hosting for this legal subdomain itself. Cloudflare processes data on IBA Music's behalf; its own use of the data is governed by its contractual role as a processor. |
+| **Apple Inc.** | Apple Push Notification service (APNs), Apple Sign-In, EventKit for optional Apple Calendar sync, ActivityKit for the Set Tracker Live Activity (§6.4), and Apple WeatherKit for the optional venue precipitation forecast shown inside the Live Activity (queries use venue coordinates, not your device location). |
+| **Google LLC** | Google Calendar API via the `calendar.app.created` scope (opt-in calendar sync) and Google Sign-In for authentication. |
+| **Microsoft Corporation** | Microsoft Sign-In (Azure Active Directory) — IBA Companion offers Microsoft 365 sign-in to musicians whose IBA Music account is linked to a Microsoft identity, alongside Apple Sign-In and Google Sign-In. Microsoft Graph is also used on the IBA Music admin side to sync performance bookings with IBA Music staff Outlook calendars; that admin use is not part of the IBA Companion app. |
+| **Cloudflare, Inc.** | Edge hosting for admin.ibamusic.com and related tools, database storage (Cloudflare D1 — performance schedule, check-ins, song metadata), object storage (Cloudflare R2 — IBA Music's multitrack audio stems used by the Practice feature, §3.9), and Cloudflare Pages hosting for this legal subdomain itself. Cloudflare processes data on IBA Music's behalf; its own use of the data is governed by its contractual role as a processor. |
 
 We also disclose information when we reasonably believe disclosure
 is necessary to comply with a lawful subpoena, court order, or
@@ -898,7 +812,6 @@ doing so is proper and practical.
 |---|---|
 | Account profile | Until you close your account, plus up to 30 days to complete deletion. |
 | Performance and attendance records | Seven (7) years, consistent with Florida tax and labor-records requirements. |
-| Invoice receipts | Seven (7) years. |
 | Location records (check-ins) | Seven (7) years alongside the associated attendance record. We do not maintain location history outside of check-in transactions. |
 | Push notification tokens | Until the token is invalidated by your device or you sign out. |
 | Crash and diagnostic logs (platform-level, via Apple/Google) | Up to 90 days. |
@@ -963,7 +876,7 @@ information applies.
 
 - **Categories of personal information we collect:** identifiers
   (name, email, account ID), contact information (phone, address),
-  employment-related information (performances, check-ins, invoices),
+  employment-related information (performances, check-ins),
   geolocation (precise, only at check-in), internet activity
   (technical logs), and inferences drawn from the foregoing for
   the limited purpose of running the service.
@@ -1002,12 +915,13 @@ unauthorized access, use, disclosure, alteration, and destruction:
   **TLS 1.2 or higher**.
 - Data at rest in Cloudflare D1 and R2 is encrypted by Cloudflare
   using industry-standard algorithms.
-- OAuth tokens on mobile devices are stored in the **iOS Keychain**
-  or **Android Keystore**, protected by the operating system's
-  hardware-backed security.
-- Authentication uses OAuth 2.0 (Apple, Google, Microsoft) or
-  **WebAuthn passkeys**. We do not store plaintext passwords for
-  any account.
+- OAuth tokens on the device are stored in the **iOS Keychain**,
+  protected by the operating system's hardware-backed security.
+- Authentication uses OAuth 2.0 (Apple, Google, Microsoft) for
+  third-party sign-in. IBA Music-hosted email-and-password sign-in
+  uses an industry-standard salted, slow-hash password store (we do
+  not store plaintext passwords). The IBA Music admin dashboard
+  additionally supports **WebAuthn passkeys** for staff sign-in.
 - Access to the IBA Music admin dashboard requires sign-in and is
   limited to authorized IBA Music personnel.
 
