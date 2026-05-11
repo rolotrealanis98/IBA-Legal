@@ -34,6 +34,7 @@ export default {
   // Products covered by these legal documents
   productsCovered: [
     "IBA Companion for iOS (iPhone)",
+    "IBA Companion for Android",
     "IBA Music Admin Dashboard (admin.ibamusic.com)",
     "IBA Music web tools (availability, band leader)",
   ],

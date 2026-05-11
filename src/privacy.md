@@ -806,6 +806,8 @@ rights, property, or safety of IBA Music, our musicians, or the
 public. We will contest overbroad legal demands where we believe
 doing so is proper and practical.
 
+<a name="data-retention"></a>
+
 ## 8. Data Retention
 
 | Category | Retention |
@@ -836,6 +838,10 @@ Send requests to
 email address on file with your account, or use another method
 reasonable to verify your identity. We respond within the time
 frames required by applicable law.
+
+For step-by-step instructions on deleting your IBA Companion
+account from inside the iOS or Android app, see the dedicated
+[Account deletion](/account-deletion/) page.
 
 ## 10. European Economic Area, United Kingdom, and Switzerland (GDPR)
 

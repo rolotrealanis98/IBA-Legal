@@ -111,6 +111,10 @@ this subdomain:
   Rules for using IBA Companion and IBA Music web tools. Governed
   by Florida law. Includes a binding arbitration clause with a
   30-day opt-out for new users.
+- **[Account deletion](https://legal.ibamusic.com/account-deletion/)** —
+  How to delete your IBA Companion account from the iOS or Android
+  app, what is removed, and the tax/labor records IBA Music must
+  retain.
 - **[Cookie Policy](https://legal.ibamusic.com/cookies/)** — How
   (and whether) cookies are used. This legal subdomain sets no
   cookies at all; the admin dashboard uses session cookies only.
