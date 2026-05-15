@@ -108,8 +108,7 @@ paid, even after they have stopped working with us:
 | Location check-in records associated with paid attendance | 7 years (alongside the attendance record) | Cannot be unlinked without invalidating the attendance record. |
 | Profile information necessary to identify those records (name, payee email, phone, instrument) | 7 years | Required so that the retained records remain meaningful and auditable. |
 | Push-notification token | Removed immediately on deletion | Not legally required to retain. |
-| Crash and diagnostic logs (Apple / Google platform-level) | Up to 90 days | Apple and Google control these directly; we have no extra retention. |
-| Telemetry event counters and crash payloads (only if you opted in) | 90 / 180 days respectively | Removed immediately if you also tap *Delete my telemetry data* before deletion. |
+| Crash and diagnostic logs (Apple / Google platform-level) | Controlled by Apple / Google | We do not retain copies on our own infrastructure. |
 | Google Calendar / Microsoft Calendar event content | None retained | We never stored a mirror; events live in your own calendar account. |
 
 The retention periods above are the same as those listed in our

@@ -201,16 +201,14 @@ operational reporting.
     never `.record` or `.playAndRecord`.
 - **Crash and diagnostic logs.** IBA Companion does not integrate
   Firebase Crashlytics, Sentry, Bugsnag, or any other third-party
-  crash-reporting SDK. Platform-level crash reports are collected
-  by Apple on IBA Music's behalf only when you opt in to sharing
-  with developers through your device settings (Apple's "Share With
-  App Developers" toggle). Those reports are delivered through
-  Apple's App Store Connect console and are used only to find and
-  fix bugs. We do not knowingly include personal data in these
-  reports. IBA Companion also includes a separate, **opt-in**
-  self-hosted diagnostic telemetry system — see §3.11 for the full
-  disclosure of what it collects, how long data is kept, and how to
-  control it.
+  crash-reporting SDK, and IBA Music does not operate any custom
+  diagnostic telemetry pipeline of its own. Platform-level crash
+  reports are collected by Apple on IBA Music's behalf only when
+  you opt in to sharing with developers through your device
+  settings (Apple's "Share With App Developers" toggle). Those
+  reports are delivered through Apple's App Store Connect console
+  and are used only to find and fix bugs. We do not knowingly
+  include personal data in these reports.
 
 ### 3.7 Calendar integration data
 
@@ -329,65 +327,6 @@ IBA Companion does **not**:
   ends when your engagement with IBA Music ends, at which point
   your access to the Companion API is revoked and any local
   downloads become orphaned and age out via TTL.
-
-<a name="diagnostics"></a>
-
-### 3.11 Diagnostic &amp; Usage Data (Opt-In)
-
-IBA Companion includes an **opt-in diagnostic telemetry system** that uses
-Apple MetricKit and custom anonymous event counters to help us find and fix
-crashes before they affect more users. This feature is **off by default** and
-is only activated if you explicitly choose to allow it.
-
-#### What we collect (opt-in only)
-
-The consent prompt you see at first launch and the **Settings → Diagnostics &
-Analytics** toggle disclose exactly what is collected. In full:
-
-- **Crash reports** — what went wrong, not who you are. Delivered via Apple
-  MetricKit (a first-party Apple framework) and sent to IBA Music's own backend
-  (`companion.ibamusic.com`). They do not include your name, account,
-  location, or any personal identifier.
-- **Which screens you use and how often** — anonymized counters for which
-  features are opened and how frequently (for example, Practice sessions
-  started, Set Tracker activations). No content — we count navigation events,
-  not what you viewed or typed.
-- **App launch time, battery usage from iOS** — performance metrics provided
-  directly by MetricKit, covering hang rate, launch time, and on-screen
-  render time.
-
-#### What we do not collect
-
-- Your location, messages, or audio
-- Your contacts or calendar events
-- Anything that identifies you personally — telemetry rows store a **hashed
-  device identifier only**, never your `user.id`, name, email, or account
-  number. The hash cannot be reversed to your identity.
-
-#### Consent model
-
-Opt-in consent is presented **once**, after your first successful login
-following the update that introduces this feature. You may allow or decline.
-If you decline or skip, diagnostics remain off and no telemetry is sent.
-You can change your choice at any time in **Settings → Diagnostics &
-Analytics**. Turning diagnostics off immediately stops all future event
-transmission. You may also delete previously submitted telemetry from your
-device by tapping **Delete my telemetry data** in that same Settings screen.
-
-#### Retention
-
-- **Event counters** (screen usage, feature adoption) — 90 days, then
-  permanently deleted.
-- **Crash payloads** (MetricKit diagnostic reports) — 180 days, to allow
-  investigation of intermittent issues, then permanently deleted.
-
-#### Data storage and sharing
-
-Telemetry data is stored exclusively on **Cloudflare D1** — IBA Music's own
-database, already disclosed in §7 and used for the rest of the app's data.
-No new sub-processor is introduced. Telemetry data is **not** shared with any
-third party, not sold, and not used for advertising or machine-learning model
-training.
 
 ### 3.10 Photos and camera (not collected)
 
@@ -606,8 +545,6 @@ IBA Music uses push notifications **only** for:
   are posted only to IBA Music's Companion API — no free-text
   input is accepted and no third party sees them.
 - Critical service announcements from IBA Music operations
-- **Diagnostics** — crash/hang/usage counters to improve app
-  stability (opt-in only; see §3.11 for full disclosure)
 
 We do **not** send advertising notifications, marketing offers,
 third-party promotions, or behavioral re-engagement nudges. You
@@ -750,7 +687,7 @@ nutrition label displayed on IBA Companion's App Store page.
 | **Location** — Precise Location | Section 3.3 | Yes | No | App Functionality |
 | **Identifiers** — User ID (from sign-in provider) | Section 3.1 | Yes | No | App Functionality |
 | **Usage Data** | *Not collected* | — | — | — |
-| **Diagnostics** — Crash Data, Performance Data, Other Diagnostic Data | Sections 3.6, 3.11 (opt-in) | No (hashed device identifier only, not linked to user identity) | No | App Functionality, Product Personalization (diagnostic context only) |
+| **Diagnostics** | *Not collected by IBA Music.* Apple's platform-level crash reports remain available to us via App Store Connect only when you opt in via your device's "Share With App Developers" setting; see §3.6. | — | — | — |
 | **User Content** | *Not collected* — see §3.9 (Practice audio is delivered to device, not collected) and §3.10 (camera / photos not used) | — | — | — |
 | **Sensitive Info** | *Not collected* | — | — | — |
 | **Financial Info** | *Not collected* | — | — | — |
@@ -816,9 +753,7 @@ doing so is proper and practical.
 | Performance and attendance records | Seven (7) years, consistent with Florida tax and labor-records requirements. |
 | Location records (check-ins) | Seven (7) years alongside the associated attendance record. We do not maintain location history outside of check-in transactions. |
 | Push notification tokens | Until the token is invalidated by your device or you sign out. |
-| Crash and diagnostic logs (platform-level, via Apple/Google) | Up to 90 days. |
-| Telemetry event counters (opt-in, §3.11) | 90 days. |
-| Telemetry crash payloads (opt-in, §3.11) | 180 days. |
+| Crash and diagnostic logs (platform-level, via Apple/Google) | Controlled by Apple/Google. We do not retain copies on our own infrastructure. |
 | Google Calendar data | Not stored on IBA Music servers. Events live in your Google account; we write to them but do not keep a mirror. |
 
 ## 9. Your Rights

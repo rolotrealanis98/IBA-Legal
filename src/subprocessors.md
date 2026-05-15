@@ -29,7 +29,7 @@ easy to consume on its own.
 | **Apple Inc.** | Apple Push Notification service (APNs); Sign in with Apple; EventKit framework for on-device Apple Calendar sync; ActivityKit for the Set Tracker Live Activity; Apple WeatherKit for the optional venue precipitation forecast shown inside the Live Activity (queries use venue coordinates, not device location) | USA, global edge | [apple.com/legal/privacy](https://www.apple.com/legal/privacy/en-ww/) |
 | **Google LLC** | Google Calendar API (opt-in, `calendar.app.created` scope only) and Google Sign-In for authentication. | USA, global edge | [policies.google.com/privacy](https://policies.google.com/privacy) |
 | **Microsoft Corporation** | Microsoft Azure Active Directory — IBA Companion offers Microsoft 365 sign-in to musicians whose IBA Music account is linked to a Microsoft identity. Microsoft Graph is also used on the IBA Music admin side to sync performance bookings with IBA Music staff Outlook calendars; that admin use is not part of the IBA Companion app. | USA, global edge | [privacy.microsoft.com](https://privacy.microsoft.com/en-us/privacystatement) |
-| **Cloudflare, Inc.** | Edge hosting for admin.ibamusic.com and related tools; Cloudflare D1 database storage (performance schedule, check-ins, song metadata, and opt-in diagnostic telemetry data per Privacy Policy §3.11); Cloudflare R2 object storage (IBA Music's multitrack audio stems used by the Practice feature); Cloudflare Pages hosting for this legal subdomain | USA, global edge | [cloudflare.com/privacypolicy](https://www.cloudflare.com/privacypolicy/) |
+| **Cloudflare, Inc.** | Edge hosting for admin.ibamusic.com and related tools; Cloudflare D1 database storage (performance schedule, check-ins, song metadata); Cloudflare R2 object storage (IBA Music's multitrack audio stems used by the Practice feature); Cloudflare Pages hosting for this legal subdomain | USA, global edge | [cloudflare.com/privacypolicy](https://www.cloudflare.com/privacypolicy/) |
 
 All listed providers process personal data only as needed to
 provide the services described above. None of them are authorized
@@ -45,9 +45,11 @@ IBA Music does **not** use:
   Unity Ads, etc.)
 - Any analytics SDKs (Firebase Analytics, Amplitude, Mixpanel,
   Segment, Hotjar, etc.)
-- Any third-party crash-reporting SDK (Sentry, Crashlytics, Bugsnag, etc.) —
-  IBA Companion's opt-in diagnostics use Apple MetricKit and IBA Music's
-  own backend (no new sub-processor)
+- Any third-party crash-reporting SDK (Sentry, Crashlytics, Bugsnag, etc.).
+  IBA Music does not operate a custom diagnostic telemetry pipeline of its
+  own; the only crash reports we may see are those Apple shares with us
+  through App Store Connect when a user opts in via the system "Share With
+  App Developers" setting.
 - Any Firebase product. IBA Companion does not include Firebase
   Analytics, Crashlytics, Performance, Remote Config, Cloud
   Messaging, or App Check.
