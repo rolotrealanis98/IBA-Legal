@@ -86,34 +86,22 @@ behalf. You can request corrections at any time.
 
 IBA Companion uses your device's precise location for **one purpose
 only**: to verify that you are physically present at the venue where
-IBA Music booked you to perform, at the time of check-in. There are
-two ways a check-in can trigger:
+IBA Music booked you to perform, at the time of check-in. Check-in
+is **manual** — you tap **Check In** on your upcoming performance,
+IBA Companion requests your current location once, and compares it
+against the venue's coordinates. There is no background or automatic
+location tracking.
 
-1. **Manual check-in** — you tap **Check In** on your upcoming
-   performance. IBA Companion requests your current location once
-   and compares it against the venue's coordinates.
-2. **Automatic geofence check-in** *(optional)* — you can enable
-   geofence auto-checkin, which asks iOS to notify IBA Companion
-   when you enter a small region centered on the venue for your
-   upcoming performance. When iOS fires that region-enter event,
-   IBA Companion records your arrival automatically so you don't
-   have to remember to tap Check In.
-
-#### iOS location permissions we request
+#### iOS location permission we request
 
 IBA Companion declares one Core Location authorization on iOS:
 
 | Permission | Key | Purpose string shown to you |
 |---|---|---|
-| Always | `NSLocationAlwaysAndWhenInUseUsageDescription` | *"IBA Companion uses your location to notify you when you arrive at a venue, so you can check in quickly."* |
+| While Using the App | `NSLocationWhenInUseUsageDescription` | *"IBA Companion checks your location when you tap Check In to confirm you've arrived at the venue. Location is never used in the background."* |
 
-iOS lets you respond to that prompt with **While Using the App**,
-**Always**, or **Don't Allow**. Manual check-in works with either
-"While Using" or "Always". Geofence auto check-in additionally
-requires "Always", because iOS only delivers region-enter events to
-an authorized app while it is in the background. If you deny both,
-the location features are unavailable but the rest of the app
-continues to function normally.
+If you deny the prompt, the check-in feature is unavailable but
+the rest of the app continues to function normally.
 
 #### What we do with location data
 
@@ -127,15 +115,10 @@ continues to function normally.
   — IBA Companion does not log a continuous location history, does
   not track your movement between venues, and does not retain
   location points outside of check-in records.
-- Geofence regions are created for your upcoming performances only,
-  up to the iOS system limit of 20 simultaneously monitored
-  regions. They are removed as soon as the performance ends.
-- The `location` background mode is declared in IBA Companion's
-  `Info.plist` so iOS can deliver region-enter events while the app
-  is in the background. IBA Companion does **not** use that
-  background mode to poll your location, build a movement profile,
-  or share live location with anyone. It is used only to complete
-  check-in bookkeeping when iOS wakes the app on arrival.
+- IBA Companion does **not** declare the `location` background
+  mode and does **not** monitor geofences. `CLLocationManager.allowsBackgroundLocationUpdates`
+  is set to `false` at all times. The app cannot read your
+  location while it is in the background.
 
 #### Sharing
 
@@ -163,11 +146,11 @@ display to you.
 
 ### 3.5 Check-in and attendance records
 
-When you check in at a venue (manually or via geofence), we record
-the timestamp, your location at check-in, the performance you
-checked in to, and whether the check-in was on time. IBA Music uses
-these records for payroll reconciliation, attendance disputes, and
-operational reporting.
+When you check in at a venue, we record the timestamp, your
+location at check-in, the performance you checked in to, and
+whether the check-in was on time. IBA Music uses these records for
+payroll reconciliation, attendance disputes, and operational
+reporting.
 
 ### 3.6 Device and technical information
 
@@ -187,8 +170,7 @@ operational reporting.
 
     | Background mode | Feature | Purpose |
     |---|---|---|
-    | `remote-notification` | Push notifications (§6.3) | Silent push payloads wake the app to refresh your schedule in the background. |
-    | `location` | Geofence auto check-in (§3.3) | iOS delivers region-enter events so check-in can be recorded when you arrive at a booked venue. |
+    | `remote-notification` | Push notifications (§6.3) | Silent push payloads wake the app to refresh your schedule or update an active Live Activity in the background. |
     | `fetch` | Calendar sync v2 | Periodic `BGAppRefreshTask` with identifier `com.rolotrealanis.IBA-Companion.calendarsync.refresh` reconciles your opted-in calendar with your performance schedule while the app is in the background. |
     | `audio` | Practice (multitrack rehearsal, §3.9) | Allows Practice audio you started to continue playing when the screen is locked or the app is backgrounded — identical behavior to any music or podcast app. |
 
@@ -336,17 +318,23 @@ camera or photo library.
 
 ### 3.12 Maps and external apps (canOpenURL only)
 
-IBA Companion declares `comgooglemaps` in `LSApplicationQueriesSchemes`
-so that, when you tap a venue address, it can detect whether
-**Google Maps** is installed on your device and offer it as an
-alternative to Apple Maps for routing. This is an
-**on-device-only** existence check using Apple's `canOpenURL` API —
-no information about your installed apps, your device, your
-location, or your account is transmitted to IBA Music or Google.
-IBA Companion does not enumerate any other app schemes and does
-not use this query for analytics, fingerprinting, or any purpose
-other than rendering the "Open in Google Maps" option in the venue
-sheet.
+IBA Companion declares three URL schemes in
+`LSApplicationQueriesSchemes` so that it can render
+"open in…" options if you have those apps installed:
+
+| Scheme | App | Where it's offered |
+|---|---|---|
+| `comgooglemaps` | Google Maps | Venue address routing (alongside Apple Maps) |
+| `waze` | Waze | Venue address routing |
+| `weather` | Apple Weather | Venue weather glance |
+
+Each check is an **on-device-only** existence query using Apple's
+`canOpenURL` API — no information about your installed apps, your
+device, your location, or your account is transmitted to IBA Music
+or any third party. IBA Companion does not enumerate any other app
+schemes and does not use these queries for analytics,
+fingerprinting, or any purpose other than rendering the optional
+"open in…" buttons.
 
 ## 4. How We Use Information
 

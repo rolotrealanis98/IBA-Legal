@@ -35,9 +35,8 @@ IBA Companion lets an IBA Music musician:
 - **View the performance schedule** that IBA Music has booked for
   them — venue, date, start and end time, call time, dress code,
   parking notes, and the band they are performing with.
-- **Check in at the venue** when they arrive, either by tapping a
-  **Check In** button or by opting in to a geofence that records
-  their arrival automatically. Check-ins are used for attendance
+- **Check in at the venue** when they arrive by tapping a
+  **Check In** button. Check-ins are used for attendance
   verification and payroll reconciliation, not for tracking.
 - **Receive operational push notifications** — schedule changes,
   check-in reminders, and payroll updates. Push is optional and
