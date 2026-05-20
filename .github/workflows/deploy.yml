@@ -1,0 +1,35 @@
+name: Deploy to Cloudflare Pages
+
+# Cloudflare Pages auto-build is intentionally NOT connected to this repo
+# (Git Provider = "No" on the iba-legal project). The 2026-05-20 audit
+# found the live site was 5 days stale because of this — App Store reviewer
+# would have read out-of-date privacy disclosures.
+# This Action is the canonical deploy path: every push to main rebuilds
+# with Eleventy and ships to production via wrangler.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Build + deploy to Cloudflare Pages (production)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 4a06fd515aaed0451b97fcf2606264ab
+        run: npm run deploy
