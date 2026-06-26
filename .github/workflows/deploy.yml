@@ -1,16 +1,15 @@
 name: Deploy to Cloudflare Pages
 
-# Cloudflare Pages auto-build is intentionally NOT connected to this repo
-# (Git Provider = "No" on the iba-legal project). The 2026-05-20 audit
-# found the live site was 5 days stale because of this — App Store reviewer
-# would have read out-of-date privacy disclosures.
-# This Action is the canonical deploy path: every push to main rebuilds
-# with Eleventy and ships to production via wrangler.
-
+# main → production; any other branch → preview at https://<branch>.iba-legal.pages.dev
+# Direct Upload (no CF git integration) — this Action is the only auto-deploy path.
 on:
   push:
-    branches: [main]
+    branches: ['**']
   workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -28,8 +27,11 @@ jobs:
 
       - run: npm ci
 
-      - name: Build + deploy to Cloudflare Pages (production)
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: 4a06fd515aaed0451b97fcf2606264ab
-        run: npm run deploy
+      - run: npm run build
+
+      - name: Deploy to Cloudflare Pages (main → production, branches → preview)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 4a06fd515aaed0451b97fcf2606264ab
+          command: pages deploy _site --project-name=iba-legal --branch=${{ github.ref_name }} --commit-dirty=true
