@@ -20,7 +20,7 @@ products.
 
 "Service" means, collectively:
 
-- **IBA Companion** for iOS (iPhone);
+- **IBA Companion** for iOS (iPhone) and for Android (Google Play);
 - the **IBA Music Admin Dashboard** at admin.ibamusic.com; and
 - IBA Music's internal web tools for musician availability and
   band leader scheduling.
@@ -35,9 +35,10 @@ Features include viewing your performance schedule, checking in at
 venues, receiving push notifications about schedule changes
 (including on-stage Stage Alerts during a performance), rehearsing
 setlists with multitrack audio stems in the Practice tab,
-displaying a Set Tracker Live Activity during performances, and —
-if you opt in — syncing your schedule to Apple Calendar or Google
-Calendar.
+displaying a Set Tracker during performances (a Live Activity on
+iOS, an ongoing notification on Android), and — if you opt in —
+syncing your schedule to your device calendar (Apple Calendar or
+Google Calendar on iOS; the native Android calendar on Android).
 
 ## 3. Account Requirements
 
@@ -145,6 +146,16 @@ Apple Calendar data. You can revoke Apple Calendar access at any
 time in **Settings → Privacy & Security → Calendars →
 IBA Companion**. Your use of Apple Calendar is governed by Apple's
 own terms.
+
+**Android device calendar.** On Android, IBA Companion syncs your
+schedule to your device's native calendar through the Android
+Calendar Provider, as described in [Privacy Policy §6A.5](/privacy/).
+This is an on-device, local integration — IBA Music's servers do not
+store a mirror of your device calendar data. You can revoke calendar
+access at any time in **Settings → Apps → IBA Companion →
+Permissions → Calendar**. If your device calendar is backed by a
+Google or Microsoft account, your use of that calendar is governed by
+that provider's own terms.
 
 ## 7. Apple App Store — Standard EULA
 

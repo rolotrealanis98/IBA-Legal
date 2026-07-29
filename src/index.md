@@ -24,9 +24,14 @@ not distributed to the public at large — it is only used by people
 who already have an active performance, staff, or contractor
 relationship with IBA Music.
 
-The app is published for **iPhone**. The current submission to the
-App Store covers iPhone only; iPad, Mac, Apple Watch, and Android
-versions are not part of this release.
+The app is published for **iPhone** (Apple App Store) and for
+**Android** phones (Google Play Store). The iOS submission covers
+iPhone only; iPad, Mac, and Apple Watch versions are not part of that
+release. The two mobile editions share the same feature set and
+connect to the same IBA Music backend; platform-specific privacy
+disclosures for each are in the
+[Privacy Policy](https://legal.ibamusic.com/privacy/) (section 6 for
+Apple, section 6A for Google Play / Android).
 
 ## What IBA Companion does
 
@@ -42,16 +47,19 @@ IBA Companion lets an IBA Music musician:
   check-in reminders, and payroll updates. Push is optional and
   can be disabled in device settings. IBA Music does not send
   advertising notifications.
-- **Optionally sync the schedule to a calendar** — either to the
-  device's native **Apple Calendar** through Apple's EventKit
-  framework, or to **Google Calendar** through a narrowly-scoped
-  Google OAuth integration described in the next section.
+- **Optionally sync the schedule to a calendar** — on iOS, either to
+  the device's native **Apple Calendar** through Apple's EventKit
+  framework or to **Google Calendar** through a narrowly-scoped Google
+  OAuth integration described in the next section; on Android, to the
+  device's native calendar through the Android Calendar Provider. The
+  app writes only the IBA Music entries it creates.
 - **Rehearse setlists in the Practice tab** with separated
   multitrack audio stems provided by IBA Music. Downloads are
   cached on-device only, auto-delete on a TTL, and are never
   uploaded anywhere by the musician.
-- **See a Set Tracker Live Activity during a performance** with
-  set-by-set timing on the lock screen and in the Dynamic Island.
+- **See a Set Tracker during a performance** with set-by-set timing —
+  shown as a Live Activity on the lock screen and Dynamic Island on
+  iOS, and as an ongoing notification on Android.
 
 ## How IBA Companion uses Google API data
 

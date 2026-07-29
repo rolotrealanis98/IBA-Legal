@@ -38,6 +38,13 @@ This policy applies to:
   setlists with multitrack stems (Practice), and optionally sync
   their schedule to Apple Calendar (via EventKit) or Google Calendar
   (via the scope described in section 5).
+- **IBA Companion for Android** — the native Android edition of the
+  same app, distributed through the Google Play Store. It mirrors the
+  iOS feature set: viewing the performance schedule, manual venue
+  check-in, rehearsing setlists with multitrack stems (Practice), and
+  optional schedule sync to the device's calendar. The Android-specific
+  platform disclosures — permissions, push, crash reporting, and the
+  Google Play Data Safety mapping — are in section 6A.
 - **IBA Music Admin Dashboard** at admin.ibamusic.com — the internal
   operations tool used by IBA Music staff to manage performances,
   venues, and musician assignments.
@@ -67,7 +74,9 @@ When you sign in to IBA Companion or any IBA Music web tool, we
 receive your name, email address, and (for some providers) a unique
 identifier from the sign-in provider you choose: **Apple Sign-In**,
 **Google Sign-In**, **Microsoft Sign-In**, or an IBA Music-hosted
-email and password sign-in.
+email and password sign-in. On Android, the available providers are
+**Google Sign-In** and **Microsoft Sign-In** (Apple Sign-In is
+offered on Apple platforms only).
 
 We use this information to create and maintain your account and to
 link you to the musician, staff, or contractor record IBA Music
@@ -103,6 +112,18 @@ IBA Companion declares one Core Location authorization on iOS:
 If you deny the prompt, the check-in feature is unavailable but
 the rest of the app continues to function normally.
 
+#### Android location permission we request
+
+On Android, IBA Companion declares only **foreground** location
+permissions — `ACCESS_FINE_LOCATION` and `ACCESS_COARSE_LOCATION`.
+It does **not** declare `ACCESS_BACKGROUND_LOCATION`. When you tap
+**Check In**, the app requests a **single, momentary** location fix
+through Google Play Services' fused location provider, compares it
+against the venue's coordinates, and then stops — there is no
+continuous polling and no background location access of any kind.
+Android shows its standard runtime location prompt; if you deny it,
+check-in is unavailable but the rest of the app works normally.
+
 #### What we do with location data
 
 - We request **precise location**
@@ -116,9 +137,13 @@ the rest of the app continues to function normally.
   not track your movement between venues, and does not retain
   location points outside of check-in records.
 - IBA Companion does **not** declare the `location` background
-  mode and does **not** monitor geofences. `CLLocationManager.allowsBackgroundLocationUpdates`
-  is set to `false` at all times. The app cannot read your
-  location while it is in the background.
+  mode and does **not** monitor geofences. On iOS,
+  `CLLocationManager.allowsBackgroundLocationUpdates` is set to
+  `false` at all times. On Android, the same guarantee is structural:
+  with no `ACCESS_BACKGROUND_LOCATION` permission declared and no
+  continuous location request, the operating system cannot deliver
+  location to the app while it is in the background. The app cannot
+  read your location while it is in the background on either platform.
 
 #### Sharing
 
@@ -130,11 +155,12 @@ than the sub-processors listed in section 7. We do not sell it.
 
 #### How to turn it off
 
-Go to **Settings → Privacy & Security → Location Services → IBA
-Companion** on your iPhone to change or revoke permission at any
-time. Disabling location will prevent the check-in feature from
-working but will not affect schedule viewing, calendar sync, or
-any other part of the app.
+On iPhone, go to **Settings → Privacy & Security → Location Services
+→ IBA Companion**; on Android, go to **Settings → Apps → IBA
+Companion → Permissions → Location**. You can change or revoke
+permission at any time. Disabling location will prevent the check-in
+feature from working but will not affect schedule viewing, calendar
+sync, or any other part of the app.
 
 ### 3.4 Performance and schedule data
 
@@ -154,11 +180,12 @@ reporting.
 
 ### 3.6 Device and technical information
 
-- **Push notification tokens.** If you grant notification permission
-  (the standard iOS prompt) IBA Companion registers for remote
-  notifications with Apple and hands us the Apple Push Notification
-  service (APNs) device token your device reports. We store that
-  token so IBA Music's backend can deliver operational push
+- **Push notification tokens.** If you grant notification permission,
+  IBA Companion registers for remote notifications and hands us the
+  device token your device reports — the **Apple Push Notification
+  service (APNs)** token on iOS, or the **Firebase Cloud Messaging
+  (FCM)** registration token on Android (see section 6A.3). We store
+  that token so IBA Music's backend can deliver operational push
   notifications — schedule changes, check-in reminders, payroll
   updates. We do **not** send marketing or advertising push
   notifications.
@@ -181,16 +208,28 @@ reporting.
     `NSMicrophoneUsageDescription` is not declared and
     `AVAudioSession` is configured for `.playback` (output only),
     never `.record` or `.playAndRecord`.
-- **Crash and diagnostic logs.** IBA Companion does not integrate
-  Firebase Crashlytics, Sentry, Bugsnag, or any other third-party
-  crash-reporting SDK, and IBA Music does not operate any custom
-  diagnostic telemetry pipeline of its own. Platform-level crash
-  reports are collected by Apple on IBA Music's behalf only when
-  you opt in to sharing with developers through your device
-  settings (Apple's "Share With App Developers" toggle). Those
-  reports are delivered through Apple's App Store Connect console
-  and are used only to find and fix bugs. We do not knowingly
-  include personal data in these reports.
+- **Crash and diagnostic logs.** This differs by platform:
+    - *On iOS*, IBA Companion integrates **no** third-party
+      crash-reporting SDK (no Firebase Crashlytics, Sentry, or
+      Bugsnag). Platform-level crash reports are collected by Apple on
+      IBA Music's behalf only when you opt in through Apple's "Share
+      With App Developers" setting, delivered through the App Store
+      Connect console, and used only to find and fix bugs.
+    - *On Android*, IBA Companion uses **Firebase Crashlytics** (a
+      Google service) to collect crash reports and basic diagnostic
+      data — stack traces, device model, OS version, and the app state
+      at the time of a crash — so we can find and fix defects. Before a
+      crash report leaves the device, it passes through an on-device
+      redaction step that strips personal identifiers (such as names,
+      emails, and tokens) from log messages. Crashlytics data is
+      processed by Google as a sub-processor (section 7), is used only
+      for stability and debugging, and is never used for advertising or
+      sold. The Android app does **not** use Firebase Analytics,
+      Performance Monitoring, Remote Config, or App Check.
+
+    IBA Music does not operate a custom diagnostic telemetry pipeline of
+    its own on either platform, and does not knowingly include personal
+    data in crash reports.
 
 ### 3.7 Calendar integration data
 
@@ -201,6 +240,12 @@ Calendar sync is **optional**. Your choices are:
   commitments.
 - **Apple Calendar (EventKit)** — see section 6.1 for the EventKit
   permission we request and how we handle on-device calendar data.
+- **Android device calendar (Calendar Provider)** — on Android,
+  schedule sync writes to your device's native calendar through the
+  Android Calendar Provider, which requires the `READ_CALENDAR` and
+  `WRITE_CALENDAR` permissions. See section 6A.5. IBA Companion
+  writes and maintains only the IBA Music calendar entries it creates
+  and never reads or modifies your other calendar events.
 
 You can use one, both, or neither. Choosing neither does not
 disable any other feature of IBA Companion.
@@ -584,9 +629,13 @@ for:
 - IBA Companion includes **no advertising SDKs** of any kind —
   no Google Ads Mobile SDK, no Meta Audience Network SDK, no
   AppLovin, no Unity Ads, no Chartboost, no IronSource, none.
-- IBA Companion includes **no analytics SDKs** — no Firebase
-  Analytics, no Amplitude, no Mixpanel, no Segment, no Hotjar, no
-  Sentry, no Crashlytics, none.
+- The **iOS** build of IBA Companion includes **no analytics SDKs** —
+  no Firebase Analytics, no Amplitude, no Mixpanel, no Segment, no
+  Hotjar, no Sentry, no Crashlytics, none. (The Android build uses
+  Firebase Cloud Messaging for push and Firebase Crashlytics for crash
+  reporting only — both operational, neither for advertising — as
+  disclosed in section 6A; it likewise includes no analytics or
+  advertising SDKs.)
 - IBA Companion does **not** share any data with third parties
   for cross-app or cross-site advertising. It does not share data
   with data brokers.
@@ -665,9 +714,12 @@ legal obligations IBA Music is required to meet.
 ### 6.7 App Store privacy labels — data mapping
 
 Below is how the data described elsewhere in this policy maps to
-Apple's App Store privacy-label categories. This exists so App
-Store reviewers can cross-check the policy against the privacy
-nutrition label displayed on IBA Companion's App Store page.
+Apple's App Store privacy-label categories for the **iOS** app. This
+exists so App Store reviewers can cross-check the policy against the
+privacy nutrition label displayed on IBA Companion's App Store page.
+The equivalent mapping for the Android app's Google Play **Data
+Safety** form is in section 6A.8 — note that, unlike iOS, the Android
+app does collect crash/diagnostic data via Firebase Crashlytics.
 
 | Apple category | Items collected | Linked to user? | Used to track? | Purpose |
 |---|---|---|---|---|
@@ -706,6 +758,112 @@ modern privacy prompts — may not be available. IBA Music does not
 intentionally limit functionality on older devices as long as they
 remain supported by Apple.
 
+## 6A. Google Play / Android Platform Disclosures
+
+This section covers the platform-specific disclosures that Google
+Play and Android conventions expect for **IBA Companion for
+Android**. It is the Android counterpart to the Apple disclosures in
+section 6. Where a feature behaves identically to iOS, the rest of
+this policy already applies; the items below describe the
+Android-specific mechanisms.
+
+### 6A.1 Distribution and sign-in
+
+IBA Companion for Android is distributed through the **Google Play
+Store**. Sign-in is offered through **Google Sign-In** (via Android
+Credential Manager) and **Microsoft Sign-In**; Sign in with Apple is
+not offered on Android. As on iOS, any biometric unlock used during
+sign-in is performed entirely on-device by the Android operating
+system — IBA Music never receives biometric data (see section 3.8).
+
+### 6A.2 Location permission
+
+IBA Companion for Android declares only foreground location
+permissions — `ACCESS_FINE_LOCATION` and `ACCESS_COARSE_LOCATION` —
+and does **not** declare `ACCESS_BACKGROUND_LOCATION`. Location is
+read as a **single momentary fix** at the moment you tap **Check
+In**, using Google Play Services' fused location provider, and is
+used only to confirm you are at the venue (section 3.3). The app
+performs no continuous tracking and cannot access location in the
+background.
+
+### 6A.3 Push notifications (Firebase Cloud Messaging)
+
+Android push notifications are delivered through **Firebase Cloud
+Messaging (FCM)**, a Google service. With your permission (the
+Android 13+ `POST_NOTIFICATIONS` runtime prompt) the app registers
+with FCM and sends the resulting device registration token to IBA
+Music's backend so we can deliver the same operational notifications
+described in section 6.3 — schedule changes, check-in reminders,
+payroll updates, stage alerts, and critical service announcements. We
+send no advertising or marketing notifications. FCM is operated by
+Google as a sub-processor (section 7).
+
+### 6A.4 Crash and diagnostic reporting (Firebase Crashlytics)
+
+The Android app uses **Firebase Crashlytics** to collect crash
+reports and basic diagnostics (stack traces, device model, OS
+version, app state at the time of a crash) so we can fix defects.
+Crash payloads pass through an on-device redaction step that removes
+personal identifiers before transmission. This data is processed by
+Google as a sub-processor (section 7), is used only for stability and
+debugging, and is never used for advertising or sold. The Android app
+does **not** include Firebase Analytics, Performance Monitoring,
+Remote Config, App Check, or any other analytics SDK.
+
+### 6A.5 Calendar integration (Android Calendar Provider)
+
+Optional schedule sync on Android writes to your device's native
+calendar through the **Android Calendar Provider**, which requires
+the `READ_CALENDAR` and `WRITE_CALENDAR` permissions. IBA Companion
+creates and maintains only the IBA Music calendar entries it writes —
+identified by a stable IBA Music event identifier — and reads back
+only those entries so it can update or remove them when your schedule
+changes. It does not read, modify, or transmit any other event in
+your calendar. This is an on-device integration; if your device
+calendar is itself backed by a Google or Microsoft account, those
+entries sync through that account under that provider's terms. You can
+revoke calendar access at any time in **Settings → Apps → IBA
+Companion → Permissions → Calendar**.
+
+### 6A.6 No advertising, no tracking, no ad identifier
+
+IBA Companion for Android contains **no advertising SDKs** and **no
+analytics SDKs**, does not request the Android Advertising ID (AAID),
+and does not track you across other apps or websites. The only
+third-party data flows are the operational sub-processors listed in
+section 7.
+
+### 6A.7 Account deletion
+
+The Android app provides in-app account deletion at **Settings →
+Delete Account**, with re-authentication, on the same terms described
+in section 6.6 and on the public
+[Account deletion](/account-deletion/) page. This satisfies Google
+Play's in-app data-deletion requirement.
+
+### 6A.8 Google Play Data Safety — data mapping
+
+This table maps the data described elsewhere in this policy to
+Google Play's Data Safety categories, so Play reviewers can
+cross-check it against the Data Safety form on IBA Companion's Play
+listing. No data type is used for tracking, and none is shared for
+advertising. Data processed by Google as a service provider (FCM,
+Crashlytics) is "collected" but not "shared" in the Data Safety
+sense.
+
+| Play Data Safety type | Collected | Shared | Purpose |
+|---|---|---|---|
+| **Personal info** — Name, Email address, Phone number | Yes (§3.1, §3.2) | No | App functionality; Account management |
+| **Location** — Approximate & precise location | Yes (§3.3) — momentary, at check-in only | No | App functionality |
+| **App info & performance** — Crash logs, Diagnostics | Yes (§6A.4) | No | App functionality — stability & debugging (processed by Google / Firebase Crashlytics; PII redacted) |
+| **Device or other IDs** — FCM registration token | Yes (§6A.3) | No | App functionality — push delivery (processed by Google / Firebase Cloud Messaging) |
+| **App activity / Financial info / Health & fitness / Photos & videos / Audio / Contacts / Messages / Web browsing** | Not collected | — | — |
+
+The Practice feature downloads IBA Music's own audio stems **to** your
+device; it does not collect or upload audio from you. The Android app
+does not access the camera or photo library.
+
 ## 7. Information We Share
 
 We share information only with the sub-processors we need in order
@@ -719,7 +877,7 @@ below is a summary.
 | Sub-processor | Purpose |
 |---|---|
 | **Apple Inc.** | Apple Push Notification service (APNs), Apple Sign-In, EventKit for optional Apple Calendar sync, ActivityKit for the Set Tracker Live Activity (§6.4), and Apple WeatherKit for the optional venue precipitation forecast shown inside the Live Activity (queries use venue coordinates, not your device location). |
-| **Google LLC** | Google Calendar API via the `calendar.app.created` scope (opt-in calendar sync) and Google Sign-In for authentication. |
+| **Google LLC** | Google Calendar API via the `calendar.app.created` scope (opt-in calendar sync on iOS); Google Sign-In for authentication; and, on Android, **Firebase Cloud Messaging** (operational push-notification delivery) and **Firebase Crashlytics** (crash and diagnostic reporting, with on-device PII redaction). |
 | **Microsoft Corporation** | Microsoft Sign-In (Azure Active Directory) — IBA Companion offers Microsoft 365 sign-in to musicians whose IBA Music account is linked to a Microsoft identity, alongside Apple Sign-In and Google Sign-In. Microsoft Graph is also used on the IBA Music admin side to sync performance bookings with IBA Music staff Outlook calendars; that admin use is not part of the IBA Companion app. |
 | **Cloudflare, Inc.** | Edge hosting for admin.ibamusic.com and related tools, database storage (Cloudflare D1 — performance schedule, check-ins, song metadata), object storage (Cloudflare R2 — IBA Music's multitrack audio stems used by the Practice feature, §3.9), and Cloudflare Pages hosting for this legal subdomain itself. Cloudflare processes data on IBA Music's behalf; its own use of the data is governed by its contractual role as a processor. |
 
