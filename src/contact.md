@@ -6,10 +6,12 @@ permalink: /contact/
 ---
 
 This page lists the contact paths for **privacy, legal, and security
-matters** relating to IBA Music products and services. It is **not**
-a general support channel — if you are an IBA Music musician needing
-app help, please use the in-app support options or contact your
-band leader directly.
+matters** relating to IBA Music products and services.
+
+**Looking for app help?** Use the [Support](/support) page — that is
+where app questions go, including sign-in trouble, missing tools,
+calendar sync, and notifications. Performers can also contact their
+band leader directly for booking and schedule questions.
 
 ## Privacy, legal, and data-subject requests
 

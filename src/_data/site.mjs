@@ -29,6 +29,7 @@ export default {
     cookies: "https://legal.ibamusic.com/cookies",
     security: "https://legal.ibamusic.com/security",
     contact: "https://legal.ibamusic.com/contact",
+    support: "https://legal.ibamusic.com/support",
   },
 
   // Products covered by these legal documents
@@ -36,6 +37,7 @@ export default {
     "IBA Companion for iOS (iPhone)",
     "IBA Companion for Android",
     "IBA Music Admin Dashboard (admin.ibamusic.com)",
+    "IBA Admin for iOS (iPhone)",
     "IBA Music web tools (availability, band leader)",
   ],
 

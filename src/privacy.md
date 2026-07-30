@@ -48,6 +48,14 @@ This policy applies to:
 - **IBA Music Admin Dashboard** at admin.ibamusic.com — the internal
   operations tool used by IBA Music staff to manage performances,
   venues, and musician assignments.
+- **IBA Admin** — our iOS app for iPhone. IBA Music office staff and
+  authorized administrators use it to manage events, performer
+  assignments, venues, availability, and check-in monitoring. Sign-in
+  is restricted to the ibamusic.com Microsoft Entra tenant. The
+  iOS-specific platform disclosures for this app — permissions,
+  sign-in, push, Wallet, calendar export, and the App Store
+  privacy-label mapping — are in section 6B, **not** section 6, which
+  covers IBA Companion.
 - **IBA Music web tools** — availability forms and band leader
   schedule tools used by band leaders and musicians.
 
@@ -504,6 +512,10 @@ reviewers, App Tracking Transparency rules, and iOS platform
 conventions expect IBA Companion to make. It applies to the
 IBA Companion app on iPhone.
 
+**It does not apply to IBA Admin**, our separate iPhone app for office
+staff and administrators. IBA Admin's iOS disclosures — including its
+own App Store privacy-label mapping — are in section 6B.
+
 ### 6.1 Apple Calendar integration (EventKit)
 
 IBA Companion can also sync your performance schedule to your
@@ -714,12 +726,16 @@ legal obligations IBA Music is required to meet.
 ### 6.7 App Store privacy labels — data mapping
 
 Below is how the data described elsewhere in this policy maps to
-Apple's App Store privacy-label categories for the **iOS** app. This
+Apple's App Store privacy-label categories **for IBA Companion**. This
 exists so App Store reviewers can cross-check the policy against the
 privacy nutrition label displayed on IBA Companion's App Store page.
 The equivalent mapping for the Android app's Google Play **Data
 Safety** form is in section 6A.8 — note that, unlike iOS, the Android
 app does collect crash/diagnostic data via Firebase Crashlytics.
+
+**Reviewing IBA Admin instead?** Use the table in section 6B.9. This
+one is IBA Companion's and includes categories, such as Location and
+Phone Number, that IBA Admin does not collect.
 
 | Apple category | Items collected | Linked to user? | Used to track? | Purpose |
 |---|---|---|---|---|
@@ -863,6 +879,179 @@ sense.
 The Practice feature downloads IBA Music's own audio stems **to** your
 device; it does not collect or upload audio from you. The Android app
 does not access the camera or photo library.
+
+## 6B. IBA Admin (iOS) Platform Disclosures
+
+This section covers the **IBA Admin** iPhone app described in section
+1.2. It is a separate app from IBA Companion with a different audience,
+a different sign-in method, and a materially smaller data footprint.
+Sections 6 and 6A describe IBA Companion and do **not** apply to
+IBA Admin.
+
+IBA Admin is distributed only to IBA Music office staff and authorized
+administrators. It is not usable without an IBA Music administrator
+account.
+
+### 6B.1 Sign-in and account information
+
+Sign-in is through **Microsoft Entra ID**, restricted to the
+ibamusic.com tenant. The app rejects any address that is not
+`@ibamusic.com`. On successful sign-in IBA Music receives the
+administrator's **name**, **email address**, and **user ID**, together
+with the role and page grants that determine which tools that account
+can see.
+
+This is the entire set of personal information IBA Admin collects. It
+is used solely to authenticate the administrator and to decide what
+they are permitted to view — never for analytics, personalization, or
+advertising.
+
+After the first sign-in the app can create a **passkey** (WebAuthn) for
+subsequent sign-ins. The passkey is bound to that specific device and
+its private key is generated and held in the device's Secure Enclave.
+It never leaves the device and IBA Music never receives it. Because
+passkeys are device-bound, the button for one appears only on a device
+where a passkey has already been enrolled.
+
+### 6B.2 Face ID
+
+IBA Admin declares `NSFaceIDUsageDescription` and uses Face ID (or the
+device passcode as a fallback) to re-protect the admin session. Apple's
+biometric system performs the match entirely on-device and returns only
+a success or failure result. **IBA Music never receives, stores, or
+transmits any biometric data**, and no biometric identifier is
+collected. This mirrors section 3.8.
+
+### 6B.3 Location — not collected
+
+**IBA Admin does not collect location of any kind.** It declares no
+`NSLocationWhenInUseUsageDescription`, no
+`NSLocationAlwaysAndWhenInUseUsageDescription`, and it never requests
+location authorization or displays the device's own position.
+
+The app does draw maps — a map of the day's event locations, and a
+venue geofence editor. Both plot **venue** coordinates supplied by
+IBA Music's own servers. Those are business records about a place, not
+information about the person using the app.
+
+This is a deliberate difference from IBA Companion, which does collect
+a momentary GPS reading at check-in (section 3.3). **That disclosure
+does not apply to IBA Admin.**
+
+### 6B.4 Apple Calendar integration (EventKit)
+
+IBA Admin declares `NSCalendarsFullAccessUsageDescription` and can
+export the administrator's schedule into their **Apple Calendar**. The
+integration is **outbound and on-device**: events flow from IBA Music
+into the local calendar, and nothing from the calendar is ever
+transmitted to IBA Music's servers or to any third party.
+
+The app **does read from the local calendar store**, and we want to be
+precise about why: when a sync runs it looks up the entries it created
+previously so it can update the ones that changed and remove the ones
+that no longer apply, instead of creating duplicates every time. Those
+reads happen entirely on the device, are limited to reconciling
+IBA Admin's own entries, and their results are never uploaded, logged
+off-device, or shared.
+
+Calendar access is optional. Declining it disables schedule export and
+affects nothing else in the app. It can be revoked at any time in
+iOS Settings → Privacy & Security → Calendars.
+
+### 6B.5 Background refresh
+
+IBA Admin registers one background task identifier,
+`com.ibamusic.admin.calendar-sync`, and declares the `fetch` and
+`remote-notification` background modes. These let a scheduled calendar
+export and incoming notifications be processed while the app is not in
+the foreground. No location is gathered in the background, and no
+additional personal data is collected by these tasks.
+
+### 6B.6 Push notifications (APNs)
+
+IBA Admin uses **Apple Push Notification service** to deliver schedule
+and change-request alerts. Apple issues a device token that IBA Music
+stores in order to address notifications to that device. The token
+identifies a device installation, not a person, and is not used for
+advertising or tracking. Notifications are optional and can be turned
+off in iOS Settings → Notifications.
+
+### 6B.7 Apple Wallet passes
+
+IBA Admin can add passes — including venue parking passes — to
+**Apple Wallet** using Apple's PassKit framework. Passes are issued by
+IBA Music and added to the local Wallet at the administrator's request.
+The app reads no payment card, no payment instrument, and no
+transaction history from Wallet, and it processes no payments.
+
+### 6B.8 No tracking, no third-party SDKs, no advertising
+
+IBA Admin performs none of Apple's defined tracking activities. It does
+not use the advertising identifier and presents no App Tracking
+Transparency prompt because it has nothing to ask for.
+
+The app contains **no third-party SDKs at all** — no analytics, no
+crash reporter, no advertising library. Its only dependencies are
+first-party Apple frameworks. Note that this differs from the Android
+edition of IBA Companion, which does use Firebase Crashlytics
+(section 6A.4); **no equivalent exists in IBA Admin**.
+
+The app also does not access the camera or the photo library, and
+declares no camera permission.
+
+### 6B.9 App Store privacy labels — data mapping for IBA Admin
+
+This is the mapping for **IBA Admin**. The table in section 6.7 is for
+IBA Companion and lists categories — notably Location and Phone — that
+IBA Admin does **not** collect. App Store reviewers cross-checking
+IBA Admin's privacy label should use this table.
+
+| Apple category | Items collected | Linked to user? | Used to track? | Purpose |
+|---|---|---|---|---|
+| **Contact Info** — Name | Section 6B.1 | Yes | No | App Functionality |
+| **Contact Info** — Email Address | Section 6B.1 | Yes | No | App Functionality |
+| **Identifiers** — User ID | Section 6B.1 | Yes | No | App Functionality |
+| **Contact Info** — Phone Number | *Not collected* | — | — | — |
+| **Location** — Precise or Coarse | *Not collected* — see §6B.3 | — | — | — |
+| **Financial Info** | *Not collected* — see §6B.10 | — | — | — |
+| **Contacts** | *Not collected* — calendar export (§6B.4) is not contacts access | — | — | — |
+| **Usage Data** | *Not collected* — no analytics SDK | — | — | — |
+| **Diagnostics** | *Not collected* — no crash reporter | — | — | — |
+| **User Content** | *Not collected* | — | — | — |
+| **Sensitive Info** | *Not collected* | — | — | — |
+| **Health & Fitness** | *Not collected* | — | — | — |
+| **Browsing History** | *Not collected* | — | — | — |
+| **Search History** | *Not collected* | — | — | — |
+| **Purchases** | *Not collected* | — | — | — |
+| **Photos or Videos / Audio Data** | *Not collected* — no camera or photo access | — | — | — |
+
+"Used to track?" is **No for every category**, for the reasons in
+section 6B.8.
+
+### 6B.10 Financial information — not collected
+
+IBA Admin displays monetary figures in one place: the late-arrival
+**penalty tier** configuration, where an administrator sets the
+company's own policy thresholds — for example, a flat deduction that
+applies past a certain lateness.
+
+These are company policy settings, and where a figure relates to a
+person, that person is a contracted performer whose schedule the
+administrator manages — not the user of the app. Apple's "Financial
+Info" category covers the **app user's own** payment information,
+credit information, or other financial information, and IBA Admin
+collects none of that. It handles no payment instrument, no card or
+bank details, and no credit information, and it processes no
+transactions.
+
+### 6B.11 Data retention and your rights
+
+Retention (section 8), your rights (section 9), GDPR (section 10), and
+CCPA/CPRA (section 11) apply to IBA Admin exactly as written. Because
+IBA Admin accounts are issued by IBA Music to its own staff and
+contractors, account creation and removal are handled through IBA Music
+internal administration; requests can also be made to
+[privacy@ibamusic.com](mailto:privacy@ibamusic.com).
 
 ## 7. Information We Share
 
