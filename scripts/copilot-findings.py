@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 """Every Copilot code-review finding on a PR — inline AND suppressed — as one flat list.
 
-Copilot re-reviews the whole diff on each push and collapses repeats into a
-"Suppressed comments" <details> block in the review body, so no single round holds
-the full picture. This unions every round and dedupes by file:line (first wins),
-then drops threads already marked resolved.
+This repo re-reviews on every push (`review_on_push`), so Copilot re-reads the whole
+diff each time and collapses repeats into a "Suppressed comments" <details> block in
+the review *body*. Those are not inline comments: the PR page, `gh pr view`, and
+`gh api .../pulls/N/comments` all miss them. No single round holds the full picture.
+
+This unions every round, merges inline + suppressed, dedupes (first occurrence wins),
+and hides only threads a human explicitly **resolved**. Threads GitHub marks *outdated*
+are still shown, tagged `moved` — outdated means the line shifted, NOT that the issue
+was fixed, and across many pushes that distinction is the difference between a clean
+list and a silently dropped finding.
 
 Usage: copilot-findings.py [<pr>] [--repo owner/name] [--include-resolved] [--json]
 """
@@ -41,9 +47,9 @@ def gh_api(path):
     return json.loads(r.stdout)
 
 
-def resolved_keys(owner, name, pr):
-    """(path, line) of every resolved or outdated review thread."""
-    keys, cur = set(), None
+def thread_state(owner, name, pr):
+    """(path, line) -> {"resolved": bool, "outdated": bool} for every review thread."""
+    state, cur = {}, None
     while True:
         cmd = ["gh", "api", "graphql", "-f", f"query={RESOLVED_Q}",
                "-F", f"owner={owner}", "-F", f"name={name}", "-F", f"pr={pr}"]
@@ -54,16 +60,15 @@ def resolved_keys(owner, name, pr):
             print(f"warning: could not read thread resolution state "
                   f"({(r.stderr or r.stdout).strip()[:160]}); showing all findings",
                   file=sys.stderr)
-            return set()
+            return {}
         page = json.loads(r.stdout)["data"]["repository"]["pullRequest"]["reviewThreads"]
         for t in page["nodes"]:
-            if not (t["isResolved"] or t["isOutdated"]):
-                continue
             c = (t["comments"]["nodes"] or [None])[0]
             if c:
-                keys.add((c["path"], c["line"] or c["originalLine"]))
+                state[(c["path"], c["line"] or c["originalLine"])] = {
+                    "resolved": t["isResolved"], "outdated": t["isOutdated"]}
         if not page["pageInfo"]["hasNextPage"]:
-            return keys
+            return state
         cur = page["pageInfo"]["endCursor"]
 
 
@@ -94,16 +99,24 @@ def main():
         if IS_COPILOT.search(c["user"]["login"] or ""):
             by_review.setdefault(c.get("pull_request_review_id"), []).append(c)
 
-    skip = set() if a.include_resolved else resolved_keys(owner, name, int(pr))
-    findings, seen = [], set()
+    state = thread_state(owner, name, int(pr))
+    findings, seen, resolved_hidden = [], set(), 0
 
     def add(kind, rnd, path, line, body):
-        key = (path, line)
-        if key in seen or key in skip:
+        nonlocal resolved_hidden
+        body = " ".join(body.split())
+        st = state.get((path, line), {})
+        # Dedupe on position AND on wording: re-review restates findings at shifted
+        # line numbers, so position alone lets the same defect through twice.
+        keys = {(path, line), (path, body[:160])}
+        if seen & keys:
             return
-        seen.add(key)
+        if st.get("resolved") and not a.include_resolved:
+            resolved_hidden += 1
+            return
+        seen.update(keys)
         findings.append({"kind": kind, "round": rnd, "file": path, "line": line,
-                         "body": " ".join(body.split())})
+                         "moved": bool(st.get("outdated")), "body": body})
 
     for idx, r in enumerate(reviews, 1):
         for c in by_review.get(r["id"], []):
@@ -117,11 +130,13 @@ def main():
     if a.json:
         print(json.dumps(findings, indent=2))
         return
-    hid = "" if a.include_resolved else f", {len(skip)} resolved/outdated thread(s) hidden"
+    hid = "" if a.include_resolved else f", {resolved_hidden} resolved thread(s) hidden"
     print(f"{repo}#{pr} — {len(reviews)} Copilot round(s), "
           f"{len(findings)} open finding(s){hid}\n")
     for f in findings:
-        print(f"[{f['kind']:10s}] round {f['round']}  {f['file']}:{f['line']}\n    {f['body']}\n")
+        tag = "  [line moved since review]" if f["moved"] else ""
+        print(f"[{f['kind']:10s}] round {f['round']}  {f['file']}:{f['line']}{tag}\n"
+              f"    {f['body']}\n")
     if not findings:
         print("  (nothing open)")
 
