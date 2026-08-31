@@ -8,3 +8,12 @@ _site/
 npm-debug.log*
 .vscode/
 .idea/
+.claude/
+.opencode/
+.mcp.json
+.repomixignore
+release-manifest.json
+AGENTS.md
+plans/
+docs/journals/
+journals/
